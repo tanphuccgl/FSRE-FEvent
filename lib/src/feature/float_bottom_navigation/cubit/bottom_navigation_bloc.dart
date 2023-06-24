@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:fevent/src/feature/home/router/home_wrapper_router.dart';
-import 'package:fevent/src/feature/profile/router/profile_wrapper_router.dart';
+import 'package:fevent/src/feature/my_user/router/profile_wrapper_router.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:fevent/src/widgets/not_found_page.dart';
 import 'package:flutter/material.dart';

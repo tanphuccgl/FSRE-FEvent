@@ -1,21 +1,21 @@
-import 'package:fevent/src/feature/profile/pages/profile_page.dart';
+import 'package:fevent/src/feature/my_user/pages/my_user_page.dart';
 import 'package:fevent/src/router/base_coordinator.dart';
 import 'package:fevent/src/widgets/not_found_page.dart';
 import 'package:flutter/material.dart';
 
 class XProfileRouterName {
-  static const String home = '/profile';
+  static const String myUser = '/my-user';
 }
 
-class ProfileCoordinator extends BaseCoordinator {
+class MyUserCoordinator extends BaseCoordinator {
   @override
-  String get initialRoute => XProfileRouterName.home;
+  String get initialRoute => XProfileRouterName.myUser;
 
   @override
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case XProfileRouterName.home:
-        return MaterialPageRoute(builder: (_) => const ProfilePage());
+      case XProfileRouterName.myUser:
+        return MaterialPageRoute(builder: (_) => const MyUserPage());
 
       default:
         return MaterialPageRoute(builder: (_) => const NotFoundPage());
