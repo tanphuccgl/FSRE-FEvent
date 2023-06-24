@@ -23,19 +23,22 @@ class UpdateProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   GapHelper.h12,
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Row(
                       children: [
                         Flexible(
                           flex: 1,
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                            size: 30,
+                          child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: const Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                              size: 30,
+                            ),
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                           flex: 8,
                           child: Center(
                             child: Text("Update Profile",
@@ -45,7 +48,7 @@ class UpdateProfilePage extends StatelessWidget {
                                     color: XColors.primary)),
                           ),
                         ),
-                        Flexible(
+                        const Flexible(
                           flex: 1,
                           child: SizedBox(),
                         )
