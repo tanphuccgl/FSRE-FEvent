@@ -1,4 +1,5 @@
 import 'package:fevent/src/config/constants/images.dart';
+import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/utils/helper/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,36 +39,39 @@ class LoginPage extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     )),
                 GapHelper.h90,
-                Container(
-                  width: 273,
-                  height: 56,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.25),
-                          offset: const Offset(0, 1),
-                          blurRadius: 5,
-                          spreadRadius: 0,
+                GestureDetector(
+                  onTap: () => XCoordinator.showDashboard(),
+                  child: Container(
+                    width: 273,
+                    height: 56,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.25),
+                            offset: const Offset(0, 1),
+                            blurRadius: 5,
+                            spreadRadius: 0,
+                          ),
+                        ],
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          XImage.logoG,
+                          width: 26.w,
+                          height: 26.w,
+                          fit: BoxFit.contain,
                         ),
+                        GapHelper.w12,
+                        const Text("Login with Google",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w100,
+                            ))
                       ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        XImage.logoG,
-                        width: 26.w,
-                        height: 26.w,
-                        fit: BoxFit.contain,
-                      ),
-                      GapHelper.w12,
-                      const Text("Login with Google",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w100,
-                          ))
-                    ],
+                    ),
                   ),
                 )
               ],

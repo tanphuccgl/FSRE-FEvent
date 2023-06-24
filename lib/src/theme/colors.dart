@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class XColors {
-  static const primary = Color(0xff11B1A5);
+  static const primary = Color(0xffFF9502);
   static const borderInput = Color(0x1A000000);
   static const diableButton = Color(0xff01878A);
   static const shadowButton = Color(0x4001878A);
