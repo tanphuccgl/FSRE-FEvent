@@ -3,6 +3,7 @@ class XRouterName {
   static const String dashboard = '/dashboard';
   static const String signIn = '/sign-in';
   static const String profile = '/profile';
+  static const String updateProfile = '/update-profile';
 
   static const String onboard = '/onboard';
   static const String forgotPassword = '/forgot-password';

@@ -1,4 +1,5 @@
 import 'package:fevent/src/config/constants/images.dart';
+import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:fevent/src/utils/helper/gap.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,7 @@ class ProfilePage extends StatelessWidget {
           ),
           GapHelper.h70,
           ElevatedButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => XCoordinator.showUpdateProfile(),
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(271.w, 58.h),
                 elevation: 0,
@@ -76,7 +77,7 @@ class ProfilePage extends StatelessWidget {
                     )),
                 backgroundColor: Colors.white,
               ),
-              child: const Text("Edit",
+              child: const Text("EDIT",
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
