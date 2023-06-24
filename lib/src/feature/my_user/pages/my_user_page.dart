@@ -1,5 +1,7 @@
 import 'package:fevent/src/config/constants/images.dart';
 import 'package:fevent/src/feature/my_user/enums/my_user_option.dart';
+
+import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:fevent/src/utils/helper/gap.dart';
 import 'package:flutter/material.dart';
@@ -16,28 +18,31 @@ class MyUserPage extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             GapHelper.h20,
-            Row(
-              children: [
-                const CircleAvatar(
-                    backgroundImage: AssetImage(XImage.avatar), radius: 40),
-                GapHelper.w20,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text("NGUYEN VAN A",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        )),
-                    GapHelper.h16,
-                    const Text("anvse123456@fpt.edu.vn",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ))
-                  ],
-                )
-              ],
+            GestureDetector(
+              onTap: () => XCoordinator.showProfile(),
+              child: Row(
+                children: [
+                  const CircleAvatar(
+                      backgroundImage: AssetImage(XImage.avatar), radius: 40),
+                  GapHelper.w20,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("NGUYEN VAN A",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          )),
+                      GapHelper.h16,
+                      const Text("anvse123456@fpt.edu.vn",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ))
+                    ],
+                  )
+                ],
+              ),
             ),
             GapHelper.h70,
             const Text("Extensions",

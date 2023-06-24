@@ -33,7 +33,7 @@ class XCoordinator {
 
   static Future showDashboard() => pushNamed(XRouterName.dashboard);
 
-  static Future showInfo() => pushNamed(XRouterName.info);
+  static Future showProfile() => pushNamed(XRouterName.profile);
 
   static Future showAttendanceStudent() =>
       pushNamed(XRouterName.attendanceStudent);

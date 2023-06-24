@@ -2,10 +2,12 @@ class XRouterName {
   static const String splash = '/splash';
   static const String dashboard = '/dashboard';
   static const String signIn = '/sign-in';
+  static const String profile = '/profile';
+
   static const String onboard = '/onboard';
   static const String forgotPassword = '/forgot-password';
   static const String schedule = '/schedule';
-  static const String info = '/info';
+
   static const String attendanceStudent = '/attendance-student';
   static const String scanQr = '/scan-qr-code';
   static const String notification = '/notification';

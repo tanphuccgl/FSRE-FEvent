@@ -9,6 +9,7 @@ class XProfileRouterName {
 
 class MyUserCoordinator extends BaseCoordinator {
   @override
+  @override
   String get initialRoute => XProfileRouterName.myUser;
 
   @override
