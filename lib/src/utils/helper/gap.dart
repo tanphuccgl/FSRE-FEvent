@@ -27,6 +27,7 @@ class GapHelper {
   static final SizedBox h70 = SizedBox(height: 70.h);
   static final SizedBox h80 = SizedBox(height: 80.h);
   static final SizedBox h90 = SizedBox(height: 90.h);
+  static final SizedBox h100 = SizedBox(height: 100.h);
   static final SizedBox h120 = SizedBox(height: 120.h);
   static final SizedBox h195 = SizedBox(height: 195.h);
 }
