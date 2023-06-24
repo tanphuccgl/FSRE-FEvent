@@ -34,6 +34,7 @@ class XCoordinator {
   static Future showDashboard() => pushNamed(XRouterName.dashboard);
 
   static Future showProfile() => pushNamed(XRouterName.profile);
+  static Future showUpdateProfile() => pushNamed(XRouterName.updateProfile);
 
   static Future showAttendanceStudent() =>
       pushNamed(XRouterName.attendanceStudent);
