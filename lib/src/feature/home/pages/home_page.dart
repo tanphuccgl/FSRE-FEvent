@@ -1,4 +1,5 @@
 import 'package:fevent/src/config/constants/images.dart';
+import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -164,15 +165,18 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Upcoming Events",
+                const Text("Upcoming Events",
                     style: TextStyle(
                         fontWeight: FontWeight.w900, color: Colors.black)),
-                Text("View all", style: TextStyle(color: Colors.grey)),
+                GestureDetector(
+                    onTap: () => XCoordinator.showAllEvent(),
+                    child: const Text("View all",
+                        style: TextStyle(color: Colors.grey))),
               ],
             ),
           ),
