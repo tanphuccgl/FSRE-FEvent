@@ -1,4 +1,6 @@
 import 'package:fevent/src/feature/dashboard/pages/dashboard_page.dart';
+import 'package:fevent/src/feature/event/pages/all_event_page.dart';
+import 'package:fevent/src/feature/event/pages/event_detail_page.dart';
 import 'package:fevent/src/feature/login/pages/login_page.dart';
 import 'package:fevent/src/feature/profile/pages/profile_page.dart';
 import 'package:fevent/src/feature/profile/pages/update_profile_page.dart';
@@ -17,6 +19,10 @@ class XAppRoute {
         return MaterialPageRoute(builder: (_) => const ProfilePage());
       case XRouterName.updateProfile:
         return MaterialPageRoute(builder: (_) => const UpdateProfilePage());
+      case XRouterName.eventAll:
+        return MaterialPageRoute(builder: (_) => const AllEventPage());
+      case XRouterName.eventDetail:
+        return MaterialPageRoute(builder: (_) => const EventDetailPage());
 
       default:
         return MaterialPageRoute(

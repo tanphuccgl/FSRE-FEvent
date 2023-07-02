@@ -4,7 +4,6 @@ class Endpoints {
   // base url
   //static const String baseUrl = "https://apidemo.ut.edu.vn/api";
 
-  //TODO update api prod
   static const String baseUrl = "https://utapi.ut.edu.vn/api";
 
   // receiveTimeout

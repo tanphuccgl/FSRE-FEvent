@@ -5,8 +5,10 @@ class XRouterName {
   static const String profile = '/profile';
   static const String updateProfile = '/update-profile';
 
-  static const String onboard = '/onboard';
-  static const String forgotPassword = '/forgot-password';
+  static const String eventAll = '/all-event';
+    static const String eventDetail = '/event-detail';
+
+
   static const String schedule = '/schedule';
 
   static const String attendanceStudent = '/attendance-student';
