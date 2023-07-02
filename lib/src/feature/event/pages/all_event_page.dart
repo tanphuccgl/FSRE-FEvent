@@ -1,3 +1,4 @@
+import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,14 +15,17 @@ class AllEventPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
             child: Row(children: [
-              Container(
-                width: 30,
-                height: 30,
-                decoration: const BoxDecoration(
-                    color: XColors.primary, shape: BoxShape.circle),
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: const BoxDecoration(
+                      color: XColors.primary, shape: BoxShape.circle),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -59,50 +63,53 @@ class AllEventPage extends StatelessWidget {
   Widget _item() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
-      child: SizedBox(
-        height: 148.h,
-        child: Row(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
-                height: 148.h,
-                width: 118.w,
-                fit: BoxFit.cover,
+      child: GestureDetector(
+        onTap: () => XCoordinator.showEventDetail(),
+        child: SizedBox(
+          height: 148.h,
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                  height: 148.h,
+                  width: 118.w,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  "29th Jan, 2022, 8:00 AM",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-                Text(
-                  "Tết Holiday Event",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(Icons.location_on_outlined),
-                    Text(
-                      "TPHCM, Viet Nam",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
-                  ],
-                ),
-              ],
-            )
-          ],
+              const SizedBox(
+                width: 15,
+              ),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    "29th Jan, 2022, 8:00 AM",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
+                  Text(
+                    "Tết Holiday Event",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(Icons.location_on_outlined),
+                      Text(
+                        "TPHCM, Viet Nam",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:fevent/src/feature/event/pages/event_detail_page.dart';
 import 'package:fevent/src/router/router_name.dart';
 import 'package:flutter/material.dart';
 
@@ -36,8 +37,9 @@ class XCoordinator {
   static Future showProfile() => pushNamed(XRouterName.profile);
   static Future showUpdateProfile() => pushNamed(XRouterName.updateProfile);
 
-  static Future showAllEvent() =>
-      pushNamed(XRouterName.eventAll);
+  static Future showAllEvent() => pushNamed(XRouterName.eventAll);
+
+  static Future showEventDetail() => push(const EventDetailPage());
 
   static Future showScanQR() => pushNamed(XRouterName.scanQr);
 
