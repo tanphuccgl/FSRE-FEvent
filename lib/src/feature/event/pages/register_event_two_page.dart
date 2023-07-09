@@ -194,7 +194,6 @@ class RegisterEventTwoPage extends StatelessWidget {
           XInput(
             value: "",
             hintText: "Vui lòng chọn công việc",
-            
             filled: true,
             fillColor: XColors.bgGrey.withOpacity(0.5),
             enabledBorder: OutlineInputBorder(

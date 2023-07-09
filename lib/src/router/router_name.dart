@@ -6,11 +6,10 @@ class XRouterName {
   static const String updateProfile = '/update-profile';
 
   static const String eventAll = '/all-event';
-    static const String eventDetail = '/event-detail';
-     static const String eventHolder = '/event-holder';
-       static const String eventOne = '/event-one';
-       static const String eventTwo = '/event-two';
-
+  static const String eventDetail = '/event-detail';
+  static const String eventHolder = '/event-holder';
+  static const String eventOne = '/event-one';
+  static const String eventTwo = '/event-two';
 
   static const String schedule = '/schedule';
 

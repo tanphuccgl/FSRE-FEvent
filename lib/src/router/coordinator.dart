@@ -44,12 +44,10 @@ class XCoordinator {
 
   static Future showEventDetail() => push(const EventDetailPage());
 
-   static Future showEventHolder() => push(const HolderRegisterEventPage());
+  static Future showEventHolder() => push(const HolderRegisterEventPage());
 
-   
-     static Future showEventOne() => push(const RegisterEventOnePage());  static Future showEventTwo() => push(const RegisterEventTwoPage());
-
-     
+  static Future showEventOne() => push(const RegisterEventOnePage());
+  static Future showEventTwo() => push(const RegisterEventTwoPage());
 
   static Future showScanQR() => pushNamed(XRouterName.scanQr);
 

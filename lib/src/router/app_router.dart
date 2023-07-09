@@ -31,10 +31,8 @@ class XAppRoute {
             builder: (_) => const HolderRegisterEventPage());
       case XRouterName.eventOne:
         return MaterialPageRoute(builder: (_) => const RegisterEventOnePage());
-          case XRouterName.eventTwo:
+      case XRouterName.eventTwo:
         return MaterialPageRoute(builder: (_) => const RegisterEventTwoPage());
-
-
 
       default:
         return MaterialPageRoute(
