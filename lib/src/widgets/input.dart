@@ -38,6 +38,8 @@ class XInput extends StatefulWidget {
     this.counterText,
     this.errorBorder,
     this.cursorColor,
+    this.filled = false,
+    this.fillColor,
   }) : super(key: key);
 
   final String value;
@@ -71,6 +73,8 @@ class XInput extends StatefulWidget {
   final int? hintMaxLines;
   final String? counterText;
   final Color? cursorColor;
+  final bool? filled;
+  final Color? fillColor;
 
   @override
   State<XInput> createState() => _XInputState();
@@ -183,8 +187,8 @@ class _XInputState extends State<XInput> {
         suffixIcon: _buildActions(),
         counterText: widget.counterText,
         counterStyle: const TextStyle(color: XColors.borderInput),
-        filled: widget.errorText == null ? filled : null,
-        fillColor: XColors.fillColor,
+        filled: widget.filled,
+        fillColor: widget.fillColor ?? XColors.fillColor,
         errorBorder: widget.errorBorder ?? errorBorder,
         focusedBorder: widget.focusedBorder ?? focusedBorder,
         focusedErrorBorder: widget.focusedBorder ?? errorBorder,
