@@ -2,6 +2,7 @@ import 'package:fevent/src/feature/event/pages/event_detail_page.dart';
 import 'package:fevent/src/feature/event/pages/holder_register_event_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_two_page.dart';
+import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/router/router_name.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,9 @@ class XCoordinator {
 
   static Future showAllEvent() => pushNamed(XRouterName.eventAll);
 
-  static Future showEventDetail() => push(const EventDetailPage());
+  static Future showEventDetail(EventModel event) => push(EventDetailPage(
+        event: event,
+      ));
 
   static Future showEventHolder() => push(const HolderRegisterEventPage());
 

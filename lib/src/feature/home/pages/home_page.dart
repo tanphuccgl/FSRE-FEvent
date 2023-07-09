@@ -1,211 +1,223 @@
 import 'package:fevent/src/config/constants/images.dart';
+import 'package:fevent/src/feature/event/logic/events_bloc.dart';
+import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: 168.h,
-        backgroundColor: XColors.primary,
-        flexibleSpace: SafeArea(
-          child: Column(children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-              child: Row(
-                children: [
-                  Image.asset(XImage.location),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Location",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Karachi, Pakistan",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Image.asset(XImage.notification),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-              padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Search Event",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.grey),
+    return BlocProvider(
+      create: (context) => EventsBloc(),
+      child: BlocBuilder<EventsBloc, EventsState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              toolbarHeight: 168.h,
+              backgroundColor: XColors.primary,
+              flexibleSpace: SafeArea(
+                child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                    child: Row(
+                      children: [
+                        Image.asset(XImage.location),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Location",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Karachi, Pakistan",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Image.asset(XImage.notification),
+                      ],
                     ),
-                    Icon(
-                      Icons.search,
-                      color: Colors.grey,
-                    )
-                  ]),
-            ),
-          ]),
-        ),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 0.1,
-                      blurRadius: 3,
-                      offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                    padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25),
                     ),
-                  ]),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Row(
+                    child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image.asset(
-                            XImage.icon1,
-                            width: 50,
-                            height: 50,
+                          Text(
+                            "Search Event",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
                           ),
-                          const SizedBox(
-                            width: 15,
+                          Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                          )
+                        ]),
+                  ),
+                ]),
+              ),
+            ),
+            body: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 0.1,
+                            blurRadius: 3,
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
                           ),
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "05",
+                        ]),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  XImage.icon1,
+                                  width: 50,
+                                  height: 50,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "05",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "Đang diễn ra",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                Image.asset(
+                                  XImage.icon2,
+                                  width: 50,
+                                  height: 50,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "05",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "Sự kiện đã\nđăng ký",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Divider(),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5),
+                            child: Text("GO DASHBOARD",
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "Đang diễn ra",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ],
+                                    fontWeight: FontWeight.w900,
+                                    color: XColors.primary)),
                           ),
-                          const Spacer(),
-                          Image.asset(
-                            XImage.icon2,
-                            width: 50,
-                            height: 50,
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "05",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "Sự kiện đã\nđăng ký",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Divider(),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5),
-                      child: Text("GO DASHBOARD",
+                        ]),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Upcoming Events",
                           style: TextStyle(
                               fontWeight: FontWeight.w900,
-                              color: XColors.primary)),
+                              color: Colors.black)),
+                      GestureDetector(
+                          onTap: () => XCoordinator.showAllEvent(),
+                          child: const Text("View all",
+                              style: TextStyle(color: Colors.grey))),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: SizedBox(
+                    height: 230.h,
+                    child: ListView.builder(
+                      itemBuilder: (context, index) => _item(state.list[index]),
+                      shrinkWrap: true,
+                      itemCount: state.list.length,
+                      scrollDirection: Axis.horizontal,
                     ),
-                  ]),
-            ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Upcoming Events",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w900, color: Colors.black)),
-                GestureDetector(
-                    onTap: () => XCoordinator.showAllEvent(),
-                    child: const Text("View all",
-                        style: TextStyle(color: Colors.grey))),
+                  ),
+                )
               ],
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: SizedBox(
-              height: 230.h,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  _item(),
-                  _item(),
-                  _item(),
-                  _item(),
-                ],
-              ),
-            ),
-          )
-        ],
+          );
+        },
       ),
     );
   }
 
-  Widget _item() {
+  Widget _item(EventModel event) {
     return GestureDetector(
-      onTap: () => XCoordinator.showEventDetail(),
+      onTap: () => XCoordinator.showEventDetail(event),
       child: Container(
         height: 220.h,
         width: 300.w,
@@ -229,6 +241,7 @@ class HomePage extends StatelessWidget {
                   topLeft: Radius.circular(25), topRight: Radius.circular(25)),
               child: Image.network(
                 "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                //  event.image.toString(),
                 height: 139.h,
                 width: 300.w,
                 fit: BoxFit.cover,
@@ -252,9 +265,9 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Designer’s Annual Seminar",
-                          style: TextStyle(
+                        Text(
+                          event.title.toString(),
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.black),
                         ),
                         const SizedBox(
@@ -262,9 +275,9 @@ class HomePage extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            const Text(
-                              "10:30 pm",
-                              style: TextStyle(color: Colors.black),
+                            Text(
+                              convertUTCToLocalTime(event.createdAt.toString()),
+                              style: const TextStyle(color: Colors.black),
                             ),
                             Container(
                               margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -273,9 +286,9 @@ class HomePage extends StatelessWidget {
                               width: 5,
                               height: 5,
                             ),
-                            const Text(
-                              "Karachi",
-                              style: TextStyle(color: Colors.black),
+                            Text(
+                              event.topic.toString(),
+                              style: const TextStyle(color: Colors.black),
                             ),
                           ],
                         ),
@@ -291,5 +304,12 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String convertUTCToLocalTime(String utcTimestamp) {
+    DateTime utcDateTime = DateTime.parse(utcTimestamp);
+    DateTime localDateTime = utcDateTime.toLocal();
+    String formattedTime = DateFormat('hh:mm a').format(localDateTime);
+    return formattedTime;
   }
 }

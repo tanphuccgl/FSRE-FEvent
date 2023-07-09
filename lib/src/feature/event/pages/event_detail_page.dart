@@ -1,10 +1,13 @@
+import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class EventDetailPage extends StatelessWidget {
-  const EventDetailPage({super.key});
+  final EventModel event;
+  const EventDetailPage({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +33,10 @@ class EventDetailPage extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
         shrinkWrap: true,
         children: [
-          const Center(
+          Center(
             child: Text(
-              "Tết Holiday Event",
-              style: TextStyle(
+              event.title.toString(),
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 30,
                   fontWeight: FontWeight.bold),
@@ -42,16 +45,19 @@ class EventDetailPage extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          const Center(
+          Center(
               child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
+              const SizedBox(
+                width: 100,
+              ),
+              const Icon(
                 Icons.calendar_today_rounded,
                 color: XColors.primary,
                 size: 30,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Column(
@@ -59,18 +65,19 @@ class EventDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "29 January, 2022",
-                    style: TextStyle(
+                    convertUTCToFormattedDate(event.createdAt.toString()),
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 15,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(
-                    "Tuesday, 3:00 - 4:00PM",
-                    style: TextStyle(
+                    convertToFormattedDateTimeRange(
+                        event.createdAt.toString(), event.endDate.toString()),
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 13,
                         fontWeight: FontWeight.bold),
@@ -82,21 +89,24 @@ class EventDetailPage extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          const Center(
+          Center(
               child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
+              const SizedBox(
+                width: 100,
+              ),
+              const Icon(
                 Icons.location_city,
                 color: XColors.primary,
                 size: 30,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Text(
-                "PDP , FPT University",
-                style: TextStyle(
+                (event.partner?.name ?? "").toString(),
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 15,
                     fontWeight: FontWeight.bold),
@@ -106,35 +116,38 @@ class EventDetailPage extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          const Center(
+          Center(
               child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
+              const SizedBox(
+                width: 100,
+              ),
+              const Icon(
                 Icons.location_on_outlined,
                 color: XColors.primary,
                 size: 30,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Việt Nam",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 15,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(
-                    "TP Thủ Đức, TP HCM",
-                    style: TextStyle(
+                    event.location.toString(),
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 13,
                         fontWeight: FontWeight.bold),
@@ -294,5 +307,24 @@ class EventDetailPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String convertUTCToFormattedDate(String utcTimestamp) {
+    DateTime utcDateTime = DateTime.parse(utcTimestamp);
+    DateTime localDateTime = utcDateTime.toLocal();
+    String formattedDate = DateFormat('d MMMM, yyyy').format(localDateTime);
+    return formattedDate;
+  }
+
+  String convertToFormattedDateTimeRange(
+      String startTimestamp, String endTimestamp) {
+    DateTime startDateTime = DateTime.parse(startTimestamp).toLocal();
+    DateTime endDateTime = DateTime.parse(endTimestamp).toLocal();
+
+    String dayOfWeek = DateFormat('EEEE').format(startDateTime);
+    String startTime = DateFormat('h:00 a').format(startDateTime);
+    String endTime = DateFormat('h:00 a').format(endDateTime);
+
+    return '$dayOfWeek, $startTime - $endTime';
   }
 }
