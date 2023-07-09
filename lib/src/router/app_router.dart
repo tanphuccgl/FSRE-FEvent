@@ -2,6 +2,7 @@ import 'package:fevent/src/feature/dashboard/pages/dashboard_page.dart';
 import 'package:fevent/src/feature/event/pages/all_event_page.dart';
 import 'package:fevent/src/feature/event/pages/event_detail_page.dart';
 import 'package:fevent/src/feature/event/pages/holder_register_event_page.dart';
+import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
 import 'package:fevent/src/feature/login/pages/login_page.dart';
 import 'package:fevent/src/feature/profile/pages/profile_page.dart';
 import 'package:fevent/src/feature/profile/pages/update_profile_page.dart';
@@ -27,6 +28,8 @@ class XAppRoute {
       case XRouterName.eventHolder:
         return MaterialPageRoute(
             builder: (_) => const HolderRegisterEventPage());
+      case XRouterName.eventOne:
+        return MaterialPageRoute(builder: (_) => const RegisterEventOnePage());
 
       default:
         return MaterialPageRoute(

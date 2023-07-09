@@ -1,3 +1,4 @@
+import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class HolderRegisterEventPage extends StatelessWidget {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
         shrinkWrap: true,
         children: [
           const Center(
@@ -102,7 +103,7 @@ class HolderRegisterEventPage extends StatelessWidget {
             height: 7,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () => XCoordinator.showEventOne(),
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: Row(
