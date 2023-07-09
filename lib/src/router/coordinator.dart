@@ -1,6 +1,7 @@
 import 'package:fevent/src/feature/event/pages/event_detail_page.dart';
 import 'package:fevent/src/feature/event/pages/holder_register_event_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
+import 'package:fevent/src/feature/event/pages/register_event_two_page.dart';
 import 'package:fevent/src/router/router_name.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +46,10 @@ class XCoordinator {
 
    static Future showEventHolder() => push(const HolderRegisterEventPage());
 
-     static Future showEventOne() => push(const RegisterEventOnePage());
+   
+     static Future showEventOne() => push(const RegisterEventOnePage());  static Future showEventTwo() => push(const RegisterEventTwoPage());
+
+     
 
   static Future showScanQR() => pushNamed(XRouterName.scanQr);
 

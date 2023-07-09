@@ -9,6 +9,7 @@ class XRouterName {
     static const String eventDetail = '/event-detail';
      static const String eventHolder = '/event-holder';
        static const String eventOne = '/event-one';
+       static const String eventTwo = '/event-two';
 
 
   static const String schedule = '/schedule';

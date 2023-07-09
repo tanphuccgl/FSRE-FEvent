@@ -127,7 +127,7 @@ class HolderRegisterEventPage extends StatelessWidget {
             height: 7,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () => XCoordinator.showEventTwo(),
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: Row(
