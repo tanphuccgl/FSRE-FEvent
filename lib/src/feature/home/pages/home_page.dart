@@ -265,10 +265,16 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          event.title.toString(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
+                        SizedBox(
+                          width: 180.w,
+                          child: Text(
+                            event.title.toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
                         ),
                         const SizedBox(
                           height: 10,

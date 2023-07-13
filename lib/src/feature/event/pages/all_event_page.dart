@@ -98,19 +98,29 @@ class AllEventPage extends StatelessWidget {
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.black),
                   ),
-                  Text(
-                    event.title.toString(),
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black),
+                  SizedBox(
+                    width: 180.w,
+                    child: Text(
+                      event.title.toString(),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Icon(Icons.location_on_outlined),
-                      Text(
-                        event.location.toString(),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                      SizedBox(
+                        width: 180.w,
+                        child: Text(
+                          event.location.toString(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
                       ),
                     ],
                   ),

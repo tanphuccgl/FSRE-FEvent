@@ -36,6 +36,7 @@ class EventDetailPage extends StatelessWidget {
           Center(
             child: Text(
               event.title.toString(),
+              textAlign: TextAlign.center,
               style: const TextStyle(
                   color: Colors.black,
                   fontSize: 30,
@@ -145,12 +146,15 @@ class EventDetailPage extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(
-                    event.location.toString(),
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold),
+                  SizedBox(
+                    width: 150,
+                    child: Text(
+                      event.location.toString(),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
