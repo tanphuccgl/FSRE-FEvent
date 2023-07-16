@@ -45,7 +45,7 @@ class MyUserPage extends StatelessWidget {
               ),
             ),
             GapHelper.h70,
-            const Text("Extensions",
+            const Text("Sự mở rộng",
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,

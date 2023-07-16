@@ -13,7 +13,7 @@ class HolderRegisterEventPage extends StatelessWidget {
         backgroundColor: XColors.primary,
         centerTitle: false,
         title: const Text(
-          "Event Details",
+          "Chi tiết sự kiện",
           style: TextStyle(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
         ),
