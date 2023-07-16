@@ -11,7 +11,7 @@ class XRouterName {
   static const String eventOne = '/event-one';
   static const String eventTwo = '/event-two';
 
-  static const String schedule = '/schedule';
+  static const String wallet = '/wallet';
 
   static const String attendanceStudent = '/attendance-student';
   static const String scanQr = '/scan-qr-code';

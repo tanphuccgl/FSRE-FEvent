@@ -21,6 +21,7 @@ class BottomNavigationState extends Equatable {
 
 enum PageIndex {
   home,
+  wallet,
   myUser,
 }
 
@@ -29,9 +30,12 @@ extension PageIndexExt on PageIndex {
     switch (this) {
       case PageIndex.home:
         return "Trang chủ";
+      case PageIndex.wallet:
+        return "Ví của tôi";
 
       case PageIndex.myUser:
         return "Người dùng";
+
       default:
         return '';
     }
@@ -42,6 +46,12 @@ extension PageIndexExt on PageIndex {
       case PageIndex.home:
         return Icon(
           Icons.home,
+          size: 30,
+          color: isActived ? XColors.primary : null,
+        );
+      case PageIndex.wallet:
+        return Icon(
+          Icons.wallet,
           size: 30,
           color: isActived ? XColors.primary : null,
         );
@@ -61,8 +71,8 @@ extension PageIndexExt on PageIndex {
     switch (this) {
       case PageIndex.home:
         return const HomeWrapperPage();
-      // case PageIndex.calendar:
-      //   return const ScheduleWrapperPage();
+      case PageIndex.wallet:
+        return const WalletWrapperPage();
       // case PageIndex.studentCard:
       //   return const CardStudentWrapperPage();
       case PageIndex.myUser:
