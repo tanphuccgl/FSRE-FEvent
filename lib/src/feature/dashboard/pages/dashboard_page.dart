@@ -2,6 +2,7 @@ import 'package:fevent/src/feature/float_bottom_navigation/cubit/bottom_navigati
 import 'package:fevent/src/feature/float_bottom_navigation/pages/float_bottom_navigation.dart';
 import 'package:fevent/src/feature/home/router/home_router.dart';
 import 'package:fevent/src/feature/my_user/router/profile_router.dart';
+import 'package:fevent/src/feature/wallet/router/wallet_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +15,7 @@ class DashboardPage extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (_) => HomeCoordinator()),
         RepositoryProvider(create: (_) => MyUserCoordinator()),
-        // RepositoryProvider(create: (_) => CardStudentCoordinator()),
+        RepositoryProvider(create: (_) => WalletCoordinator()),
         // RepositoryProvider(create: (_) => ScheduleCoordinator()),
       ],
       child: BlocProvider(
