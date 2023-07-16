@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 GapHelper.h16,
-                const Text("LOGIN",
+                const Text("Đăng nhập",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w400,

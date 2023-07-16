@@ -41,7 +41,7 @@ class UpdateProfilePage extends StatelessWidget {
                         const Expanded(
                           flex: 8,
                           child: Center(
-                            child: Text("Update Profile",
+                            child: Text("Cập nhật hồ sơ",
                                 style: TextStyle(
                                     fontSize: 30,
                                     fontWeight: FontWeight.w500,
@@ -60,7 +60,7 @@ class UpdateProfilePage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     child: XInput(
                       value: "",
-                      hintText: "Full name",
+                      hintText: "Họ và tên",
                       prefixIcon: Icon(
                         Icons.person,
                         color: XColors.primary,
@@ -82,7 +82,7 @@ class UpdateProfilePage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     child: XInput(
                       value: "",
-                      hintText: "Your phone",
+                      hintText: "Số điện thoại của bạn",
                       prefixIcon: Icon(
                         Icons.person,
                         color: XColors.primary,
@@ -104,7 +104,7 @@ class UpdateProfilePage extends StatelessWidget {
                             )),
                         backgroundColor: Colors.white,
                       ),
-                      child: const Text("UPDATE",
+                      child: const Text("Cập nhật",
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,

@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
-          title: const Text("Profile",
+          title: const Text("Hồ sơ",
               style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w400,
@@ -77,7 +77,7 @@ class ProfilePage extends StatelessWidget {
                     )),
                 backgroundColor: Colors.white,
               ),
-              child: const Text("EDIT",
+              child: const Text("Sửa",
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,

@@ -10,15 +10,15 @@ enum MyUserOption {
   String get labelOf {
     switch (this) {
       case MyUserOption.notification:
-        return 'Notifications';
+        return 'Thông báo';
       case MyUserOption.feedback:
-        return 'Feedback';
+        return 'Nhận xét';
       case MyUserOption.event:
-        return 'My Event';
+        return 'Lịch sử tham gia sự kiện';
       case MyUserOption.donate:
-        return 'My Donate';
+        return 'Lịch sử quyên góp';
       case MyUserOption.logout:
-        return 'Logout';
+        return 'Đăng xuất';
     }
   }
 

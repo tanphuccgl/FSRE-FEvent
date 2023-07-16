@@ -28,10 +28,10 @@ extension PageIndexExt on PageIndex {
   String lableOf() {
     switch (this) {
       case PageIndex.home:
-        return "Home";
+        return "Trang chủ";
 
       case PageIndex.myUser:
-        return "My User";
+        return "Người dùng";
       default:
         return '';
     }

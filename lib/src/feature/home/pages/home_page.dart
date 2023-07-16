@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Location",
+                              "Địa điểm",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                               height: 5,
                             ),
                             Text(
-                              "Karachi, Pakistan",
+                              "Quận 9, TP Hồ Chí Minh",
                               style: TextStyle(color: Colors.white),
                             ),
                           ],
@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Search Event",
+                            "Tìm kiếm sự kiện",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey),
@@ -165,7 +165,7 @@ class HomePage extends StatelessWidget {
                           const Divider(),
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 5),
-                            child: Text("GO DASHBOARD",
+                            child: Text("Đến trang chủ",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w900,
                                     color: XColors.primary)),
@@ -181,13 +181,13 @@ class HomePage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("Upcoming Events",
+                      const Text("Sự kiện sắp tới",
                           style: TextStyle(
                               fontWeight: FontWeight.w900,
                               color: Colors.black)),
                       GestureDetector(
                           onTap: () => XCoordinator.showAllEvent(),
-                          child: const Text("View all",
+                          child: const Text("Xem tất cả",
                               style: TextStyle(color: Colors.grey))),
                     ],
                   ),

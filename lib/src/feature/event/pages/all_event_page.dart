@@ -40,7 +40,7 @@ class AllEventPage extends StatelessWidget {
                       width: 10,
                     ),
                     const Text(
-                      "All Event",
+                      "Tất cả sự kiện",
                       style: TextStyle(
                           color: XColors.primary,
                           fontSize: 25,
