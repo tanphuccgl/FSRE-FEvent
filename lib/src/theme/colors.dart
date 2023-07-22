@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class XColors {
   static const primary = Color(0xffFF9502);
+  static const containerDialogWallet = Color(0xFFF2F5F7);
+
   static const borderInput = Color(0x1A000000);
   static const diableButton = Color(0xff01878A);
   static const shadowButton = Color(0x4001878A);
@@ -27,5 +29,4 @@ class XColors {
   static const itemCard = Color(0xFFFF905C);
   static const itemCard2 = Color(0xFF00BBF9);
   static const link = Color(0xFF3B7CF9);
-  static const orange = Color(0xFFFF8F5C);
 }
