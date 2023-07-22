@@ -16,4 +16,7 @@ class Endpoints {
   static const String event = "$baseUrl/events";
   static const String google = "$baseUrl/auth/google/callback";
   static const String logout = "$baseUrl/auth/logout";
+  static const String getFavouriteEvent = "$baseUrl/interests/event";
+
+  
 }
