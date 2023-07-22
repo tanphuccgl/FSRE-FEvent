@@ -2,6 +2,7 @@ import 'package:fevent/bloc_observer.dart';
 import 'package:fevent/fcm_config.dart';
 import 'package:fevent/firebase_options.dart';
 import 'package:fevent/src/network/domain.dart';
+import 'package:fevent/src/services/user_prefs.dart';
 import 'package:fevent/src/theme/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -18,9 +19,9 @@ class ConfigApp {
     ]);
     SystemChrome.setSystemUIOverlayStyle(XTheme.barOverLayStyle);
     _locator();
+    await UserPrefs.instance.initialize();
     await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+        options: DefaultFirebaseOptions.currentPlatform);
 
     Bloc.observer = XBlocObserver();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);

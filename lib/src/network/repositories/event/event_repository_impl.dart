@@ -26,7 +26,7 @@ class EventRepositoryImpl extends EventRepository {
         response.data,
       );
       final list = (result.data ?? []).toList();
-      return response.statusCode == 200
+      return response.statusCode == 200 || response.statusCode == 201
           ? XResult.success(list)
           : XResult.error("Error");
     } catch (e) {
