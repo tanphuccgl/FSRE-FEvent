@@ -1,4 +1,6 @@
+import 'package:fevent/src/feature/my_user/cubit/profile_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum MyUserOption {
   notification,
@@ -22,8 +24,11 @@ enum MyUserOption {
     }
   }
 
-  void onTap() {
+  void onTap(BuildContext context) {
     switch (this) {
+      case MyUserOption.logout:
+        context.read<ProfileBloc>().logout();
+        break;
       default:
         break;
     }
