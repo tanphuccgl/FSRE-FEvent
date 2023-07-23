@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class EventModel {
   String? eventId;
   String? title;
@@ -86,6 +87,11 @@ class EventModel {
     }
     return data;
   }
+
+  @override
+  String toString() {
+    return 'EventModel(eventId: $eventId, title: $title, topic: $topic, type: $type, description: $description, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, location: $location, totalDonation: $totalDonation, rating: $rating, startDate: $startDate, endDate: $endDate, image: $image, expectedAmount: $expectedAmount, remainingAmount: $remainingAmount, partner: $partner, staff: $staff)';
+  }
 }
 
 class Partner {
@@ -135,6 +141,7 @@ class Staff {
   String? updatedAt;
   bool? isVerified;
   String? quitDate;
+  Department? department;
 
   Staff(
       {this.staffId,
@@ -145,7 +152,8 @@ class Staff {
       this.createdAt,
       this.updatedAt,
       this.isVerified,
-      this.quitDate});
+      this.quitDate,
+      this.department});
 
   Staff.fromJson(Map<String, dynamic> json) {
     staffId = json['staffId'];
@@ -157,6 +165,9 @@ class Staff {
     updatedAt = json['updatedAt'];
     isVerified = json['isVerified'];
     quitDate = json['quitDate'];
+    department = json['department'] != null
+        ? Department.fromJson(json['department'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -170,6 +181,42 @@ class Staff {
     data['updatedAt'] = updatedAt;
     data['isVerified'] = isVerified;
     data['quitDate'] = quitDate;
+    if (department != null) {
+      data['department'] = department!.toJson();
+    }
+    return data;
+  }
+}
+
+class Department {
+  String? departmentId;
+  String? name;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
+
+  Department(
+      {this.departmentId,
+      this.name,
+      this.status,
+      this.createdAt,
+      this.updatedAt});
+
+  Department.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    name = json['name'];
+    status = json['status'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['departmentId'] = departmentId;
+    data['name'] = name;
+    data['status'] = status;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
     return data;
   }
 }

@@ -66,7 +66,7 @@ class EventDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    convertUTCToFormattedDate(event.createdAt.toString()),
+                    convertUTCToFormattedDate(event.startDate.toString()),
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 15,
@@ -77,7 +77,7 @@ class EventDetailPage extends StatelessWidget {
                   ),
                   Text(
                     convertToFormattedDateTimeRange(
-                        event.createdAt.toString(), event.endDate.toString()),
+                        event.startDate.toString(), event.endDate.toString()),
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 13,
@@ -106,7 +106,7 @@ class EventDetailPage extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                (event.partner?.name ?? "").toString(),
+                (event.staff?.department?.name ?? "").toString(),
                 style: const TextStyle(
                     color: Colors.black,
                     fontSize: 15,
@@ -136,9 +136,9 @@ class EventDetailPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Việt Nam",
-                    style: TextStyle(
+                  Text(
+                    event.location ?? "",
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 15,
                         fontWeight: FontWeight.bold),
@@ -178,111 +178,113 @@ class EventDetailPage extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(width: 1, color: XColors.primary)),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Icon(
-                        Icons.location_city,
+                      const Icon(
+                        Icons.calendar_month_outlined,
                         color: XColors.primary,
                         size: 30,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
-                        "PDP , FPT University",
-                        style: TextStyle(
+                        event.title ?? "",
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Row(
                     children: [
-                      Icon(
-                        Icons.location_city,
+                      const Icon(
+                        Icons.work,
                         color: XColors.primary,
                         size: 30,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
-                        "PDP , FPT University",
-                        style: TextStyle(
+                        event.topic ?? "",
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Row(
                     children: [
-                      Icon(
-                        Icons.location_city,
+                      const Icon(
+                        Icons.person_3,
                         color: XColors.primary,
                         size: 30,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
-                        "PDP , FPT University",
-                        style: TextStyle(
+                        event.remainingAmount.toString(),
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Row(
                     children: [
-                      Icon(
-                        Icons.location_city,
+                      const Icon(
+                        Icons.timelapse_sharp,
                         color: XColors.primary,
                         size: 30,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
-                        "PDP , FPT University",
-                        style: TextStyle(
+                        convertToFormattedDateTimeRange(
+                            event.startDate.toString(),
+                            event.endDate.toString()),
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Row(
                     children: [
-                      Icon(
-                        Icons.location_city,
+                      const Icon(
+                        Icons.supervised_user_circle_outlined,
                         color: XColors.primary,
                         size: 30,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
-                        "PDP , FPT University",
-                        style: TextStyle(
+                        event.partner?.name ?? "",
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold),
@@ -292,6 +294,25 @@ class EventDetailPage extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          const Text(
+            "Thông tin sự kiện",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Text(
+            event.description ?? "",
+            style: const TextStyle(
+                color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
           ),
           const SizedBox(
             height: 15,
