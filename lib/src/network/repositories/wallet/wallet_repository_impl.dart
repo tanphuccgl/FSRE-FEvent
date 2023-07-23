@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:fevent/src/config/constants/endpoints.dart';
 import 'package:fevent/src/network/data_sources/base_data_source.dart';
 import 'package:fevent/src/network/model/common/result.dart';
@@ -9,9 +10,15 @@ import 'package:fevent/src/utils/helper/logger.dart';
 
 class WalletRepositoryImpl extends WalletRepository {
   @override
-  Future<XResult<WalletModel>> getWalletMe() async {
+  Future<XResult<WalletModel>> getWalletMe(String token) async {
     try {
-      final response = await BaseDataSource().get(Endpoints.wallet);
+      final response = await BaseDataSource().get(
+        Endpoints.wallet,
+        options: Options(headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        }),
+      );
 
       final result = WalletModel.fromJson(response.data);
 
@@ -26,10 +33,14 @@ class WalletRepositoryImpl extends WalletRepository {
   }
 
   @override
-  Future<XResult<TransactionModel>> getListTransaction() async {
+  Future<XResult<TransactionModel>> getListTransaction(String token) async {
     try {
       final response = await BaseDataSource().get(
         "${Endpoints.transaction}?page=0&pageSize=12&orderBy=createdAt&order=ASC&isShowInactive=false",
+        options: Options(headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        }),
       );
 
       final result = TransactionModel.fromJson(response.data);
@@ -44,10 +55,15 @@ class WalletRepositoryImpl extends WalletRepository {
   }
 
   @override
-  Future<XResult<TransactionModel>> withdraw(double number) async {
+  Future<XResult<TransactionModel>> withdraw(
+      String token, double number) async {
     try {
-      final response = await BaseDataSource()
-          .post(Endpoints.withdraw, data: {"amount": number});
+      final response = await BaseDataSource().post(Endpoints.withdraw,
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+          }),
+          data: {"amount": number});
 
       final result = TransactionModel.fromJson(response.data);
 
@@ -62,12 +78,17 @@ class WalletRepositoryImpl extends WalletRepository {
   }
 
   @override
-  Future<XResult<DepositModel>> deposit(double number, String url) async {
+  Future<XResult<DepositModel>> deposit(
+      String token, double number, String url) async {
     try {
       final response = await BaseDataSource().post(
         Endpoints.deposit,
+        options: Options(headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        }),
         data: {
-          "amount": double,
+          "amount": number,
           "redirectUrl": url,
         },
       );

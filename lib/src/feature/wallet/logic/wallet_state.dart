@@ -44,6 +44,33 @@ class WalletState extends Equatable {
   final TransactionModel? transactionModel;
   final double number;
 
+  String textShow(String type) {
+    switch (type) {
+      case "DEPOSIT":
+        return "Nạp tiền vào ví";
+      case "WITHDRAW":
+        return "Rút tiền từ ví";
+      case "SEND":
+        return "Chuyển tiền";
+      case "RECEIVE":
+        return "Nhận tiền";
+      case "DONATE":
+        return "Quyên góp";
+      case "RECEIVE_DONATE":
+        return "Nhận quyên góp";
+      case "COST":
+        return "Phí đăng ký";
+      case "RECEIVE_COST":
+        return "Nhận phí đăng ký";
+      case "REFUND":
+        return "Hoàn phí đăng ký";
+      case "RECEIVE_REFUND":
+        return "Nhận hoàn phí đăng ký";
+      default:
+        return "";
+    }
+  }
+
   const WalletState({
     this.walletModel,
     this.transactionModel,

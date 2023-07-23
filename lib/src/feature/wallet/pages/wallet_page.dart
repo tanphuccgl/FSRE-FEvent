@@ -4,6 +4,7 @@ import 'package:fevent/src/theme/colors.dart';
 import 'package:fevent/src/utils/helper/radius.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class WalletPage extends StatelessWidget {
   const WalletPage({super.key});
@@ -74,7 +75,9 @@ class WalletPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderHelper.r10),
                               maximumSize: const Size(150, 40)),
-                          onPressed: () {},
+                          onPressed: () => context
+                              .read<WalletBloc>()
+                              .onWithdrawButton(context),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -92,7 +95,9 @@ class WalletPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderHelper.r10),
                               maximumSize: const Size(150, 40)),
-                          onPressed: () {},
+                          onPressed: () => context
+                              .read<WalletBloc>()
+                              .onDepositButton(context),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -146,25 +151,43 @@ class WalletPage extends StatelessWidget {
   }
 
   Widget _item(TransactionDataModel data) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: [
-          Icon(Icons.trending_up),
-          SizedBox(
-            width: 15,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return BlocBuilder<WalletBloc, WalletState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Row(
             children: [
-              Text("Nạp tiển vào ví"),
-              Text("12:30 - 21/03/2023"),
+              const Icon(Icons.trending_up),
+              const SizedBox(
+                width: 15,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(state.textShow(data.type ?? "")),
+                  Text(formatDate(data.updatedAt ?? "")),
+                ],
+              ),
+              const Spacer(),
+              const Text("+10.000vnd"),
             ],
           ),
-          Spacer(),
-          Text("+10.000vnd"),
-        ],
-      ),
+        );
+      },
     );
+  }
+
+  String formatDate(String dateTimeString) {
+    if (dateTimeString.isEmpty) return "";
+    DateTime dateTime = DateTime.parse(dateTimeString);
+
+    // Format time
+    String formattedTime = DateFormat('HH:mm').format(dateTime.toLocal());
+
+    // Format date
+    String formattedDate =
+        DateFormat('dd/MM/yyyy').format(DateTime(2023, 3, 21));
+
+    return '$formattedTime - $formattedDate';
   }
 }
