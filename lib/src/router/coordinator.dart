@@ -47,7 +47,7 @@ class XCoordinator {
         event: event,
       ));
 
-  static Future showEventHolder() => push(const HolderRegisterEventPage());
+  static Future showEventHolder(EventModel event) => push( HolderRegisterEventPage(   event: event,));
 
   static Future showEventOne() => push(const RegisterEventOnePage());
   static Future showEventTwo() => push(const RegisterEventTwoPage());

@@ -157,7 +157,9 @@ class WalletPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Row(
             children: [
-              const Icon(Icons.trending_up),
+              data.type?.contains("RECEIVE") == true
+                  ? const Icon(Icons.trending_down)
+                  : const Icon(Icons.trending_up),
               const SizedBox(
                 width: 15,
               ),
@@ -169,7 +171,9 @@ class WalletPage extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              const Text("+10.000vnd"),
+              Text(data.type?.contains("RECEIVE") == true
+                  ? "-"
+                  : '+' "${data.amount}vnd"),
             ],
           ),
         );

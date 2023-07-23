@@ -298,21 +298,29 @@ class EventDetailPage extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          const Text(
-            "Thông tin sự kiện",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Text(
+              "Thông tin sự kiện",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(
             height: 15,
           ),
-          Text(
-            event.description ?? "",
-            style: const TextStyle(
-                color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(
+              event.description ?? "",
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
           const SizedBox(
             height: 15,
@@ -321,7 +329,7 @@ class EventDetailPage extends StatelessWidget {
             child: ElevatedButton(
                 style:
                     ElevatedButton.styleFrom(maximumSize: const Size(150, 55)),
-                onPressed: () => XCoordinator.showEventHolder(),
+                onPressed: () => XCoordinator.showEventHolder(event),
                 child: const Text(
                   "Đăng ký",
                 )),
