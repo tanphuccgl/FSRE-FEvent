@@ -16,7 +16,15 @@ class Endpoints {
   static const String event = "$baseUrl/events";
   static const String google = "$baseUrl/auth/google/callback";
   static const String logout = "$baseUrl/auth/logout";
+
   static const String getFavouriteEvent = "$baseUrl/interests/event";
 
   
+
+
+  static const String wallet = "$baseUrl/wallet/me";
+  static const String transaction = "$baseUrl/wallet/me/transaction";
+  static const String withdraw = "$baseUrl/wallet/withdraw";
+  static const String deposit = "$baseUrl/wallet/deposit/momo";
+
 }

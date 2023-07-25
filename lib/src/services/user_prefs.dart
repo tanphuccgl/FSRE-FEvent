@@ -27,7 +27,8 @@ class UserPrefs {
     _prefs.setString("USER", value);
   }
 
-  String? get getTokenUser => getUser()?.token;
+  String? get getTokenUser =>
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU4YjQ2YWYyLTI2ODUtNDRhMS1iYWM1LWE3YjY4YzQ4NDJmNCIsImlhdCI6MTY5MDA5MzE1Mn0.gZAZG1JuL2Bs3tZviIPMnNacdA8nVwVpcShmQnD0EyY";
 
   //String? get getUserID => getUser()?.id;
 }
