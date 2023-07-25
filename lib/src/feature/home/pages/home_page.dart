@@ -8,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
+import '../logic/favoutire_bloc.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -216,98 +218,119 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _item(EventModel event) {
-    return GestureDetector(
-      onTap: () => XCoordinator.showEventDetail(event),
-      child: Container(
-        height: 220.h,
-        width: 300.w,
-        margin: const EdgeInsets.fromLTRB(2, 0, 10, 10),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(25),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 0.1,
-                blurRadius: 3,
-                offset: const Offset(0, 3), // changes position of shadow
-              ),
-            ]),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(25), topRight: Radius.circular(25)),
-              child: Image.network(
-                "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
-                //  event.image.toString(),
-                height: 139.h,
-                width: 300.w,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      XImage.icon3,
-                      height: 50,
-                      width: 30,
+    return BlocProvider(
+      create: (context) => FavouriteBloc(event.eventId ?? ""),
+      child: BlocBuilder<FavouriteBloc, FavouriteState>(
+        builder: (context, state) {
+          return GestureDetector(
+            onTap: () => XCoordinator.showEventDetail(event),
+            child: Container(
+              height: 220.h,
+              width: 300.w,
+              margin: const EdgeInsets.fromLTRB(2, 0, 10, 10),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 0.1,
+                      blurRadius: 3,
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 180.w,
-                          child: Text(
-                            event.title.toString(),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              convertUTCToLocalTime(event.createdAt.toString()),
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 5),
-                              decoration: const BoxDecoration(
-                                  color: Colors.black, shape: BoxShape.circle),
-                              width: 5,
-                              height: 5,
-                            ),
-                            Text(
-                              event.topic.toString(),
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    const Icon(
-                      Icons.favorite_border,
-                    )
                   ]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25)),
+                    child: Image.network(
+                      "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                      //  event.image.toString(),
+                      height: 139.h,
+                      width: 300.w,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            XImage.icon3,
+                            height: 50,
+                            width: 30,
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 180.w,
+                                child: Text(
+                                  event.title.toString(),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    convertUTCToLocalTime(
+                                        event.createdAt.toString()),
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    decoration: const BoxDecoration(
+                                        color: Colors.black,
+                                        shape: BoxShape.circle),
+                                    width: 5,
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    event.topic.toString(),
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          state.isEnable
+                              ? const Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                )
+                              : GestureDetector(
+                                  onTap: () => context
+                                      .read<FavouriteBloc>()
+                                      .postFavouriteEvent(),
+                                  child: const Icon(
+                                    Icons.favorite_border,
+                                  ),
+                                )
+                        ]),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:fevent/src/feature/event/logic/events_bloc.dart';
+import 'package:fevent/src/feature/home/logic/favoutire_bloc.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
@@ -69,66 +70,93 @@ class AllEventPage extends StatelessWidget {
   }
 
   Widget _item(EventModel event) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
-      child: GestureDetector(
-        onTap: () => XCoordinator.showEventDetail(event),
-        child: SizedBox(
-          height: 148.h,
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
-                  height: 148.h,
-                  width: 118.w,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    convertUTCToFormattedDateTime(event.createdAt.toString()),
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black),
-                  ),
-                  SizedBox(
-                    width: 180.w,
-                    child: Text(
-                      event.title.toString(),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black),
+    return BlocProvider(
+      create: (context) => FavouriteBloc(event.eventId ?? ""),
+      child: BlocBuilder<FavouriteBloc, FavouriteState>(
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: GestureDetector(
+              onTap: () => XCoordinator.showEventDetail(event),
+              child: SizedBox(
+                height: 148.h,
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                        height: 148.h,
+                        width: 118.w,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.location_on_outlined),
-                      SizedBox(
-                        width: 180.w,
-                        child: Text(
-                          event.location.toString(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          convertUTCToFormattedDateTime(
+                              event.createdAt.toString()),
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.black),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
+                        SizedBox(
+                          width: 180.w,
+                          child: Text(
+                            event.title.toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 200,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Icon(Icons.location_on_outlined),
+                              SizedBox(
+                                width: 100,
+                                child: Text(
+                                  event.location.toString(),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                              ),
+                              const Spacer(),
+                              state.isEnable
+                                  ? const Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                    )
+                                  : GestureDetector(
+                                      onTap: () => context
+                                          .read<FavouriteBloc>()
+                                          .postFavouriteEvent(),
+                                      child: const Icon(
+                                        Icons.favorite_border,
+                                      ),
+                                    )
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
