@@ -108,13 +108,14 @@ class BaseDataSource {
   }
 
   // Delete:--------------------------------------------------------------------
-  Future<XResult<T>> delete<T>(
+  Future<Response> delete<T>(
     String uri, {
-    required T data,
-    required List<int> statusCodes,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
   }) async {
     try {
       final Response response = await _dio
@@ -130,13 +131,10 @@ class BaseDataSource {
         '> DELETE RESPONSE [${response.statusCode}]< $uri $data',
       );
 
-      return statusCodes.contains(response.statusCode)
-          ? XResult.success(response.data)
-          : XResult.error(response.statusCode.toString());
+      return response;
     } catch (e) {
       LoggerHelper.errorApi('> API CATCH Error< $e');
-
-      return XResult.exception(e);
+      rethrow;
     }
   }
 }

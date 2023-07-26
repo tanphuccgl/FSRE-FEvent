@@ -5,6 +5,7 @@ import 'package:fevent/src/network/model/common/result.dart';
 import 'package:fevent/src/network/model/wallet/deposit_model.dart';
 import 'package:fevent/src/network/model/wallet/transaction_model.dart';
 import 'package:fevent/src/network/model/wallet/wallet_model.dart';
+import 'package:fevent/src/network/model/wallet/withdraw_model.dart';
 import 'package:fevent/src/network/repositories/wallet/wallet_repository.dart';
 import 'package:fevent/src/utils/helper/logger.dart';
 
@@ -55,8 +56,7 @@ class WalletRepositoryImpl extends WalletRepository {
   }
 
   @override
-  Future<XResult<TransactionModel>> withdraw(
-      String token, double number) async {
+  Future<XResult<WithdrawModel>> withdraw(String token, double number) async {
     try {
       final response = await BaseDataSource().post(Endpoints.withdraw,
           options: Options(headers: {
@@ -65,7 +65,7 @@ class WalletRepositoryImpl extends WalletRepository {
           }),
           data: {"amount": number});
 
-      final result = TransactionModel.fromJson(response.data);
+      final result = WithdrawModel.fromJson(response.data);
 
       return response.statusCode == 200 || response.statusCode == 201
           ? XResult.success(result)

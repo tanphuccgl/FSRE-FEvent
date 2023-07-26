@@ -4,6 +4,7 @@ import 'package:fevent/src/network/model/common/result.dart';
 import 'package:fevent/src/network/model/user.dart';
 import 'package:fevent/src/network/repositories/authentication/auth_repository.dart';
 import 'package:fevent/src/utils/helper/logger.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   @override
@@ -13,12 +14,17 @@ class AuthRepositoryImpl extends AuthRepository {
     required String uuidGoogle,
   }) async {
     try {
+      final deviceId = await FirebaseMessaging.instance.getToken(
+              vapidKey:
+                  "AAAAn5LwCqk:APA91bHm-0rsBmYSqwaPR2DXlyN8oCtMjx15FbURgWE0MJI2i5s1CLp2jzTzFxHGNROflEyGDgSHNWxVwvb1YZ6iitn7JH2Kun5CVGj8VV6VP4DkjoRXMYHaV2di9gEJoxIFbcObA6dh") ??
+          "";
       final response = await BaseDataSource().post(
         Endpoints.google,
         data: {
           "name": name,
           "email": email,
           "sub": uuidGoogle,
+          "deviceId": deviceId,
         },
       );
 
@@ -27,8 +33,8 @@ class AuthRepositoryImpl extends AuthRepository {
       return response.statusCode == 200 || response.statusCode == 201
           ? XResult.success(result)
           : XResult.error("Error");
-    } catch (e) {
-      LoggerHelper.error('> login with google A CATCH Error< $e');
+    } catch (e, a) {
+      LoggerHelper.error('> login with google A CATCH Error< $e $a');
 
       return XResult.exception(e);
     }

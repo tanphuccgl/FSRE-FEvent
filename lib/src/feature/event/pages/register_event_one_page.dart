@@ -1,4 +1,5 @@
 import 'package:fevent/src/feature/event/logic/register_event_one_bloc.dart';
+import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:fevent/src/utils/helper/radius.dart';
 import 'package:fevent/src/widgets/input.dart';
@@ -6,12 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterEventOnePage extends StatelessWidget {
-  const RegisterEventOnePage({super.key});
+  final EventModel event;
+  const RegisterEventOnePage({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterEventOneBloc(),
+      create: (context) => RegisterEventOneBloc(event),
       child: BlocBuilder<RegisterEventOneBloc, RegisterEventOneState>(
         builder: (context, state) {
           return Scaffold(

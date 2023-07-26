@@ -3,6 +3,8 @@ import 'package:fevent/src/network/repositories/event/event_repository.dart';
 import 'package:fevent/src/network/repositories/event/event_repository_impl.dart';
 import 'package:fevent/src/network/repositories/favourite/favourite_repository.dart';
 import 'package:fevent/src/network/repositories/favourite/favourite_repository_impl.dart';
+import 'package:fevent/src/network/repositories/job/job_repository.dart';
+import 'package:fevent/src/network/repositories/job/job_repository_impl.dart';
 import 'package:fevent/src/network/repositories/wallet/wallet_repository.dart';
 import 'package:fevent/src/network/repositories/wallet/wallet_repository_impl.dart';
 
@@ -19,10 +21,12 @@ class Domain {
   late AuthRepository authRepository;
   late WalletRepository walletRepository;
   late FavouriteRepository favouriteRepository;
+  late JobRepository jobRepository;
   Domain._() {
     eventRepository = EventRepositoryImpl();
     authRepository = AuthRepositoryImpl();
     walletRepository = WalletRepositoryImpl();
     favouriteRepository = FavouriteRepositoryImpl();
+    jobRepository = JobRepositoryImpl();
   }
 }
