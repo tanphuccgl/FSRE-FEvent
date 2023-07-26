@@ -86,6 +86,7 @@ class WalletBloc extends Cubit<WalletState> {
   }
 
   void onWithdrawButton(BuildContext context) {
+    onChangedNumber("0");
     showDialog(
       context: context,
       builder: (context1) {
@@ -158,6 +159,7 @@ class WalletBloc extends Cubit<WalletState> {
   }
 
   void onDepositButton(BuildContext context) {
+    onChangedNumber("0");
     showDialog(
       context: context,
       builder: (BuildContext context1) {

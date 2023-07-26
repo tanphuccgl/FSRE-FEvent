@@ -77,7 +77,7 @@ class WalletPage extends StatelessWidget {
                               maximumSize: const Size(150, 40)),
                           onPressed: () => context
                               .read<WalletBloc>()
-                              .onWithdrawButton(context),
+                              .onDepositButton(context),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -97,7 +97,7 @@ class WalletPage extends StatelessWidget {
                               maximumSize: const Size(150, 40)),
                           onPressed: () => context
                               .read<WalletBloc>()
-                              .onDepositButton(context),
+                              .onWithdrawButton(context),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

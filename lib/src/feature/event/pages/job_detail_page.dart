@@ -175,7 +175,8 @@ class JobDetailPage extends StatelessWidget {
               ],
             ),
           ),
-          if (data.event?.status == "PUBLIC")
+          if (data.event?.status == "PUBLIC" &&
+              (data.event?.remainingAmount ?? 0) > 0)
             Center(
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(

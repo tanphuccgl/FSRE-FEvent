@@ -71,7 +71,6 @@ class EventRepositoryImpl extends EventRepository {
   Future<XResult<RemoveParticipantsModel>> removeRegisterEvent(
       String participantId, String token) async {
     try {
-      print("levi" + participantId);
       final response = await BaseDataSource().delete(
         "${Endpoints.deleteRegisterEvent}/$participantId",
         options: Options(headers: {

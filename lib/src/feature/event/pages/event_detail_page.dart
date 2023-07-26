@@ -334,7 +334,8 @@ class EventDetailPage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                if (event.status == "PUBLIC")
+                if (event.status == "PUBLIC" &&
+                    (event.remainingAmount ?? 0) > 0)
                   if (state.data?.participantId == null)
                     Center(
                       child: ElevatedButton(
