@@ -1,8 +1,11 @@
 import 'package:fevent/src/feature/event/pages/event_detail_page.dart';
 import 'package:fevent/src/feature/event/pages/holder_register_event_page.dart';
+import 'package:fevent/src/feature/event/pages/job_detail_page.dart';
+import 'package:fevent/src/feature/event/pages/list_job_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_two_page.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
+import 'package:fevent/src/network/model/job.dart';
 import 'package:fevent/src/router/router_name.dart';
 import 'package:flutter/material.dart';
 
@@ -52,8 +55,25 @@ class XCoordinator {
         event: event,
       ));
 
-  static Future showEventOne() => push(const RegisterEventOnePage());
-  static Future showEventTwo() => push(const RegisterEventTwoPage());
+  static Future showEventOne(EventModel event) => push(RegisterEventOnePage(
+        event: event,
+      ));
+  static Future showEventTwo(String eventId) =>
+      push(RegisterEventTwoPage(eventId: eventId));
+
+  static Future showListJob() => push(const ListJobPage());
+
+  static Future showJobDetail(JobData event) => push(JobDetailPage(
+        data: event,
+      ));
+  static Future showEventDetail1(EventModel event) =>
+      navigator.pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => EventDetailPage(
+                  event: event,
+                )),
+        (route) => false,
+      );
 
   static Future showScanQR() => pushNamed(XRouterName.scanQr);
 

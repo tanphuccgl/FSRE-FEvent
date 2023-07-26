@@ -14,6 +14,7 @@ class Endpoints {
 
   // endpoints
   static const String event = "$baseUrl/events";
+  static const String getEvent = "$baseUrl/events";
   static const String google = "$baseUrl/auth/google/callback";
   static const String logout = "$baseUrl/auth/logout";
 
@@ -24,4 +25,10 @@ class Endpoints {
   static const String transaction = "$baseUrl/wallet/me/transaction";
   static const String withdraw = "$baseUrl/wallet/withdraw";
   static const String deposit = "$baseUrl/wallet/deposit/momo";
+
+  static const String postRegisterEvent = "$baseUrl/participants";
+  static String checkRegisterEvent(eventId) =>
+      "$baseUrl/participants/event/$event/me";
+
+  static const String jobs = "$baseUrl/jobs";
 }

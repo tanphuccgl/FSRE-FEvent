@@ -28,7 +28,9 @@ class UserPrefs {
   }
 
   String? get getTokenUser =>
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU4YjQ2YWYyLTI2ODUtNDRhMS1iYWM1LWE3YjY4YzQ4NDJmNCIsImlhdCI6MTY5MDA5MzE1Mn0.gZAZG1JuL2Bs3tZviIPMnNacdA8nVwVpcShmQnD0EyY";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU4YjQ2YWYyLTI2ODUtNDRhMS1iYWM1LWE3YjY4YzQ4NDJmNCIsImlhdCI6MTY5MDMyMTIyNX0.Ghym3yNn9vE2rCoie8th6LBy2JpWXnqxupWnPUiqaYM";
 
   //String? get getUserID => getUser()?.id;
+
+  // String? get getTokenUser => getUser()?.token;
 }

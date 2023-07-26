@@ -11,6 +11,9 @@ class XRouterName {
   static const String eventOne = '/event-one';
   static const String eventTwo = '/event-two';
 
+  static const String listJob = '/list-job';
+  static const String jobDetail = '/job-detail';
+
   static const String wallet = '/wallet';
 
   static const String attendanceStudent = '/attendance-student';

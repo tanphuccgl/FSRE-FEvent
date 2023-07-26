@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterEventTwoPage extends StatelessWidget {
-  const RegisterEventTwoPage({super.key});
+  final String eventId;
+  const RegisterEventTwoPage({super.key, required this.eventId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterEventTwoBloc(),
+      create: (context) => RegisterEventTwoBloc(eventId),
       child: BlocBuilder<RegisterEventTwoBloc, RegisterEventTwoState>(
         builder: (context, state) {
           return Scaffold(
@@ -218,7 +219,9 @@ class RegisterEventTwoPage extends StatelessWidget {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           maximumSize: const Size(150, 55)),
-                      onPressed: () => context.read<RegisterEventTwoBloc>(),
+                      onPressed: () => context
+                          .read<RegisterEventTwoBloc>()
+                          .onRegisterButton(context),
                       child: const Text("Đăng ký")),
                 ),
                 const SizedBox(
