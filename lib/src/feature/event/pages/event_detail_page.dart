@@ -14,7 +14,7 @@ class EventDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DetailEventBloc(event.eventId ?? ""),
+      create: (context) => DetailEventBloc(event),
       child: BlocBuilder<DetailEventBloc, DetailEventState>(
         builder: (context, state) {
           return Scaffold(
@@ -335,7 +335,7 @@ class EventDetailPage extends StatelessWidget {
                   height: 15,
                 ),
                 if (event.status == "PUBLIC")
-                  if (state.data == null)
+                  if (state.data?.participantId == null)
                     Center(
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -349,8 +349,11 @@ class EventDetailPage extends StatelessWidget {
                     Center(
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
                               maximumSize: const Size(150, 55)),
-                          onPressed: () => XCoordinator.showEventHolder(event),
+                          onPressed: () => context
+                              .read<DetailEventBloc>()
+                              .onRemoveRegisterEventButton(context),
                           child: const Text(
                             "Hủy Đăng ký",
                           )),

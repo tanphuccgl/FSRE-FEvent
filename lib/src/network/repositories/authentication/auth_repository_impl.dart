@@ -33,8 +33,8 @@ class AuthRepositoryImpl extends AuthRepository {
       return response.statusCode == 200 || response.statusCode == 201
           ? XResult.success(result)
           : XResult.error("Error");
-    } catch (e) {
-      LoggerHelper.error('> login with google A CATCH Error< $e');
+    } catch (e, a) {
+      LoggerHelper.error('> login with google A CATCH Error< $e $a');
 
       return XResult.exception(e);
     }

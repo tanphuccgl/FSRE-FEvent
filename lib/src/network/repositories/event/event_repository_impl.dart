@@ -71,15 +71,13 @@ class EventRepositoryImpl extends EventRepository {
   Future<XResult<RemoveParticipantsModel>> removeRegisterEvent(
       String participantId, String token) async {
     try {
+      print("levi" + participantId);
       final response = await BaseDataSource().delete(
-        Endpoints.postRegisterEvent,
+        "${Endpoints.deleteRegisterEvent}/$participantId",
         options: Options(headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer $token",
         }),
-        data: {
-          "participantId": participantId,
-        },
       );
 
       final result = RemoveParticipantsModel.fromJson(response.data);
@@ -88,7 +86,7 @@ class EventRepositoryImpl extends EventRepository {
           ? XResult.success(result)
           : XResult.error("Error");
     } catch (e, a) {
-      LoggerHelper.error('> postFavouriteEvent CATCH Error< $e $a');
+      LoggerHelper.error('> deleta removeRegisterEvent CATCH Error< $e $a');
 
       return XResult.exception(e);
     }
@@ -121,17 +119,18 @@ class EventRepositoryImpl extends EventRepository {
     try {
       final response = await BaseDataSource().get(
         Endpoints.checkRegisterEvent(eventId),
+        options: Options(headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        }),
       );
 
-      final result = CheckParticipantsModel.fromJson(
-        response.data,
-      );
-
+      final result = CheckParticipantsModel.fromJson(response.data);
       return response.statusCode == 200 || response.statusCode == 201
           ? XResult.success(result)
           : XResult.error("Error");
-    } catch (e) {
-      LoggerHelper.error('> GET  Event CATCH Error< $e');
+    } catch (e, a) {
+      LoggerHelper.error('> GET checkRegisterEvent CATCH Error< $e $a');
 
       return XResult.exception(e);
     }

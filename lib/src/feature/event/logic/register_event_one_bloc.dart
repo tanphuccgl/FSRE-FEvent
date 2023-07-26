@@ -32,23 +32,6 @@ class RegisterEventOneBloc extends Cubit<RegisterEventOneState> {
     }
   }
 
-  void onRemoveRegisterEventButton(BuildContext context) async {
-    showDialogDelete(context);
-  }
-
-  void deleteEventRegister() async {
-    final token = UserPrefs().getTokenUser;
-    if (token == null) return;
-
-    final result = await _domain.eventRepository
-        .removeRegisterEvent(event.eventId ?? "", token);
-    if (result.isSuccess) {
-      // ignore: use_build_context_synchronously
-    } else {
-      XToast.error("Lỗi");
-    }
-  }
-
   void success(BuildContext context) {
     showDialog(
       context: context,
@@ -74,60 +57,6 @@ class RegisterEventOneBloc extends Cubit<RegisterEventOneState> {
                   child: const Text(
                     "XÁC NHẬN",
                   )),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void showDialogDelete(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          content: const Text(
-            'BẠN CÓ MUỐN HỦY ĐĂNG KÝ\nSỰ KIỆN KHÔNG?',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.redAccent,
-                fontSize: 19,
-                fontWeight: FontWeight.bold),
-          ),
-          actions: [
-            Column(
-              children: [
-                Center(
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderHelper.r10),
-                          maximumSize: const Size(250, 40)),
-                      onPressed: () {
-                        deleteEventRegister();
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text(
-                        "XÁC NHẬN",
-                      )),
-                ),
-                Center(
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          side: const BorderSide(color: Colors.grey),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderHelper.r10),
-                          maximumSize: const Size(250, 40)),
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: const Text(
-                        "HỦY",
-                        style: TextStyle(color: Colors.grey),
-                      )),
-                ),
-              ],
             ),
           ],
         );

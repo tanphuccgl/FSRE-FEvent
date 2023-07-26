@@ -27,8 +27,10 @@ class Endpoints {
   static const String deposit = "$baseUrl/wallet/deposit/momo";
 
   static const String postRegisterEvent = "$baseUrl/participants";
+  static const String deleteRegisterEvent = "$baseUrl/participants";
+
   static String checkRegisterEvent(eventId) =>
-      "$baseUrl/participants/event/$event/me";
+      "$baseUrl/participants/event/$eventId/me";
 
   static const String jobs = "$baseUrl/jobs";
 }

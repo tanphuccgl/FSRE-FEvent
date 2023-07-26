@@ -66,14 +66,18 @@ class XCoordinator {
   static Future showJobDetail(JobData event) => push(JobDetailPage(
         data: event,
       ));
-  static Future showEventDetail1(EventModel event) =>
-      navigator.pushAndRemoveUntil(
-        MaterialPageRoute(
-            builder: (context) => EventDetailPage(
-                  event: event,
-                )),
-        (route) => false,
-      );
+  static Future showEventDetail1(EventModel event) async {
+    navigator.pop();
+    navigator.pop();
+    navigator.pop();
+    navigator.pop();
+    navigator.push(
+      MaterialPageRoute(
+          builder: (context) => EventDetailPage(
+                event: event,
+              )),
+    );
+  }
 
   static Future showScanQR() => pushNamed(XRouterName.scanQr);
 
