@@ -36,14 +36,14 @@ class MyUserPage extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("NGUYEN VAN A",
-                                    style: TextStyle(
+                                Text(state.profile?.name ?? "",
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                     )),
                                 GapHelper.h16,
-                                const Text("anvse123456@fpt.edu.vn",
-                                    style: TextStyle(
+                                Text(state.profile?.account?.email ?? "",
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                     ))

@@ -33,4 +33,7 @@ class Endpoints {
       "$baseUrl/participants/event/$eventId/me";
 
   static const String jobs = "$baseUrl/jobs";
+
+  static const String profile = "$baseUrl/students/me";
+  static const String postProfile = "$baseUrl/students";
 }
