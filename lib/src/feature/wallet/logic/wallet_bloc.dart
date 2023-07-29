@@ -129,7 +129,7 @@ class WalletBloc extends Cubit<WalletState> {
                   ),
                 ),
                 const Text(
-                  '*Số tiền nạp tối thiểu là 50.000vnd.\n\n'
+                  '*Số tiền rút tối thiểu là 50.000vnd.\n\n'
                   'Vui lòng chờ 24h để tiền được nhập vào tài khoản.',
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -149,7 +149,7 @@ class WalletBloc extends Cubit<WalletState> {
                       maximumSize: const Size(250, 40)),
                   onPressed: () => withdraw(context1),
                   child: const Text(
-                    "NẠP TIỀN",
+                    "RÚT TIỀN",
                   )),
             ),
           ],
@@ -202,7 +202,7 @@ class WalletBloc extends Cubit<WalletState> {
                   ),
                 ),
                 const Text(
-                  '*Số tiền rút tối thiểu là 50.000vnd.\n\n'
+                  '*Số tiền nạp tối thiểu là 50.000vnd.\n\n'
                   'Vui lòng chờ 24h để tiền được nhập vào tài khoản.',
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -222,7 +222,7 @@ class WalletBloc extends Cubit<WalletState> {
                       maximumSize: const Size(250, 40)),
                   onPressed: () => deposit(context1),
                   child: const Text(
-                    "RÚT TIỀN",
+                    "NẠP TIỀN",
                   )),
             ),
           ],
