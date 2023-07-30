@@ -1,6 +1,7 @@
 import 'package:fevent/src/feature/dashboard/pages/dashboard_page.dart';
 import 'package:fevent/src/feature/event/pages/all_event_page.dart';
 import 'package:fevent/src/feature/event/pages/detail_event_donate_page.dart';
+import 'package:fevent/src/feature/event/pages/detail_event_ticket_page.dart';
 import 'package:fevent/src/feature/event/pages/donate_event_page.dart';
 import 'package:fevent/src/feature/event/pages/event_detail_page.dart';
 import 'package:fevent/src/feature/event/pages/holder_register_event_page.dart';
@@ -8,6 +9,7 @@ import 'package:fevent/src/feature/event/pages/job_detail_page.dart';
 import 'package:fevent/src/feature/event/pages/list_job_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_two_page.dart';
+import 'package:fevent/src/feature/event/pages/success_event_ticket_page.dart';
 import 'package:fevent/src/feature/login/pages/login_page.dart';
 import 'package:fevent/src/feature/profile/pages/profile_page.dart';
 import 'package:fevent/src/feature/profile/pages/update_profile_page.dart';
@@ -42,6 +44,14 @@ class XAppRoute {
             builder: (_) => DetailEventDonatePage(
                   event: EventModel(),
                 ));
+      case XRouterName.eventDetailTicket:
+        return MaterialPageRoute(
+            builder: (_) => DetailEventTicketPage(
+                  event: EventModel(),
+                ));
+      case XRouterName.eventDetailTicketSucess:
+        return MaterialPageRoute(
+            builder: (_) => const SuccessEventTicketPage());
 
       case XRouterName.eventHolder:
         return MaterialPageRoute(
