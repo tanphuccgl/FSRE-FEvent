@@ -4,6 +4,8 @@ class XColors {
   static const primary = Color(0xffFF9502);
   static const containerDialogWallet = Color(0xFFF2F5F7);
 
+  static const fill = Color(0xFFF2F5F7);
+
   static const borderInput = Color(0x1A000000);
   static const diableButton = Color(0xff01878A);
   static const shadowButton = Color(0x4001878A);

@@ -1,5 +1,6 @@
 import 'package:fevent/src/feature/dashboard/pages/dashboard_page.dart';
-import 'package:fevent/src/feature/event/pages/detail_event_donate_page.dart';
+
+import 'package:fevent/src/feature/event/pages/detail_event_ticket_page.dart';
 import 'package:fevent/src/feature/event/pages/donate_event_page.dart';
 import 'package:fevent/src/feature/event/pages/event_detail_page.dart';
 import 'package:fevent/src/feature/event/pages/holder_register_event_page.dart';
@@ -7,6 +8,7 @@ import 'package:fevent/src/feature/event/pages/job_detail_page.dart';
 import 'package:fevent/src/feature/event/pages/list_job_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_two_page.dart';
+import 'package:fevent/src/feature/event/pages/success_event_ticket_page.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/job.dart';
 import 'package:fevent/src/router/router_name.dart';
@@ -52,9 +54,8 @@ class XCoordinator {
 
   static Future showAllEvent() => pushNamed(XRouterName.eventAll);
 
-  static Future showEventDetail(EventModel event) => push(DetailEventDonatePage(
-        event: event,
-      ));
+  static Future showEventDetail(EventModel event) =>
+      push(DetailEventTicketPage(event: event));
 
   static Future showEventHolder(EventModel event) =>
       push(HolderRegisterEventPage(
@@ -69,6 +70,10 @@ class XCoordinator {
   static Future showEventDonate(EventModel event) => push(DonateEventPage(
         event: event,
       ));
+
+  static Future showEventTicketSuccess() =>
+      push(const SuccessEventTicketPage());
+
   static Future showListJob() => push(const ListJobPage());
 
   static Future showJobDetail(JobData event) => push(JobDetailPage(
