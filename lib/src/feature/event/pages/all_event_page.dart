@@ -162,10 +162,14 @@ class AllEventPage extends StatelessWidget {
   }
 
   String convertUTCToFormattedDateTime(String utcTimestamp) {
-    DateTime utcDateTime = DateTime.parse(utcTimestamp);
-    DateTime localDateTime = utcDateTime.toLocal();
-    String formattedDateTime =
-        DateFormat('d MMM, yyyy, h:mm a').format(localDateTime);
-    return formattedDateTime;
+    try {
+      DateTime utcDateTime = DateTime.parse(utcTimestamp);
+      DateTime localDateTime = utcDateTime.toLocal();
+      String formattedDateTime =
+          DateFormat('d MMM, yyyy, h:mm a').format(localDateTime);
+      return formattedDateTime;
+    } catch (e) {
+      return "";
+    }
   }
 }

@@ -1,4 +1,5 @@
-import 'package:fevent/src/feature/event/logic/register_event_two_bloc.dart';
+import 'package:fevent/src/feature/event/logic/donate_event_bloc.dart';
+import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:fevent/src/utils/helper/radius.dart';
 import 'package:fevent/src/widgets/input.dart';
@@ -6,15 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class RegisterEventTwoPage extends StatelessWidget {
-  final String eventId;
-  const RegisterEventTwoPage({super.key, required this.eventId});
+class DonateEventPage extends StatelessWidget {
+  final EventModel event;
+  const DonateEventPage({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterEventTwoBloc(eventId),
-      child: BlocBuilder<RegisterEventTwoBloc, RegisterEventTwoState>(
+      create: (context) => DonateEventBloc(event),
+      child: BlocBuilder<DonateEventBloc, DonateEventState>(
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
@@ -42,7 +43,7 @@ class RegisterEventTwoPage extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    state.event?.title ?? "",
+                    event.title ?? "",
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 30,
@@ -70,7 +71,7 @@ class RegisterEventTwoPage extends StatelessWidget {
                       children: [
                         Text(
                           convertUTCToFormattedDate(
-                              (state.event?.startDate ?? "").toString()),
+                              (event.startDate ?? "").toString()),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 15,
@@ -81,8 +82,8 @@ class RegisterEventTwoPage extends StatelessWidget {
                         ),
                         Text(
                           convertToFormattedDateTimeRange(
-                              (state.event?.startDate ?? "").toString(),
-                              (state.event?.endDate ?? "").toString()),
+                              (event.startDate ?? "").toString(),
+                              (event.endDate ?? "").toString()),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 13,
@@ -100,7 +101,7 @@ class RegisterEventTwoPage extends StatelessWidget {
                   height: 7,
                 ),
                 const Center(
-                    child: Text("Xác nhận đăng ký",
+                    child: Text("Quyên góp",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 13,
@@ -112,19 +113,24 @@ class RegisterEventTwoPage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const Text("Họ và tên :",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold)),
+                const Center(
+                  child: Text("Nhập số tiền muốn quyên góp:",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold)),
+                ),
                 const SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
                 XInput(
-                  value: "",
-                  hintText: "Họ và tên",
+                  value: state.number == 0.0 ? "" : state.number.toString(),
                   filled: true,
-                  fillColor: XColors.bgGrey.withOpacity(0.5),
+                  hintText: "Vui lòng nhập số tiền",
+                  onChanged: (value) =>
+                      context.read<DonateEventBloc>().onChangedNumber(value),
+                  keyboardType: TextInputType.number,
+                  fillColor: XColors.containerDialogWallet,
                   enabledBorder: OutlineInputBorder(
                     borderSide:
                         const BorderSide(color: XColors.bgGrey, width: 1),
@@ -134,7 +140,7 @@ class RegisterEventTwoPage extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                const Text("MSSV :",
+                const Text("Lời nhắn",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 13,
@@ -142,81 +148,21 @@ class RegisterEventTwoPage extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                XInput(
-                  value: "",
-                  hintText: "MSSV",
-                  filled: true,
-                  fillColor: XColors.bgGrey.withOpacity(0.5),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: XColors.bgGrey, width: 1),
-                    borderRadius: BorderHelper.r10,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text("Email :",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold)),
-                const SizedBox(
-                  height: 5,
-                ),
-                XInput(
-                  value: "",
-                  hintText: "Email",
-                  filled: true,
-                  fillColor: XColors.bgGrey.withOpacity(0.5),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: XColors.bgGrey, width: 1),
-                    borderRadius: BorderHelper.r10,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text("Skill",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold)),
-                const SizedBox(
-                  height: 5,
-                ),
-                XInput(
-                  value: "",
-                  hintText: "Vui lòng chọn kỹ năng thích hợp",
-                  filled: true,
-                  fillColor: XColors.bgGrey.withOpacity(0.5),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: XColors.bgGrey, width: 1),
-                    borderRadius: BorderHelper.r10,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text("Chọn công việc",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold)),
-                const SizedBox(
-                  height: 5,
-                ),
-                XInput(
-                  value: "",
-                  hintText: "Vui lòng chọn công việc",
-                  filled: true,
-                  fillColor: XColors.bgGrey.withOpacity(0.5),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: XColors.bgGrey, width: 1),
-                    borderRadius: BorderHelper.r10,
+                SizedBox(
+                  height: 200,
+                  child: XInput(
+                    value: state.note,
+                    onChanged: (value) =>
+                        context.read<DonateEventBloc>().onChangedNote(value),
+                    maxLines: 7,
+                    hintText: "Nhập lời nhắn",
+                    filled: true,
+                    fillColor: XColors.bgGrey.withOpacity(0.5),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: XColors.bgGrey, width: 1),
+                      borderRadius: BorderHelper.r10,
+                    ),
                   ),
                 ),
                 Center(
@@ -224,9 +170,11 @@ class RegisterEventTwoPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           maximumSize: const Size(150, 55)),
                       onPressed: () => context
-                          .read<RegisterEventTwoBloc>()
-                          .onRegisterButton(context),
-                      child: const Text("Đăng ký")),
+                          .read<DonateEventBloc>()
+                          .onDonateButton(context),
+                      child: const Text(
+                        "Quyên góp",
+                      )),
                 ),
                 const SizedBox(
                   height: 25,

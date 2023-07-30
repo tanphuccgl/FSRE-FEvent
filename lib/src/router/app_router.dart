@@ -1,5 +1,7 @@
 import 'package:fevent/src/feature/dashboard/pages/dashboard_page.dart';
 import 'package:fevent/src/feature/event/pages/all_event_page.dart';
+import 'package:fevent/src/feature/event/pages/detail_event_donate_page.dart';
+import 'package:fevent/src/feature/event/pages/donate_event_page.dart';
 import 'package:fevent/src/feature/event/pages/event_detail_page.dart';
 import 'package:fevent/src/feature/event/pages/holder_register_event_page.dart';
 import 'package:fevent/src/feature/event/pages/job_detail_page.dart';
@@ -34,6 +36,13 @@ class XAppRoute {
             builder: (_) => EventDetailPage(
                   event: EventModel(),
                 ));
+
+      case XRouterName.eventDetailDonate:
+        return MaterialPageRoute(
+            builder: (_) => DetailEventDonatePage(
+                  event: EventModel(),
+                ));
+
       case XRouterName.eventHolder:
         return MaterialPageRoute(
             builder: (_) => HolderRegisterEventPage(
@@ -47,6 +56,12 @@ class XAppRoute {
       case XRouterName.eventTwo:
         return MaterialPageRoute(
             builder: (_) => const RegisterEventTwoPage(eventId: ""));
+
+      case XRouterName.eventDonate:
+        return MaterialPageRoute(
+            builder: (_) => DonateEventPage(
+                  event: EventModel(),
+                ));
 
       case XRouterName.wallet:
         return MaterialPageRoute(builder: (_) => const WalletPage());

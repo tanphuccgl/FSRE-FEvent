@@ -5,6 +5,7 @@ import 'package:fevent/src/utils/helper/radius.dart';
 import 'package:fevent/src/widgets/input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class RegisterEventOnePage extends StatelessWidget {
   final EventModel event;
@@ -40,10 +41,10 @@ class RegisterEventOnePage extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
               shrinkWrap: true,
               children: [
-                const Center(
+                Center(
                   child: Text(
-                    "Tết Holiday Event",
-                    style: TextStyle(
+                    event.title ?? "",
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
@@ -52,16 +53,16 @@ class RegisterEventOnePage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const Center(
+                Center(
                     child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.calendar_today_rounded,
                       color: XColors.primary,
                       size: 30,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Column(
@@ -69,18 +70,21 @@ class RegisterEventOnePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "29 January, 2022",
-                          style: TextStyle(
+                          convertUTCToFormattedDate(
+                              (event.startDate ?? "").toString()),
+                          style: const TextStyle(
                               color: Colors.black,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Text(
-                          "Tuesday, 3:00 - 4:00PM",
-                          style: TextStyle(
+                          convertToFormattedDateTimeRange(
+                              (event.startDate ?? "").toString(),
+                              (event.endDate ?? "").toString()),
+                          style: const TextStyle(
                               color: Colors.black,
                               fontSize: 13,
                               fontWeight: FontWeight.bold),
@@ -127,8 +131,10 @@ class RegisterEventOnePage extends StatelessWidget {
                   height: 5,
                 ),
                 XInput(
-                  value: "",
+                  value: state.name,
                   hintText: "Họ và tên",
+                  onChanged: (value) =>
+                      context.read<RegisterEventOneBloc>().onChangedName(value),
                   filled: true,
                   fillColor: XColors.bgGrey.withOpacity(0.5),
                   enabledBorder: OutlineInputBorder(
@@ -149,9 +155,11 @@ class RegisterEventOnePage extends StatelessWidget {
                   height: 5,
                 ),
                 XInput(
-                  value: "",
+                  value: state.code,
                   hintText: "MSSV",
                   filled: true,
+                  onChanged: (value) =>
+                      context.read<RegisterEventOneBloc>().onChangedCode(value),
                   fillColor: XColors.bgGrey.withOpacity(0.5),
                   enabledBorder: OutlineInputBorder(
                     borderSide:
@@ -171,7 +179,10 @@ class RegisterEventOnePage extends StatelessWidget {
                   height: 5,
                 ),
                 XInput(
-                  value: "",
+                  value: state.email,
+                  onChanged: (value) => context
+                      .read<RegisterEventOneBloc>()
+                      .onChangedEmail(value),
                   hintText: "Email",
                   filled: true,
                   fillColor: XColors.bgGrey.withOpacity(0.5),
@@ -193,8 +204,10 @@ class RegisterEventOnePage extends StatelessWidget {
                   height: 5,
                 ),
                 XInput(
-                  value: "",
+                  value: state.note,
                   hintText: "Mong muốn của bạn",
+                  onChanged: (value) =>
+                      context.read<RegisterEventOneBloc>().onChangedNote(value),
                   filled: true,
                   fillColor: XColors.bgGrey.withOpacity(0.5),
                   enabledBorder: OutlineInputBorder(
@@ -223,5 +236,32 @@ class RegisterEventOnePage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String convertUTCToFormattedDate(String utcTimestamp) {
+    try {
+      DateTime utcDateTime = DateTime.parse(utcTimestamp);
+      DateTime localDateTime = utcDateTime.toLocal();
+      String formattedDate = DateFormat('d MMMM, yyyy').format(localDateTime);
+      return formattedDate;
+    } catch (e) {
+      return "";
+    }
+  }
+
+  String convertToFormattedDateTimeRange(
+      String startTimestamp, String endTimestamp) {
+    try {
+      DateTime startDateTime = DateTime.parse(startTimestamp).toLocal();
+      DateTime endDateTime = DateTime.parse(endTimestamp).toLocal();
+
+      String dayOfWeek = DateFormat('EEEE').format(startDateTime);
+      String startTime = DateFormat('h:00 a').format(startDateTime);
+      String endTime = DateFormat('h:00 a').format(endDateTime);
+
+      return '$dayOfWeek, $startTime - $endTime';
+    } catch (e) {
+      return "";
+    }
   }
 }

@@ -14,9 +14,29 @@ part "register_event_one_state.dart";
 
 class RegisterEventOneBloc extends Cubit<RegisterEventOneState> {
   final EventModel event;
-  RegisterEventOneBloc(this.event) : super(RegisterEventOneState());
+  RegisterEventOneBloc(this.event) : super(const RegisterEventOneState());
 
   Domain get _domain => GetIt.I<Domain>();
+
+  void onChangedName(String value) {
+    emit(state.copyWith(name: value));
+  }
+
+  void onChangedCode(String value) {
+    emit(state.copyWith(code: value));
+  }
+
+  void onChangedPhone(String value) {
+    emit(state.copyWith(phone: value));
+  }
+
+  void onChangedEmail(String value) {
+    emit(state.copyWith(email: value));
+  }
+
+  void onChangedNote(String value) {
+    emit(state.copyWith(note: value));
+  }
 
   void onRegisterButton(BuildContext context) async {
     final token = UserPrefs().getTokenUser;

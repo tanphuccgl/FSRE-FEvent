@@ -1,3 +1,6 @@
+import 'package:fevent/src/feature/dashboard/pages/dashboard_page.dart';
+import 'package:fevent/src/feature/event/pages/detail_event_donate_page.dart';
+import 'package:fevent/src/feature/event/pages/donate_event_page.dart';
 import 'package:fevent/src/feature/event/pages/event_detail_page.dart';
 import 'package:fevent/src/feature/event/pages/holder_register_event_page.dart';
 import 'package:fevent/src/feature/event/pages/job_detail_page.dart';
@@ -41,12 +44,15 @@ class XCoordinator {
 
   static Future showDashboard() => pushNamed(XRouterName.dashboard);
 
+  static Future replaceDashboard() => navigator.pushReplacement(
+      MaterialPageRoute(builder: (_) => const DashboardPage()));
+
   static Future showProfile() => pushNamed(XRouterName.profile);
   static Future showUpdateProfile() => pushNamed(XRouterName.updateProfile);
 
   static Future showAllEvent() => pushNamed(XRouterName.eventAll);
 
-  static Future showEventDetail(EventModel event) => push(EventDetailPage(
+  static Future showEventDetail(EventModel event) => push(DetailEventDonatePage(
         event: event,
       ));
 
@@ -60,7 +66,9 @@ class XCoordinator {
       ));
   static Future showEventTwo(String eventId) =>
       push(RegisterEventTwoPage(eventId: eventId));
-
+  static Future showEventDonate(EventModel event) => push(DonateEventPage(
+        event: event,
+      ));
   static Future showListJob() => push(const ListJobPage());
 
   static Future showJobDetail(JobData event) => push(JobDetailPage(
