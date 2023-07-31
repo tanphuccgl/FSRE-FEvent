@@ -1,4 +1,5 @@
 import 'package:fevent/src/feature/my_user/cubit/profile_bloc.dart';
+import 'package:fevent/src/router/coordinator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,6 +30,11 @@ enum MyUserOption {
       case MyUserOption.logout:
         context.read<ProfileBloc>().logout();
         break;
+      case MyUserOption.event:
+        XCoordinator.showMyEvent();
+
+        break;
+
       default:
         break;
     }
