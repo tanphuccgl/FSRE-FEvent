@@ -4,6 +4,7 @@ class XRouterName {
   static const String signIn = '/sign-in';
   static const String profile = '/profile';
   static const String updateProfile = '/update-profile';
+  static const String myEvent = '/my-event';
 
   static const String eventAll = '/all-event';
   static const String eventDetail = '/event-detail';

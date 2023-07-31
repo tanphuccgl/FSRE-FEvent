@@ -9,6 +9,7 @@ import 'package:fevent/src/feature/event/pages/list_job_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_two_page.dart';
 import 'package:fevent/src/feature/event/pages/success_event_ticket_page.dart';
+import 'package:fevent/src/feature/my_event/pages/my_event_page.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/job.dart';
 import 'package:fevent/src/router/router_name.dart';
@@ -50,6 +51,8 @@ class XCoordinator {
       MaterialPageRoute(builder: (_) => const DashboardPage()));
 
   static Future showProfile() => pushNamed(XRouterName.profile);
+
+  static Future showMyEvent() => push(const MyEventPage());
   static Future showUpdateProfile() => pushNamed(XRouterName.updateProfile);
 
   static Future showAllEvent() => pushNamed(XRouterName.eventAll);
