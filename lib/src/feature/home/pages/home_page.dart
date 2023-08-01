@@ -82,7 +82,7 @@ class HomePage extends StatelessWidget {
                 ]),
               ),
             ),
-            body: Column(
+            body: ListView(
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -116,19 +116,19 @@ class HomePage extends StatelessWidget {
                                 const SizedBox(
                                   width: 15,
                                 ),
-                                const Column(
+                                Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "05",
-                                      style: TextStyle(
+                                      state.countEvent,
+                                      style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
-                                    Text(
+                                    const Text(
                                       "Đang diễn ra",
                                       style: TextStyle(color: Colors.black),
                                     ),
@@ -165,12 +165,15 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           const Divider(),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 5),
-                            child: Text("Đến trang chủ",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    color: XColors.primary)),
+                          GestureDetector(
+                            onTap: () => XCoordinator.showAllEvent(state.list),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              child: Text("Đến trang chủ",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      color: XColors.primary)),
+                            ),
                           ),
                         ]),
                   ),
@@ -178,17 +181,57 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
+                if (state.listUpcoming.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Sự kiện sắp tới",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                color: Colors.black)),
+                        GestureDetector(
+                            onTap: () =>
+                                XCoordinator.showAllEvent(state.listUpcoming),
+                            child: const Text("Xem tất cả",
+                                style: TextStyle(color: Colors.grey))),
+                      ],
+                    ),
+                  ),
+                if (state.listUpcoming.isNotEmpty)
+                  const SizedBox(
+                    height: 20,
+                  ),
+                if (state.listUpcoming.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: SizedBox(
+                      height: 230.h,
+                      child: ListView.builder(
+                        itemBuilder: (context, index) =>
+                            _item(state.listUpcoming[index]),
+                        shrinkWrap: true,
+                        itemCount: state.listUpcoming.length,
+                        scrollDirection: Axis.horizontal,
+                      ),
+                    ),
+                  ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("Sự kiện sắp tới",
+                      const Text("Tìm hiểu thêm",
                           style: TextStyle(
                               fontWeight: FontWeight.w900,
                               color: Colors.black)),
                       GestureDetector(
-                          onTap: () => XCoordinator.showAllEvent(),
+                          onTap: () =>
+                              XCoordinator.showAllEvent(state.listOther),
                           child: const Text("Xem tất cả",
                               style: TextStyle(color: Colors.grey))),
                     ],
@@ -198,18 +241,115 @@ class HomePage extends StatelessWidget {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 15),
+                  padding: const EdgeInsets.only(left: 15, right: 15),
                   child: SizedBox(
                     height: 230.h,
                     child: ListView.builder(
-                      itemBuilder: (context, index) => _item(state.list[index]),
+                      itemBuilder: (context, index) =>
+                          _itemOther(state.listOther[index]),
                       shrinkWrap: true,
-                      itemCount: state.list.length,
-                      scrollDirection: Axis.horizontal,
+                      itemCount: state.listOther.length,
                     ),
                   ),
                 )
               ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _itemOther(EventModel event) {
+    return BlocProvider(
+      create: (context) => FavouriteBloc(event.eventId ?? ""),
+      child: BlocBuilder<FavouriteBloc, FavouriteState>(
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: GestureDetector(
+              onTap: () => XCoordinator.showEventDetail(event),
+              child: Container(
+                padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(15)),
+                height: 183.h,
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              formatDateTime(event.createdAt.toString()),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                  color: Colors.grey),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            SizedBox(
+                              width: 150.w,
+                              child: Text(
+                                event.title.toString(),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18,
+                                    color: Colors.black),
+                              ),
+                            ),
+                          ],
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                            height: 110.h,
+                            width: 132.w,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    Row(
+                      children: [
+                        const Icon(Icons.location_on_outlined),
+                        Text(
+                          event.location.toString(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
+                        const Spacer(),
+                        state.isEnable
+                            ? const Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                              )
+                            : GestureDetector(
+                                onTap: () => context
+                                    .read<FavouriteBloc>()
+                                    .postFavouriteEvent(),
+                                child: const Icon(
+                                  Icons.favorite_border,
+                                ),
+                              )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
           );
         },
@@ -336,9 +476,67 @@ class HomePage extends StatelessWidget {
   }
 
   String convertUTCToLocalTime(String utcTimestamp) {
-    DateTime utcDateTime = DateTime.parse(utcTimestamp);
-    DateTime localDateTime = utcDateTime.toLocal();
-    String formattedTime = DateFormat('hh:mm a').format(localDateTime);
-    return formattedTime;
+    try {
+      DateTime utcDateTime = DateTime.parse(utcTimestamp);
+      DateTime localDateTime = utcDateTime.toLocal();
+      String formattedTime = DateFormat('hh:mm a').format(localDateTime);
+      return formattedTime;
+    } catch (e) {
+      return "";
+    }
+  }
+
+  String formatDateTime(String inputDateTime) {
+    try {
+      // Chuyển chuỗi input thành DateTime
+      DateTime dateTime = DateTime.parse(inputDateTime);
+
+      // Chuyển đổi sang múi giờ Việt Nam (GMT+7)
+      dateTime = dateTime.toLocal();
+
+      // Định dạng lại thành chuỗi theo yêu cầu: "WED, 12 MAY - 9:00 PM"
+      String formattedDateTime =
+          "${_getWeekday(dateTime)}, ${_getDay(dateTime)} ${_getMonth(dateTime)} - ${_getTime(dateTime)}";
+
+      return formattedDateTime;
+    } catch (e) {
+      return "";
+    }
+  }
+
+  String _getWeekday(DateTime dateTime) {
+    List<String> weekdays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    return weekdays[dateTime.weekday];
+  }
+
+  String _getDay(DateTime dateTime) {
+    return dateTime.day.toString().padLeft(2, '0');
+  }
+
+  String _getMonth(DateTime dateTime) {
+    List<String> months = [
+      'JAN',
+      'FEB',
+      'MAR',
+      'APR',
+      'MAY',
+      'JUN',
+      'JUL',
+      'AUG',
+      'SEP',
+      'OCT',
+      'NOV',
+      'DEC'
+    ];
+    return months[dateTime.month - 1];
+  }
+
+  String _getTime(DateTime dateTime) {
+    String period = dateTime.hour >= 12 ? 'PM' : 'AM';
+    int hour = dateTime.hour % 12;
+    if (hour == 0) {
+      hour = 12;
+    }
+    return '$hour:${dateTime.minute.toString().padLeft(2, '0')} $period';
   }
 }

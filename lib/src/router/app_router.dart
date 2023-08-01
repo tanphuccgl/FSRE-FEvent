@@ -36,7 +36,10 @@ class XAppRoute {
       case XRouterName.updateProfile:
         return MaterialPageRoute(builder: (_) => const UpdateProfilePage());
       case XRouterName.eventAll:
-        return MaterialPageRoute(builder: (_) => const AllEventPage());
+        return MaterialPageRoute(
+            builder: (_) => const AllEventPage(
+                  list: [],
+                ));
       case XRouterName.eventDetail:
         return MaterialPageRoute(
             builder: (_) => EventDetailPage(
