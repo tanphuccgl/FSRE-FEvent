@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:fevent/src/config/constants/endpoints.dart';
-import 'package:fevent/src/network/model/common/result.dart';
 import 'package:fevent/src/utils/helper/logger.dart';
 
 class BaseDataSource {
@@ -71,11 +70,10 @@ class BaseDataSource {
   }
 
   // Put:-----------------------------------------------------------------------
-  Future<XResult<T>> put<T>(
+  Future<Response> put(
     String uri, {
-    required T data,
-    required List<int> statusCodes,
-    required Map<String, dynamic>? queryParameters,
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
@@ -97,13 +95,11 @@ class BaseDataSource {
         '> PUT RESPONSE [${response.statusCode}]< $uri $data',
       );
 
-      return statusCodes.contains(response.statusCode)
-          ? XResult.success(response.data)
-          : XResult.error(response.statusCode.toString());
+      return response;
     } catch (e) {
       LoggerHelper.errorApi('> API CATCH Error< $e');
 
-      return XResult.exception(e);
+      rethrow;
     }
   }
 

@@ -88,25 +88,20 @@ class AuthRepositoryImpl extends AuthRepository {
     required String phone,
     required String major,
     required String semester,
-    required String gender,
     required String dateOfBirth,
-    required String email,
   }) async {
     try {
-      final response = await BaseDataSource().post(Endpoints.postProfile,
+      final response = await BaseDataSource().put(Endpoints.updateProfile,
           options: Options(headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer $token",
           }),
           data: {
             "name": name,
-            "email": email,
-            "password": "Abc123456",
-            "phone": "0123456789",
-            "semester": 1,
-            "major": "Software Engineering",
-            "gender": "MALE",
-            "dateOfBirth": "20000101"
+            "phone": phone,
+            "dateOfBirth": dateOfBirth,
+            "semester": int.tryParse(semester),
+            "major": major,
           });
 
       final result = UpdateProfileModel.fromJson(response.data);
@@ -114,8 +109,8 @@ class AuthRepositoryImpl extends AuthRepository {
       return response.statusCode == 200 || response.statusCode == 201
           ? XResult.success(result)
           : XResult.error("Error");
-    } catch (e) {
-      LoggerHelper.error('> post updateProfile A CATCH Error< $e');
+    } catch (e, a) {
+      LoggerHelper.error('> post updateProfile A CATCH Error< $e $a');
 
       return XResult.exception(e);
     }

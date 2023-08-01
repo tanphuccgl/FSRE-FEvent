@@ -35,7 +35,7 @@ class Endpoints {
   static const String jobs = "$baseUrl/jobs";
 
   static const String profile = "$baseUrl/students/me";
-  static const String postProfile = "$baseUrl/students";
+  static const String updateProfile = "$baseUrl/students";
 
   static const String getInterestsMe = "$baseUrl/interests/me";
 

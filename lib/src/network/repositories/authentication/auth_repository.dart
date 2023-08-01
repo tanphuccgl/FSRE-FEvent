@@ -18,9 +18,7 @@ abstract class AuthRepository {
     required String phone,
     required String major,
     required String semester,
-    required String gender,
     required String dateOfBirth,
-    required String email,
   });
 
   Future<XResult<bool>> logout();

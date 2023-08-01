@@ -28,6 +28,7 @@ class UpdateProfileBloc extends Cubit<UpdateProfileState> {
       onChangedPhone(result.data?.phone ?? "");
       onChangedMajor(result.data?.major ?? "");
       onChangedCourse((result.data?.semester ?? "").toString());
+      emit(state.copyWith(birthDay: result.data?.dateOfBirth));
     }
   }
 
@@ -52,13 +53,11 @@ class UpdateProfileBloc extends Cubit<UpdateProfileState> {
     if (token == null) return;
     final result = await _domain.authRepository.updateProfile(
       token: token,
-      dateOfBirth: "",
-      email: "",
-      gender: "",
-      major: "",
-      name: "",
-      phone: "",
-      semester: "",
+      dateOfBirth: state.birthDay,
+      major: state.major,
+      name: state.name,
+      phone: state.phone,
+      semester: state.course,
     );
     if (result.isSuccess) {
       Navigator.pop(context);
