@@ -8,6 +8,7 @@ class UpdateProfileState extends Equatable {
   final String phone;
   final String major;
   final String course;
+  final String birthDay;
 
   const UpdateProfileState({
     this.updateProfile,
@@ -16,6 +17,7 @@ class UpdateProfileState extends Equatable {
     this.phone = "",
     this.major = "",
     this.course = "",
+    this.birthDay = "",
   });
 
   @override
@@ -26,6 +28,7 @@ class UpdateProfileState extends Equatable {
         phone,
         major,
         course,
+        birthDay,
       ];
 
   UpdateProfileState copyWith({
@@ -35,6 +38,7 @@ class UpdateProfileState extends Equatable {
     String? phone,
     String? major,
     String? course,
+    String? birthDay,
   }) {
     return UpdateProfileState(
       updateProfile: updateProfile ?? this.updateProfile,
@@ -43,6 +47,7 @@ class UpdateProfileState extends Equatable {
       phone: phone ?? this.phone,
       major: major ?? this.major,
       course: course ?? this.course,
+      birthDay: birthDay ?? this.birthDay,
     );
   }
 }

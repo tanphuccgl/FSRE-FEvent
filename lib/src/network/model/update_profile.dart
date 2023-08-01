@@ -1,135 +1,104 @@
 class UpdateProfileModel {
-  String? name;
-  String? phone;
-  int? semester;
-  String? major;
-  String? gender;
-  String? dateOfBirth;
-  Account? account;
   String? studentId;
+  String? name;
+  String? gender;
+  String? phone;
+  String? dateOfBirth;
+  String? major;
+  int? semester;
   String? createdAt;
   String? updatedAt;
   bool? isVerified;
+  Account? account;
 
   UpdateProfileModel(
-      {this.name,
-      this.phone,
-      this.semester,
-      this.major,
+      {this.studentId,
+      this.name,
       this.gender,
+      this.phone,
       this.dateOfBirth,
-      this.account,
-      this.studentId,
+      this.major,
+      this.semester,
       this.createdAt,
       this.updatedAt,
-      this.isVerified});
+      this.isVerified,
+      this.account});
 
   UpdateProfileModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    phone = json['phone'];
-    semester = json['semester'];
-    major = json['major'];
-    gender = json['gender'];
-    dateOfBirth = json['dateOfBirth'];
-    account =
-        json['account'] != null ? Account.fromJson(json['account']) : null;
     studentId = json['studentId'];
+    name = json['name'];
+    gender = json['gender'];
+    phone = json['phone'];
+    dateOfBirth = json['dateOfBirth'];
+    major = json['major'];
+    semester = json['semester'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     isVerified = json['isVerified'];
+    account =
+        json['account'] != null ? Account.fromJson(json['account']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['phone'] = phone;
-    data['semester'] = semester;
-    data['major'] = major;
-    data['gender'] = gender;
-    data['dateOfBirth'] = dateOfBirth;
-    if (account != null) {
-      data['account'] = account!.toJson();
-    }
     data['studentId'] = studentId;
+    data['name'] = name;
+    data['gender'] = gender;
+    data['phone'] = phone;
+    data['dateOfBirth'] = dateOfBirth;
+    data['major'] = major;
+    data['semester'] = semester;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     data['isVerified'] = isVerified;
+    if (account != null) {
+      data['account'] = account!.toJson();
+    }
     return data;
   }
 }
 
 class Account {
+  String? accountId;
   String? email;
   String? password;
   String? role;
   String? status;
-  Wallet? wallet;
   String? googleId;
-  String? deviceId;
-  String? accountId;
   String? createdAt;
+  String? deviceId;
 
   Account(
-      {this.email,
+      {this.accountId,
+      this.email,
       this.password,
       this.role,
       this.status,
-      this.wallet,
       this.googleId,
-      this.deviceId,
-      this.accountId,
-      this.createdAt});
+      this.createdAt,
+      this.deviceId});
 
   Account.fromJson(Map<String, dynamic> json) {
+    accountId = json['accountId'];
     email = json['email'];
     password = json['password'];
     role = json['role'];
     status = json['status'];
-    wallet = json['wallet'] != null ? Wallet.fromJson(json['wallet']) : null;
     googleId = json['googleId'];
-    deviceId = json['deviceId'];
-    accountId = json['accountId'];
     createdAt = json['createdAt'];
+    deviceId = json['deviceId'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['accountId'] = accountId;
     data['email'] = email;
     data['password'] = password;
     data['role'] = role;
     data['status'] = status;
-    if (wallet != null) {
-      data['wallet'] = wallet!.toJson();
-    }
     data['googleId'] = googleId;
+    data['createdAt'] = createdAt;
     data['deviceId'] = deviceId;
-    data['accountId'] = accountId;
-    data['createdAt'] = createdAt;
-    return data;
-  }
-}
-
-class Wallet {
-  int? balance;
-  String? walletId;
-  String? createdAt;
-  String? updatedAt;
-
-  Wallet({this.balance, this.walletId, this.createdAt, this.updatedAt});
-
-  Wallet.fromJson(Map<String, dynamic> json) {
-    balance = json['balance'];
-    walletId = json['walletId'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['balance'] = balance;
-    data['walletId'] = walletId;
-    data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
     return data;
   }
 }
