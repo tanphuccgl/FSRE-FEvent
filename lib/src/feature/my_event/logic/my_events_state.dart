@@ -5,23 +5,27 @@ class MyEventsState extends Equatable {
   final InterestsMeModel? interestsMeModel;
   final ParticipantsByEventStatusModel? participantsByEventStatusFinished;
   final ParticipantsByEventStatusModel? participantsByEventStatusUpcomming;
+  final ParticipantsMeModel? participantsMeModel;
 
   const MyEventsState({
     this.interestsMeModel,
     this.participantsByEventStatusFinished,
     this.participantsByEventStatusUpcomming,
+    this.participantsMeModel,
   });
   @override
   List<Object?> get props => [
         interestsMeModel,
         participantsByEventStatusFinished,
         participantsByEventStatusUpcomming,
+        participantsMeModel,
       ];
 
   MyEventsState copyWith({
     InterestsMeModel? interestsMeModel,
     ParticipantsByEventStatusModel? participantsByEventStatusFinished,
     ParticipantsByEventStatusModel? participantsByEventStatusUpcomming,
+    ParticipantsMeModel? participantsMeModel,
   }) {
     return MyEventsState(
       interestsMeModel: interestsMeModel ?? this.interestsMeModel,
@@ -29,6 +33,7 @@ class MyEventsState extends Equatable {
           this.participantsByEventStatusFinished,
       participantsByEventStatusUpcomming: participantsByEventStatusUpcomming ??
           this.participantsByEventStatusUpcomming,
+      participantsMeModel: participantsMeModel ?? this.participantsMeModel,
     );
   }
 }

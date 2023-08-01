@@ -9,7 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class AllEventPage extends StatelessWidget {
-  const AllEventPage({super.key});
+  final List<EventModel> list;
+  const AllEventPage({super.key, required this.list});
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +61,8 @@ class AllEventPage extends StatelessWidget {
             body: ListView.builder(
               padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
               shrinkWrap: true,
-              itemBuilder: (context, index) => _item(state.list[index]),
-              itemCount: state.list.length,
+              itemBuilder: (context, index) => _item(list[index]),
+              itemCount: list.length,
             ),
           );
         },

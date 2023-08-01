@@ -1,4 +1,5 @@
 import 'package:fevent/src/feature/dashboard/pages/dashboard_page.dart';
+import 'package:fevent/src/feature/event/pages/all_event_page.dart';
 
 import 'package:fevent/src/feature/event/pages/detail_event_ticket_page.dart';
 import 'package:fevent/src/feature/event/pages/donate_event_page.dart';
@@ -55,7 +56,8 @@ class XCoordinator {
   static Future showMyEvent() => push(const MyEventPage());
   static Future showUpdateProfile() => pushNamed(XRouterName.updateProfile);
 
-  static Future showAllEvent() => pushNamed(XRouterName.eventAll);
+  static Future showAllEvent(List<EventModel> list) =>
+      push(AllEventPage(list: list));
 
   static Future showEventDetail(EventModel event) =>
       push(DetailEventTicketPage(event: event));

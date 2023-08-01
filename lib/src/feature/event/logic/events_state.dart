@@ -4,6 +4,15 @@ part of "events_bloc.dart";
 class EventsState extends Equatable {
   final List<EventModel> list;
 
+  String get countEvent =>
+      list.map((e) => e.status == "ONGOING").length.toString();
+
+  List<EventModel> get listUpcoming =>
+      list.where((e) => e.status == "UPCOMING").toList();
+
+  List<EventModel> get listOther =>
+      list.where((e) => e.status != "UPCOMING").toList();
+
   const EventsState({this.list = const []});
   @override
   List<Object?> get props => [

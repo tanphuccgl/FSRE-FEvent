@@ -39,6 +39,8 @@ class Endpoints {
 
   static const String getInterestsMe = "$baseUrl/interests/me";
 
+  static const String getparticipantsMe = "$baseUrl/participants/me";
+
   static const String getParticipantsByEventStatusFinished =
       "$baseUrl/participants/event/status/me?status=FINISHED";
 
