@@ -1,4 +1,27 @@
 class ParticipantsMeModel {
+  List<Data>? data;
+
+  ParticipantsMeModel({this.data});
+
+  ParticipantsMeModel.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(Data.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data {
   String? participantId;
   String? checkinAt;
   String? checkoutAt;
@@ -7,7 +30,7 @@ class ParticipantsMeModel {
   Event? event;
   Student? student;
 
-  ParticipantsMeModel(
+  Data(
       {this.participantId,
       this.checkinAt,
       this.checkoutAt,
@@ -16,7 +39,7 @@ class ParticipantsMeModel {
       this.event,
       this.student});
 
-  ParticipantsMeModel.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     participantId = json['participantId'];
     checkinAt = json['checkinAt'];
     checkoutAt = json['checkoutAt'];

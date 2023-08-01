@@ -1,6 +1,8 @@
-import 'package:fevent/src/network/model/event/event_model.dart';
+import 'package:fevent/src/feature/my_event/logic/my_events_bloc.dart';
+import 'package:fevent/src/network/model/participants_me_model.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
@@ -9,22 +11,21 @@ class AllTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
-    // return BlocBuilder<MyEventsBloc, MyEventsState>(
-    //   builder: (context, state) {
-    //     return ListView.builder(
-    //       padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
-    //       shrinkWrap: true,
-    //       itemCount: state.interestsMeModel.length,
-    //       itemBuilder: (context, index) {
-    //         return item(state.interestsMeModel[index]);
-    //       },
-    //     );
-    //   },
-    // );
+    return BlocBuilder<MyEventsBloc, MyEventsState>(
+      builder: (context, state) {
+        return ListView.builder(
+          padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
+          shrinkWrap: true,
+          itemCount: (state.participantsMeModel?.data ?? []).length,
+          itemBuilder: (context, index) {
+            return item((state.participantsMeModel?.data ?? [])[index]);
+          },
+        );
+      },
+    );
   }
 
-  Widget item(EventModel data) {
+  Widget item(Data data) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Container(
@@ -64,7 +65,7 @@ class AllTab extends StatelessWidget {
                 SizedBox(
                   width: 180.w,
                   child: Text(
-                    (data.title ?? "").toString(),
+                    (data.event?.title ?? "").toString(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -86,7 +87,7 @@ class AllTab extends StatelessWidget {
                       const Icon(Icons.location_on_outlined),
                       Expanded(
                         child: Text(
-                          data.location.toString(),
+                          (data.event?.location ?? "").toString(),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(

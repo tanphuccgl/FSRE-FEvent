@@ -143,19 +143,19 @@ class HomePage extends StatelessWidget {
                                 const SizedBox(
                                   width: 15,
                                 ),
-                                const Column(
+                                Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "05",
-                                      style: TextStyle(
+                                      state.count.toString(),
+                                      style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
-                                    Text(
+                                    const Text(
                                       "Sự kiện đã\nđăng ký",
                                       style: TextStyle(color: Colors.black),
                                     ),
