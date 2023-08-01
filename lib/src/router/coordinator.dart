@@ -1,5 +1,6 @@
 import 'package:fevent/src/feature/dashboard/pages/dashboard_page.dart';
 import 'package:fevent/src/feature/event/pages/all_event_page.dart';
+import 'package:fevent/src/feature/event/pages/detail_event_donate_page.dart';
 
 import 'package:fevent/src/feature/event/pages/detail_event_ticket_page.dart';
 import 'package:fevent/src/feature/event/pages/donate_event_page.dart';
@@ -59,8 +60,15 @@ class XCoordinator {
   static Future showAllEvent(List<EventModel> list) =>
       push(AllEventPage(list: list));
 
-  static Future showEventDetail(EventModel event) =>
+  static Future<void> showEventDetail(EventModel event) async {
+    if (event.type == "DONATION") {
+      push(DetailEventDonatePage(event: event));
+    } else if (event.type == "TICKET") {
       push(DetailEventTicketPage(event: event));
+    } else {
+      push(EventDetailPage(event: event));
+    }
+  }
 
   static Future showEventHolder(EventModel event) =>
       push(HolderRegisterEventPage(

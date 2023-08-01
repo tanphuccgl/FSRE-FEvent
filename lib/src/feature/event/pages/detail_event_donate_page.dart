@@ -114,12 +114,16 @@ class DetailEventDonatePage extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text(
-                      (event.staff?.department?.name ?? "").toString(),
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
+                    SizedBox(
+                      width: 200,
+                      child: Text(
+                        (event.staff?.department?.name ?? "").toString(),
+                        maxLines: 3,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 )),
@@ -145,12 +149,16 @@ class DetailEventDonatePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          event.location ?? "",
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
+                        SizedBox(
+                          width: 200,
+                          child: Text(
+                            event.location ?? "",
+                            maxLines: 3,
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                         const SizedBox(
                           height: 5,
@@ -159,6 +167,7 @@ class DetailEventDonatePage extends StatelessWidget {
                           width: 150,
                           child: Text(
                             event.location.toString(),
+                            maxLines: 3,
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 13,
@@ -193,7 +202,7 @@ class DetailEventDonatePage extends StatelessWidget {
                                   fontWeight: FontWeight.w700),
                             ),
                             TextSpan(
-                              text: "/10.000.000",
+                              text: "/50.000.000",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,

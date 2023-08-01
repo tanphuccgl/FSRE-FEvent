@@ -1,3 +1,4 @@
+import 'package:fevent/src/config/constants/images.dart';
 import 'package:fevent/src/feature/event/logic/detail_event_bloc.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/router/coordinator.dart';
@@ -243,10 +244,11 @@ class DetailEventTicketPage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Image.network(
-                  "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
-                  height: 168.h,
-                  fit: BoxFit.cover,
+                Image.asset(
+                  XImage.ticket,
+                  width: 240.w,
+                  height: 128.h,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(
                   height: 15,
