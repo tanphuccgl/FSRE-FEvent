@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:fevent/src/network/domain.dart';
-import 'package:fevent/src/network/model/event/event_model.dart';
+
+import 'package:fevent/src/network/model/event_detail.dart';
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/services/user_prefs.dart';
 import 'package:fevent/src/widgets/toast_wrapper.dart';
@@ -93,7 +94,7 @@ class RegisterEventTwoBloc extends Cubit<RegisterEventTwoState> {
                       maximumSize: const Size(250, 40)),
                   onPressed: () {
                     if (state.event == null) return;
-                    XCoordinator.showEventDetail1(state.event!);
+                    XCoordinator.showEventDetail1(state.event?.eventId ?? "");
                   },
                   child: const Text(
                     "XÁC NHẬN",

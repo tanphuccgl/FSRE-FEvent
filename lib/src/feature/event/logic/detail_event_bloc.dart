@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:fevent/src/network/domain.dart';
 import 'package:fevent/src/network/model/check_participants.dart';
-import 'package:fevent/src/network/model/event/event_model.dart';
+
+import 'package:fevent/src/network/model/event_detail.dart';
 
 import 'package:fevent/src/services/user_prefs.dart';
 import 'package:fevent/src/utils/helper/radius.dart';
@@ -13,19 +14,29 @@ import 'package:get_it/get_it.dart';
 part "detail_event_state.dart";
 
 class DetailEventBloc extends Cubit<DetailEventState> {
-  final EventModel event;
-  DetailEventBloc(this.event) : super(const DetailEventState()) {
+  final String eventId;
+  DetailEventBloc(this.eventId) : super(const DetailEventState()) {
     initial();
+    getEvent();
   }
 
   Domain get _domain => GetIt.I<Domain>();
+
+  void getEvent() async {
+    final token = UserPrefs().getTokenUser;
+    if (token == null) return;
+    final result = await _domain.eventRepository.getEvent(eventId, token);
+    if (result.isSuccess) {
+      emit(state.copyWith(eventModel: result.data));
+    }
+  }
 
   void initial() async {
     final token = UserPrefs().getTokenUser;
     if (token == null) return;
 
-    final result = await _domain.eventRepository
-        .checkRegisterEvent(event.eventId ?? "", token);
+    final result =
+        await _domain.eventRepository.checkRegisterEvent(eventId, token);
     if (result.isSuccess) {
       emit(state.copyWith(data: result.data));
     }

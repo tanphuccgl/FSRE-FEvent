@@ -2,7 +2,7 @@
 part of "register_event_two_bloc.dart";
 
 class RegisterEventTwoState extends Equatable {
-  final EventModel? event;
+  final EventDetailModel? event;
 
   final String name;
   final String code;
@@ -29,7 +29,7 @@ class RegisterEventTwoState extends Equatable {
       ];
 
   RegisterEventTwoState copyWith({
-    EventModel? event,
+    EventDetailModel? event,
     String? name,
     String? code,
     String? phone,

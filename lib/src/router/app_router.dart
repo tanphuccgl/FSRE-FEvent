@@ -16,7 +16,6 @@ import 'package:fevent/src/feature/profile/pages/profile_page.dart';
 import 'package:fevent/src/feature/profile/pages/update_profile_page.dart';
 import 'package:fevent/src/feature/scan/pages/scan_page.dart';
 import 'package:fevent/src/feature/wallet/pages/wallet_page.dart';
-import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/job.dart';
 import 'package:fevent/src/router/router_name.dart';
 import 'package:fevent/src/widgets/not_found_page.dart';
@@ -45,33 +44,29 @@ class XAppRoute {
                 ));
       case XRouterName.eventDetail:
         return MaterialPageRoute(
-            builder: (_) => EventDetailPage(
-                  event: EventModel(),
-                ));
+            builder: (_) => const EventDetailPage(eventId: ""));
 
       case XRouterName.eventDetailDonate:
         return MaterialPageRoute(
-            builder: (_) => DetailEventDonatePage(
-                  event: EventModel(),
+            builder: (_) => const DetailEventDonatePage(
+                  eventId: "",
                 ));
       case XRouterName.eventDetailTicket:
         return MaterialPageRoute(
-            builder: (_) => DetailEventTicketPage(
-                  event: EventModel(),
-                ));
+            builder: (_) => const DetailEventTicketPage(eventId: ""));
       case XRouterName.eventDetailTicketSucess:
         return MaterialPageRoute(
             builder: (_) => const SuccessEventTicketPage());
 
       case XRouterName.eventHolder:
         return MaterialPageRoute(
-            builder: (_) => HolderRegisterEventPage(
-                  event: EventModel(),
+            builder: (_) => const HolderRegisterEventPage(
+                  eventId: "",
                 ));
       case XRouterName.eventOne:
         return MaterialPageRoute(
-            builder: (_) => RegisterEventOnePage(
-                  event: EventModel(),
+            builder: (_) => const RegisterEventOnePage(
+                  eventId: "",
                 ));
       case XRouterName.eventTwo:
         return MaterialPageRoute(
@@ -79,8 +74,8 @@ class XAppRoute {
 
       case XRouterName.eventDonate:
         return MaterialPageRoute(
-            builder: (_) => DonateEventPage(
-                  event: EventModel(),
+            builder: (_) => const DonateEventPage(
+                  eventId: "",
                 ));
 
       case XRouterName.wallet:

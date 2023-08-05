@@ -5,6 +5,7 @@ import 'package:fevent/src/network/model/check_participants.dart';
 import 'package:fevent/src/network/model/common/result.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/event/list_event_model.dart';
+import 'package:fevent/src/network/model/event_detail.dart';
 import 'package:fevent/src/network/model/post_participants.dart';
 import 'package:fevent/src/network/model/remove_participants.dart';
 import 'package:fevent/src/network/repositories/event/event_repository.dart';
@@ -92,13 +93,14 @@ class EventRepositoryImpl extends EventRepository {
   }
 
   @override
-  Future<XResult<EventModel>> getEvent(String eventId, String token) async {
+  Future<XResult<EventDetailModel>> getEvent(
+      String eventId, String token) async {
     try {
       final response = await BaseDataSource().get(
         "${Endpoints.getEvent}/$eventId",
       );
 
-      final result = EventModel.fromJson(
+      final result = EventDetailModel.fromJson(
         response.data,
       );
 

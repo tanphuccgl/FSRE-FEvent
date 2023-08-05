@@ -1,6 +1,7 @@
 import 'package:fevent/src/network/model/check_participants.dart';
 import 'package:fevent/src/network/model/common/result.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
+import 'package:fevent/src/network/model/event_detail.dart';
 import 'package:fevent/src/network/model/post_participants.dart';
 import 'package:fevent/src/network/model/remove_participants.dart';
 
@@ -21,7 +22,7 @@ abstract class EventRepository {
   Future<XResult<RemoveParticipantsModel>> removeRegisterEvent(
       String participantId, String token);
 
-  Future<XResult<EventModel>> getEvent(String eventId, String token);
+  Future<XResult<EventDetailModel>> getEvent(String eventId, String token);
 
   Future<XResult<CheckParticipantsModel>> checkRegisterEvent(
       String eventId, String token);

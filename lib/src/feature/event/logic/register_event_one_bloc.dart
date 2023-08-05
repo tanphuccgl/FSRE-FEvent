@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:fevent/src/network/domain.dart';
-import 'package:fevent/src/network/model/event/event_model.dart';
+import 'package:fevent/src/network/model/event_detail.dart';
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/services/user_prefs.dart';
 import 'package:fevent/src/widgets/toast_wrapper.dart';
@@ -13,10 +13,21 @@ import '../../../utils/helper/radius.dart';
 part "register_event_one_state.dart";
 
 class RegisterEventOneBloc extends Cubit<RegisterEventOneState> {
-  final EventModel event;
-  RegisterEventOneBloc(this.event) : super(const RegisterEventOneState());
+  final String eventId;
+  RegisterEventOneBloc(this.eventId) : super(const RegisterEventOneState()) {
+    getEvent();
+  }
 
   Domain get _domain => GetIt.I<Domain>();
+
+  void getEvent() async {
+    final token = UserPrefs().getTokenUser;
+    if (token == null) return;
+    final result = await _domain.eventRepository.getEvent(eventId, token);
+    if (result.isSuccess) {
+      emit(state.copyWith(eventModel: result.data));
+    }
+  }
 
   void onChangedName(String value) {
     emit(state.copyWith(name: value));
@@ -45,8 +56,8 @@ class RegisterEventOneBloc extends Cubit<RegisterEventOneState> {
       return;
     }
 
-    final result = await _domain.eventRepository
-        .postRegisterEvent(event.eventId ?? "", token);
+    final result =
+        await _domain.eventRepository.postRegisterEvent(eventId, token);
     if (result.isSuccess) {
       // ignore: use_build_context_synchronously
       success(context);
@@ -76,7 +87,7 @@ class RegisterEventOneBloc extends Cubit<RegisterEventOneState> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderHelper.r10),
                       maximumSize: const Size(250, 40)),
-                  onPressed: () => XCoordinator.showEventDetail1(event),
+                  onPressed: () => XCoordinator.showEventDetail1(eventId),
                   child: const Text(
                     "XÁC NHẬN",
                   )),

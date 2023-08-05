@@ -1,5 +1,4 @@
 import 'package:fevent/src/feature/event/logic/donate_event_bloc.dart';
-import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:fevent/src/utils/helper/radius.dart';
 import 'package:fevent/src/widgets/input.dart';
@@ -8,13 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class DonateEventPage extends StatelessWidget {
-  final EventModel event;
-  const DonateEventPage({super.key, required this.event});
+  final String eventId;
+  const DonateEventPage({super.key, required this.eventId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DonateEventBloc(event),
+      create: (context) => DonateEventBloc(eventId),
       child: BlocBuilder<DonateEventBloc, DonateEventState>(
         builder: (context, state) {
           return Scaffold(
@@ -43,7 +42,7 @@ class DonateEventPage extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    event.title ?? "",
+                    state.eventModel?.title ?? "",
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 30,
@@ -71,7 +70,7 @@ class DonateEventPage extends StatelessWidget {
                       children: [
                         Text(
                           convertUTCToFormattedDate(
-                              (event.startDate ?? "").toString()),
+                              (state.eventModel?.startDate ?? "").toString()),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 15,
@@ -82,8 +81,8 @@ class DonateEventPage extends StatelessWidget {
                         ),
                         Text(
                           convertToFormattedDateTimeRange(
-                              (event.startDate ?? "").toString(),
-                              (event.endDate ?? "").toString()),
+                              (state.eventModel?.startDate ?? "").toString(),
+                              (state.eventModel?.endDate ?? "").toString()),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 13,

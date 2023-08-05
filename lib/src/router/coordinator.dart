@@ -67,31 +67,30 @@ class XCoordinator {
                 .categoryId ??
             "")
         .isNotEmpty) {
-      push(DetailEventDonatePage(event: event));
+      push(DetailEventDonatePage(eventId: event.eventId ?? ""));
     } else if (((event.categories ?? [])
                 .singleWhere((e) => e.categoryName == "TICKET",
                     orElse: () => Categories(categoryId: ""))
                 .categoryId ??
             "")
         .isNotEmpty) {
-      push(DetailEventTicketPage(event: event));
+      push(DetailEventTicketPage(eventId: event.eventId ?? ""));
     } else {
-      push(EventDetailPage(event: event));
+      push(EventDetailPage(eventId: event.eventId ?? ""));
     }
   }
 
-  static Future showEventHolder(EventModel event) =>
-      push(HolderRegisterEventPage(
-        event: event,
+  static Future showEventHolder(String eventId) => push(HolderRegisterEventPage(
+        eventId: eventId,
       ));
 
-  static Future showEventOne(EventModel event) => push(RegisterEventOnePage(
-        event: event,
+  static Future showEventOne(String eventId) => push(RegisterEventOnePage(
+        eventId: eventId,
       ));
   static Future showEventTwo(String eventId) =>
       push(RegisterEventTwoPage(eventId: eventId));
-  static Future showEventDonate(EventModel event) => push(DonateEventPage(
-        event: event,
+  static Future showEventDonate(String eventId) => push(DonateEventPage(
+        eventId: eventId,
       ));
 
   static Future showEventTicketSuccess() =>
@@ -102,7 +101,7 @@ class XCoordinator {
   static Future showJobDetail(JobData event) => push(JobDetailPage(
         data: event,
       ));
-  static Future showEventDetail1(EventModel event) async {
+  static Future showEventDetail1(String eventId) async {
     navigator.pop();
     navigator.pop();
     navigator.pop();
@@ -110,7 +109,7 @@ class XCoordinator {
     navigator.push(
       MaterialPageRoute(
           builder: (context) => EventDetailPage(
-                event: event,
+                eventId: eventId,
               )),
     );
   }

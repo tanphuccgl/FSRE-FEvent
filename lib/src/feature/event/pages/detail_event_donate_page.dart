@@ -1,5 +1,4 @@
 import 'package:fevent/src/feature/event/logic/detail_event_bloc.dart';
-import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class DetailEventDonatePage extends StatelessWidget {
-  final EventModel event;
-  const DetailEventDonatePage({super.key, required this.event});
+  final String eventId;
+  const DetailEventDonatePage({super.key, required this.eventId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DetailEventBloc(event),
+      create: (context) => DetailEventBloc(eventId),
       child: BlocBuilder<DetailEventBloc, DetailEventState>(
         builder: (context, state) {
           return Scaffold(
@@ -43,7 +42,7 @@ class DetailEventDonatePage extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    event.title.toString(),
+                    (state.eventModel?.title ?? "").toString(),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.black,
@@ -74,7 +73,8 @@ class DetailEventDonatePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          convertUTCToFormattedDate(event.startDate.toString()),
+                          convertUTCToFormattedDate(
+                              (state.eventModel?.startDate ?? "").toString()),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 15,
@@ -85,8 +85,8 @@ class DetailEventDonatePage extends StatelessWidget {
                         ),
                         Text(
                           convertToFormattedDateTimeRange(
-                              event.startDate.toString(),
-                              event.endDate.toString()),
+                              (state.eventModel?.startDate ?? "").toString(),
+                              (state.eventModel?.endDate ?? "").toString()),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 13,
@@ -117,7 +117,8 @@ class DetailEventDonatePage extends StatelessWidget {
                     SizedBox(
                       width: 200,
                       child: Text(
-                        (event.staff?.department?.name ?? "").toString(),
+                        (state.eventModel?.staff?.department?.name ?? "")
+                            .toString(),
                         maxLines: 3,
                         style: const TextStyle(
                             color: Colors.black,
@@ -152,7 +153,7 @@ class DetailEventDonatePage extends StatelessWidget {
                         SizedBox(
                           width: 200,
                           child: Text(
-                            event.location ?? "",
+                            state.eventModel?.location ?? "",
                             maxLines: 3,
                             style: const TextStyle(
                                 color: Colors.black,
@@ -166,7 +167,7 @@ class DetailEventDonatePage extends StatelessWidget {
                         SizedBox(
                           width: 150,
                           child: Text(
-                            event.location.toString(),
+                            (state.eventModel?.location ?? "").toString(),
                             maxLines: 3,
                             style: const TextStyle(
                                 color: Colors.black,
@@ -192,17 +193,18 @@ class DetailEventDonatePage extends StatelessWidget {
                             fontSize: 14, fontWeight: FontWeight.w400),
                       ),
                       RichText(
-                        text: const TextSpan(
+                        text: TextSpan(
                           children: [
                             TextSpan(
-                              text: '5.000.000',
-                              style: TextStyle(
+                              text: (state.eventModel?.totalDonation ?? 0)
+                                  .toString(),
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700),
                             ),
-                            TextSpan(
-                              text: "/50.000.000",
+                            const TextSpan(
+                              text: "/5.000.000",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -231,7 +233,7 @@ class DetailEventDonatePage extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                       child: LinearProgressIndicator(
-                        value: 0.7,
+                        value: (state.eventModel?.totalDonation ?? 0) / 5000000,
                         valueColor: const AlwaysStoppedAnimation<Color>(
                             XColors.primary),
                         backgroundColor: Colors.grey.shade300,
@@ -249,9 +251,9 @@ class DetailEventDonatePage extends StatelessWidget {
                     children: [
                       RichText(
                         textAlign: TextAlign.start,
-                        text: const TextSpan(
+                        text: TextSpan(
                           children: [
-                            TextSpan(
+                            const TextSpan(
                               text: 'Donations\n',
                               style: TextStyle(
                                   color: XColors.text,
@@ -259,8 +261,10 @@ class DetailEventDonatePage extends StatelessWidget {
                                   fontWeight: FontWeight.w400),
                             ),
                             TextSpan(
-                              text: "500",
-                              style: TextStyle(
+                              text: (state.eventModel?.donations ?? [])
+                                  .length
+                                  .toString(),
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -271,30 +275,9 @@ class DetailEventDonatePage extends StatelessWidget {
                       ),
                       RichText(
                         textAlign: TextAlign.start,
-                        text: const TextSpan(
+                        text: TextSpan(
                           children: [
-                            TextSpan(
-                              text: 'Achieved\n',
-                              style: TextStyle(
-                                  color: XColors.text,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            TextSpan(
-                              text: "50%",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: const TextSpan(
-                          children: [
-                            TextSpan(
+                            const TextSpan(
                               text: 'Time remaining\n',
                               style: TextStyle(
                                   color: XColors.text,
@@ -302,8 +285,9 @@ class DetailEventDonatePage extends StatelessWidget {
                                   fontWeight: FontWeight.w400),
                             ),
                             TextSpan(
-                              text: "2 Days",
-                              style: TextStyle(
+                              text:
+                                  "${calculateTimeDifference(state.eventModel?.startDate ?? "")} Days",
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400),
@@ -328,21 +312,23 @@ class DetailEventDonatePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    if (event.status == "PUBLIC" &&
-                        (event.remainingAmount ?? 0) > 0)
+                    if (state.eventModel?.status == "PUBLIC" &&
+                        (state.eventModel?.remainingAmount ?? 0) > 0)
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               maximumSize: const Size(150, 55)),
-                          onPressed: () => XCoordinator.showEventOne(event),
+                          onPressed: () => XCoordinator.showEventOne(eventId),
                           child: const Text(
                             "Đăng ký",
                           )),
-                    if (event.status == "PUBLIC" || event.status == "UPCOMING")
+                    if (state.eventModel?.status == "PUBLIC" ||
+                        state.eventModel?.status == "UPCOMING")
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.lightGreen,
                               maximumSize: const Size(150, 55)),
-                          onPressed: () => XCoordinator.showEventDonate(event),
+                          onPressed: () =>
+                              XCoordinator.showEventDonate(eventId),
                           child: const Text(
                             "Quyên góp",
                           )),
@@ -357,6 +343,18 @@ class DetailEventDonatePage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String calculateTimeDifference(String a) {
+    try {
+      DateTime targetTime = DateTime.parse(a);
+      DateTime currentTime = DateTime.now();
+      Duration difference = currentTime.difference(targetTime);
+      int daysDifference = difference.inDays;
+      return daysDifference.abs().toString();
+    } catch (e) {
+      return "";
+    }
   }
 
   String convertUTCToFormattedDate(String utcTimestamp) {
