@@ -14,6 +14,7 @@ import 'package:fevent/src/feature/login/pages/login_page.dart';
 import 'package:fevent/src/feature/my_event/pages/my_event_page.dart';
 import 'package:fevent/src/feature/profile/pages/profile_page.dart';
 import 'package:fevent/src/feature/profile/pages/update_profile_page.dart';
+import 'package:fevent/src/feature/scan/pages/scan_page.dart';
 import 'package:fevent/src/feature/wallet/pages/wallet_page.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/job.dart';
@@ -30,6 +31,8 @@ class XAppRoute {
         return MaterialPageRoute(builder: (_) => const DashboardPage());
       case XRouterName.profile:
         return MaterialPageRoute(builder: (_) => const ProfilePage());
+      case XRouterName.scanQr:
+        return MaterialPageRoute(builder: (_) => const ScanPage());
       case XRouterName.myEvent:
         return MaterialPageRoute(builder: (_) => const MyEventPage());
 

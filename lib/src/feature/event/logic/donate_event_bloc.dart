@@ -111,7 +111,7 @@ class DonateEventBloc extends Cubit<DonateEventState> {
                     onPressed: () {
                       XCoordinator.replaceDashboard();
 
-                      context.read<BottomNavigationBloc>().onItemTapped(1);
+                      context.read<BottomNavigationBloc>().onItemTapped(2);
                     },
                     child: const Text(
                       "NẠP TIỀN",

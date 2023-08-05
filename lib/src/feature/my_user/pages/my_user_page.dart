@@ -21,53 +21,51 @@ class MyUserPage extends StatelessWidget {
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GapHelper.h20,
-                      GestureDetector(
-                        onTap: () => XCoordinator.showProfile(),
-                        child: Row(
+                child: ListView(children: [
+                  GapHelper.h20,
+                  GestureDetector(
+                    onTap: () => XCoordinator.showProfile(),
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                            backgroundImage: AssetImage(XImage.avatar),
+                            radius: 40),
+                        GapHelper.w20,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const CircleAvatar(
-                                backgroundImage: AssetImage(XImage.avatar),
-                                radius: 40),
-                            GapHelper.w20,
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(state.profile?.name ?? "",
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                    )),
-                                GapHelper.h16,
-                                Text(state.profile?.account?.email ?? "",
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                    ))
-                              ],
-                            )
+                            Text(state.profile?.name ?? "",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                )),
+                            GapHelper.h16,
+                            Text(state.profile?.account?.email ?? "",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ))
                           ],
-                        ),
-                      ),
-                      GapHelper.h70,
-                      const Text("Sự mở rộng",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.black)),
-                      GapHelper.h12,
-                      ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (_, i) => Column(
-                          children: [_item(MyUserOption.values[i])],
-                        ),
-                        itemCount: MyUserOption.values.length,
-                      ),
-                    ]),
+                        )
+                      ],
+                    ),
+                  ),
+                  GapHelper.h70,
+                  const Text("Sự mở rộng",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.black)),
+                  GapHelper.h12,
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (_, i) => Column(
+                      children: [_item(MyUserOption.values[i])],
+                    ),
+                    itemCount: MyUserOption.values.length,
+                  ),
+                ]),
               ),
             ),
           );
