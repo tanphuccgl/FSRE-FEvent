@@ -42,6 +42,10 @@ enum MyUserOption {
         XCoordinator.showJobRequestPage();
 
         break;
+      case MyUserOption.donate:
+        XCoordinator.showMyDonationPage();
+
+        break;
 
       default:
         break;
