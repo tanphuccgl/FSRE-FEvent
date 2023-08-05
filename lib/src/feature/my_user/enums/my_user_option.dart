@@ -38,6 +38,11 @@ enum MyUserOption {
 
         break;
 
+      case MyUserOption.job:
+        XCoordinator.showJobRequestPage();
+
+        break;
+
       default:
         break;
     }
