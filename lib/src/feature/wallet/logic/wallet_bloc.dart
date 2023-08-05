@@ -12,6 +12,7 @@ import 'package:fevent/src/widgets/toast_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part "wallet_state.dart";
 
@@ -72,6 +73,7 @@ class WalletBloc extends Cubit<WalletState> {
     final result = await _domain.walletRepository
         .deposit(token, state.number, "https://www.facebook.com/");
     if (result.isSuccess) {
+      await launchUrl(Uri.parse(result.data!.paymentUrl ?? ""));
       //  emit(state.copyWith(walletModel: result.data));
       getWalletMe();
       Navigator.pop(context);
