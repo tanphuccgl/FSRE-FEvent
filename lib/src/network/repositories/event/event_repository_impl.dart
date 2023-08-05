@@ -7,6 +7,7 @@ import 'package:fevent/src/network/model/donations.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/event/list_event_model.dart';
 import 'package:fevent/src/network/model/event_detail.dart';
+import 'package:fevent/src/network/model/feedback.dart';
 import 'package:fevent/src/network/model/post_participants.dart';
 import 'package:fevent/src/network/model/remove_participants.dart';
 import 'package:fevent/src/network/model/ticket.dart';
@@ -26,7 +27,7 @@ class EventRepositoryImpl extends EventRepository {
   }) async {
     try {
       final response = await BaseDataSource().get(
-        "${Endpoints.event}?page=0&pageSize=12&orderBy=createdAt&order=ASC&isShowInactive=false&startDate=12%3A00%2001%2F01%2F2000&endDate=12%3A00%2001%2F01%2F2099",
+        "${Endpoints.event}?page=0&pageSize=99&orderBy=startDate&order=ASC&isShowInactive=false&startDate=12%3A00%2001%2F01%2F2000&endDate=12%3A00%2001%2F01%2F2099",
       );
 
       final result = ListEventModel.fromJson(
@@ -196,6 +197,45 @@ class EventRepositoryImpl extends EventRepository {
           : XResult.error("Error");
     } catch (e, a) {
       LoggerHelper.error('> postTicketEvent CATCH Error< $e $a');
+
+      return XResult.exception(e);
+    }
+  }
+
+  @override
+  Future<XResult<FeedbackModel>> postFeedback({
+    required int satisfaction,
+    required int contentQuality,
+    required int organization,
+    required int speakerQuality,
+    required String like,
+    required String dislike,
+    required String token,
+    required String eventId,
+  }) async {
+    try {
+      final response = await BaseDataSource().post(Endpoints.postdonations,
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+          }),
+          data: {
+            "satisfaction": satisfaction,
+            "contentQuality": contentQuality,
+            "organization": organization,
+            "speakerQuality": speakerQuality,
+            "like": like,
+            "dislike": dislike,
+            "eventId": eventId,
+          });
+
+      final result = FeedbackModel.fromJson(response.data);
+
+      return response.statusCode == 200 || response.statusCode == 201
+          ? XResult.success(result)
+          : XResult.error("Error");
+    } catch (e, a) {
+      LoggerHelper.error('> postFeedback CATCH Error< $e $a');
 
       return XResult.exception(e);
     }

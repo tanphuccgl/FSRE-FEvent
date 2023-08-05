@@ -10,6 +10,7 @@ import 'package:fevent/src/feature/event/pages/list_job_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_two_page.dart';
 import 'package:fevent/src/feature/event/pages/success_event_ticket_page.dart';
+import 'package:fevent/src/feature/feedback/pages/feedback_page.dart';
 import 'package:fevent/src/feature/job_request/pages/job_request_page.dart';
 import 'package:fevent/src/feature/login/pages/login_page.dart';
 import 'package:fevent/src/feature/my_donation/pages/my_donation_page.dart';
@@ -96,6 +97,11 @@ class XAppRoute {
 
       case XRouterName.myDonation:
         return MaterialPageRoute(builder: (_) => const MyDonationPage());
+      case XRouterName.feedback:
+        return MaterialPageRoute(
+            builder: (_) => const FeedbackPage(
+                  eventId: "",
+                ));
 
       default:
         return MaterialPageRoute(

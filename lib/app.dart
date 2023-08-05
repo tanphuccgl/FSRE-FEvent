@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             navigatorKey: XCoordinator.navigatorKey,
-            initialRoute: XRouterName.signIn,
+            initialRoute: XRouterName.feedback,
             onGenerateRoute: XAppRoute.onGenerateRoute,
             navigatorObservers: [XRouteObserver()],
             builder: (context, child) {
