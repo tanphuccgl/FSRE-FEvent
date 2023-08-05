@@ -99,7 +99,7 @@ class JobRequestPage extends StatelessWidget {
                           child: const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Công việc đang chờ xét duyệt",
+                              "Công việc đã tham gia",
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   color: Colors.black,
