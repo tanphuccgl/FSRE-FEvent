@@ -317,12 +317,16 @@ class HomePage extends StatelessWidget {
                     Row(
                       children: [
                         const Icon(Icons.location_on_outlined),
-                        Text(
-                          event.location.toString(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
+                        SizedBox(
+                          width: 200,
+                          child: Text(
+                            event.location.toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
                         ),
                         const Spacer(),
                         state.isEnable

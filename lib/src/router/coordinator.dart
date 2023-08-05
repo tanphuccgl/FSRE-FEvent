@@ -11,6 +11,7 @@ import 'package:fevent/src/feature/event/pages/list_job_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_two_page.dart';
 import 'package:fevent/src/feature/event/pages/success_event_ticket_page.dart';
+import 'package:fevent/src/feature/feedback/pages/feedback_page.dart';
 import 'package:fevent/src/feature/job_request/pages/job_request_page.dart';
 import 'package:fevent/src/feature/my_donation/pages/my_donation_page.dart';
 import 'package:fevent/src/feature/my_event/pages/my_event_page.dart';
@@ -123,4 +124,7 @@ class XCoordinator {
   static Future showJobRequestPage() => push(const JobRequestPage());
 
   static Future showMyDonationPage() => push(const MyDonationPage());
+  static Future showFeedbackPage(String eventId) => push(FeedbackPage(
+        eventId: eventId,
+      ));
 }
