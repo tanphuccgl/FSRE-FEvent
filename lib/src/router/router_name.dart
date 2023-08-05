@@ -22,6 +22,8 @@ class XRouterName {
 
   static const String wallet = '/wallet';
 
+  static const String jobRequest = '/jobRequest';
+
   static const String attendanceStudent = '/attendance-student';
   static const String scanQr = '/scan-qr-code';
   static const String notification = '/notification';

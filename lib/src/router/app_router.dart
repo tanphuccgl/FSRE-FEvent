@@ -10,6 +10,7 @@ import 'package:fevent/src/feature/event/pages/list_job_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_two_page.dart';
 import 'package:fevent/src/feature/event/pages/success_event_ticket_page.dart';
+import 'package:fevent/src/feature/job_request/pages/job_request_page.dart';
 import 'package:fevent/src/feature/login/pages/login_page.dart';
 import 'package:fevent/src/feature/my_event/pages/my_event_page.dart';
 import 'package:fevent/src/feature/profile/pages/profile_page.dart';
@@ -88,6 +89,9 @@ class XAppRoute {
             builder: (_) => JobDetailPage(
                   data: JobData(),
                 ));
+
+      case XRouterName.jobRequest:
+        return MaterialPageRoute(builder: (_) => const JobRequestPage());
 
       default:
         return MaterialPageRoute(

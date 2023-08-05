@@ -1,5 +1,6 @@
 import 'package:fevent/src/network/model/common/result.dart';
 import 'package:fevent/src/network/model/interests_model.dart';
+import 'package:fevent/src/network/model/job_request_me.dart';
 import 'package:fevent/src/network/model/participants_by_event_status_model.dart';
 import 'package:fevent/src/network/model/participants_me_model.dart';
 
@@ -12,4 +13,7 @@ abstract class MyEventRepository {
 
   Future<XResult<ParticipantsByEventStatusModel>>
       getParticipantsByEventStatusUpcomming(String token);
+
+  Future<XResult<JobRequestMeModel>> getJobRequestMeAccept(String token);
+  Future<XResult<JobRequestMeModel>> getJobRequestMePending(String token);
 }
