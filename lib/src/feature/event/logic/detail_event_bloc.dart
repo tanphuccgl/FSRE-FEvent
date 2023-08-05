@@ -115,7 +115,6 @@ class DetailEventBloc extends Cubit<DetailEventState> {
   }
 
   void postTicketEvent() async {
-    //TODO
     final token = UserPrefs().getTokenUser;
     if (token == null) return;
     final result =

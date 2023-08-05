@@ -108,10 +108,7 @@ class EndTab extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: GestureDetector(
-                      onTap: () {
-                        // TODO
-                        //XCoordinator.showJobDetail(data);
-                      },
+                      onTap: () {},
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(

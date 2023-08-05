@@ -9,6 +9,7 @@ import 'package:fevent/src/network/model/event/list_event_model.dart';
 import 'package:fevent/src/network/model/event_detail.dart';
 import 'package:fevent/src/network/model/post_participants.dart';
 import 'package:fevent/src/network/model/remove_participants.dart';
+import 'package:fevent/src/network/model/ticket.dart';
 import 'package:fevent/src/network/repositories/event/event_repository.dart';
 import 'package:fevent/src/utils/helper/logger.dart';
 
@@ -173,9 +174,8 @@ class EventRepositoryImpl extends EventRepository {
     }
   }
 
-  //TODO
   @override
-  Future<XResult<CheckParticipantsModel>> postTicketEvent(
+  Future<XResult<TicketModel>> postTicketEvent(
       String eventId, String token) async {
     try {
       final response = await BaseDataSource().post(
@@ -189,7 +189,7 @@ class EventRepositoryImpl extends EventRepository {
         },
       );
 
-      final result = CheckParticipantsModel.fromJson(response.data);
+      final result = TicketModel.fromJson(response.data);
 
       return response.statusCode == 200 || response.statusCode == 201
           ? XResult.success(result)

@@ -5,6 +5,7 @@ import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/event_detail.dart';
 import 'package:fevent/src/network/model/post_participants.dart';
 import 'package:fevent/src/network/model/remove_participants.dart';
+import 'package:fevent/src/network/model/ticket.dart';
 
 abstract class EventRepository {
   Future<XResult<List<EventModel>>> getListEvent({
@@ -35,6 +36,5 @@ abstract class EventRepository {
     required String eventId,
   });
 
-  Future<XResult<CheckParticipantsModel>> postTicketEvent(
-      String eventId, String token);
+  Future<XResult<TicketModel>> postTicketEvent(String eventId, String token);
 }
