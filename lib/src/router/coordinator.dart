@@ -1,5 +1,6 @@
 import 'package:fevent/src/feature/dashboard/pages/dashboard_page.dart';
 import 'package:fevent/src/feature/event/pages/all_event_page.dart';
+import 'package:fevent/src/feature/event/pages/detail_event_donate_page.dart';
 
 import 'package:fevent/src/feature/event/pages/detail_event_ticket_page.dart';
 import 'package:fevent/src/feature/event/pages/donate_event_page.dart';
@@ -59,21 +60,37 @@ class XCoordinator {
   static Future showAllEvent(List<EventModel> list) =>
       push(AllEventPage(list: list));
 
-  static Future showEventDetail(EventModel event) =>
-      push(DetailEventTicketPage(event: event));
+  static Future<void> showEventDetail(EventModel event) async {
+    if (((event.categories ?? [])
+                .singleWhere((e) => e.categoryName == "DONATION",
+                    orElse: () => Categories(categoryId: ""))
+                .categoryId ??
+            "")
+        .isNotEmpty) {
+      push(DetailEventDonatePage(eventId: event.eventId ?? ""));
+    } else if (((event.categories ?? [])
+                .singleWhere((e) => e.categoryName == "TICKET",
+                    orElse: () => Categories(categoryId: ""))
+                .categoryId ??
+            "")
+        .isNotEmpty) {
+      push(DetailEventTicketPage(eventId: event.eventId ?? ""));
+    } else {
+      push(EventDetailPage(eventId: event.eventId ?? ""));
+    }
+  }
 
-  static Future showEventHolder(EventModel event) =>
-      push(HolderRegisterEventPage(
-        event: event,
+  static Future showEventHolder(String eventId) => push(HolderRegisterEventPage(
+        eventId: eventId,
       ));
 
-  static Future showEventOne(EventModel event) => push(RegisterEventOnePage(
-        event: event,
+  static Future showEventOne(String eventId) => push(RegisterEventOnePage(
+        eventId: eventId,
       ));
   static Future showEventTwo(String eventId) =>
       push(RegisterEventTwoPage(eventId: eventId));
-  static Future showEventDonate(EventModel event) => push(DonateEventPage(
-        event: event,
+  static Future showEventDonate(String eventId) => push(DonateEventPage(
+        eventId: eventId,
       ));
 
   static Future showEventTicketSuccess() =>
@@ -84,7 +101,7 @@ class XCoordinator {
   static Future showJobDetail(JobData event) => push(JobDetailPage(
         data: event,
       ));
-  static Future showEventDetail1(EventModel event) async {
+  static Future showEventDetail1(String eventId) async {
     navigator.pop();
     navigator.pop();
     navigator.pop();
@@ -92,7 +109,7 @@ class XCoordinator {
     navigator.push(
       MaterialPageRoute(
           builder: (context) => EventDetailPage(
-                event: event,
+                eventId: eventId,
               )),
     );
   }

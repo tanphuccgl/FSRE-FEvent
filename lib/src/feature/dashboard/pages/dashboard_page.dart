@@ -6,6 +6,8 @@ import 'package:fevent/src/feature/wallet/router/wallet_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../scan/router/scan_router.dart';
+
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
@@ -16,7 +18,7 @@ class DashboardPage extends StatelessWidget {
         RepositoryProvider(create: (_) => HomeCoordinator()),
         RepositoryProvider(create: (_) => MyUserCoordinator()),
         RepositoryProvider(create: (_) => WalletCoordinator()),
-        // RepositoryProvider(create: (_) => ScheduleCoordinator()),
+        RepositoryProvider(create: (_) => ScanCoordinator()),
       ],
       child: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
         builder: (_, state) {

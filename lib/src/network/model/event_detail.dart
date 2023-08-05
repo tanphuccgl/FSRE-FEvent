@@ -1,4 +1,4 @@
-class EventModel {
+class EventDetailModel {
   String? eventId;
   String? title;
   String? topic;
@@ -18,9 +18,11 @@ class EventModel {
   int? remainingAmount;
   List<Partners>? partners;
   Staff? staff;
+  List<Donations>? donations;
   List<Categories>? categories;
+  int? donationCount;
 
-  EventModel(
+  EventDetailModel(
       {this.eventId,
       this.title,
       this.topic,
@@ -40,9 +42,11 @@ class EventModel {
       this.remainingAmount,
       this.partners,
       this.staff,
-      this.categories});
+      this.donations,
+      this.categories,
+      this.donationCount});
 
-  EventModel.fromJson(Map<String, dynamic> json) {
+  EventDetailModel.fromJson(Map<String, dynamic> json) {
     eventId = json['eventId'];
     title = json['title'];
     topic = json['topic'];
@@ -67,12 +71,19 @@ class EventModel {
       });
     }
     staff = json['staff'] != null ? Staff.fromJson(json['staff']) : null;
+    if (json['donations'] != null) {
+      donations = <Donations>[];
+      json['donations'].forEach((v) {
+        donations!.add(Donations.fromJson(v));
+      });
+    }
     if (json['categories'] != null) {
       categories = <Categories>[];
       json['categories'].forEach((v) {
         categories!.add(Categories.fromJson(v));
       });
     }
+    donationCount = json['donationCount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -100,9 +111,13 @@ class EventModel {
     if (staff != null) {
       data['staff'] = staff!.toJson();
     }
+    if (donations != null) {
+      data['donations'] = donations!.map((v) => v.toJson()).toList();
+    }
     if (categories != null) {
       data['categories'] = categories!.map((v) => v.toJson()).toList();
     }
+    data['donationCount'] = donationCount;
     return data;
   }
 }
@@ -230,6 +245,51 @@ class Department {
     data['status'] = status;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
+    return data;
+  }
+}
+
+class Donations {
+  String? donationId;
+  String? type;
+  int? amount;
+  String? note;
+  String? createdAt;
+  String? updatedAt;
+  String? status;
+  String? paymentMethod;
+
+  Donations(
+      {this.donationId,
+      this.type,
+      this.amount,
+      this.note,
+      this.createdAt,
+      this.updatedAt,
+      this.status,
+      this.paymentMethod});
+
+  Donations.fromJson(Map<String, dynamic> json) {
+    donationId = json['donationId'];
+    type = json['type'];
+    amount = json['amount'];
+    note = json['note'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+    status = json['status'];
+    paymentMethod = json['paymentMethod'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['donationId'] = donationId;
+    data['type'] = type;
+    data['amount'] = amount;
+    data['note'] = note;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['status'] = status;
+    data['paymentMethod'] = paymentMethod;
     return data;
   }
 }

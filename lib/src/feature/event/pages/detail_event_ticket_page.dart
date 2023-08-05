@@ -1,6 +1,5 @@
+import 'package:fevent/src/config/constants/images.dart';
 import 'package:fevent/src/feature/event/logic/detail_event_bloc.dart';
-import 'package:fevent/src/network/model/event/event_model.dart';
-import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,13 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class DetailEventTicketPage extends StatelessWidget {
-  final EventModel event;
-  const DetailEventTicketPage({super.key, required this.event});
+  final String eventId;
+  const DetailEventTicketPage({super.key, required this.eventId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DetailEventBloc(event),
+      create: (context) => DetailEventBloc(eventId),
       child: BlocBuilder<DetailEventBloc, DetailEventState>(
         builder: (context, state) {
           return Scaffold(
@@ -43,7 +42,7 @@ class DetailEventTicketPage extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    event.title.toString(),
+                    (state.eventModel?.title ?? "").toString(),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.black,
@@ -74,7 +73,8 @@ class DetailEventTicketPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          convertUTCToFormattedDate(event.startDate.toString()),
+                          convertUTCToFormattedDate(
+                              (state.eventModel?.startDate ?? "").toString()),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 15,
@@ -85,8 +85,8 @@ class DetailEventTicketPage extends StatelessWidget {
                         ),
                         Text(
                           convertToFormattedDateTimeRange(
-                              event.startDate.toString(),
-                              event.endDate.toString()),
+                              (state.eventModel?.startDate ?? "").toString(),
+                              (state.eventModel?.endDate ?? "").toString()),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 13,
@@ -115,7 +115,8 @@ class DetailEventTicketPage extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      (event.staff?.department?.name ?? "").toString(),
+                      (state.eventModel?.staff?.department?.name ?? "")
+                          .toString(),
                       style: const TextStyle(
                           color: Colors.black,
                           fontSize: 15,
@@ -146,7 +147,7 @@ class DetailEventTicketPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          event.location ?? "",
+                          state.eventModel?.location ?? "",
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 15,
@@ -158,7 +159,7 @@ class DetailEventTicketPage extends StatelessWidget {
                         SizedBox(
                           width: 150,
                           child: Text(
-                            event.location.toString(),
+                            state.eventModel?.location ?? "",
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 13,
@@ -243,10 +244,11 @@ class DetailEventTicketPage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Image.network(
-                  "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
-                  height: 168.h,
-                  fit: BoxFit.cover,
+                Image.asset(
+                  XImage.ticket,
+                  width: 240.w,
+                  height: 128.h,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(
                   height: 15,
@@ -254,13 +256,14 @@ class DetailEventTicketPage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                if (event.status == "PUBLIC" &&
-                    (event.remainingAmount ?? 0) > 0)
+                if (state.eventModel?.status == "PUBLIC" &&
+                    (state.eventModel?.remainingAmount ?? 0) > 0)
                   Center(
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             maximumSize: const Size(150, 55)),
-                        onPressed: () => XCoordinator.showEventTicketSuccess(),
+                        onPressed: () =>
+                            context.read<DetailEventBloc>().postTicketEvent(),
                         child: const Text(
                           "Mua vé",
                         )),
@@ -277,21 +280,29 @@ class DetailEventTicketPage extends StatelessWidget {
   }
 
   String convertUTCToFormattedDate(String utcTimestamp) {
-    DateTime utcDateTime = DateTime.parse(utcTimestamp);
-    DateTime localDateTime = utcDateTime.toLocal();
-    String formattedDate = DateFormat('d MMMM, yyyy').format(localDateTime);
-    return formattedDate;
+    try {
+      DateTime utcDateTime = DateTime.parse(utcTimestamp);
+      DateTime localDateTime = utcDateTime.toLocal();
+      String formattedDate = DateFormat('d MMMM, yyyy').format(localDateTime);
+      return formattedDate;
+    } catch (e) {
+      return "";
+    }
   }
 
   String convertToFormattedDateTimeRange(
       String startTimestamp, String endTimestamp) {
-    DateTime startDateTime = DateTime.parse(startTimestamp).toLocal();
-    DateTime endDateTime = DateTime.parse(endTimestamp).toLocal();
+    try {
+      DateTime startDateTime = DateTime.parse(startTimestamp).toLocal();
+      DateTime endDateTime = DateTime.parse(endTimestamp).toLocal();
 
-    String dayOfWeek = DateFormat('EEEE').format(startDateTime);
-    String startTime = DateFormat('h:00 a').format(startDateTime);
-    String endTime = DateFormat('h:00 a').format(endDateTime);
+      String dayOfWeek = DateFormat('EEEE').format(startDateTime);
+      String startTime = DateFormat('h:00 a').format(startDateTime);
+      String endTime = DateFormat('h:00 a').format(endDateTime);
 
-    return '$dayOfWeek, $startTime - $endTime';
+      return '$dayOfWeek, $startTime - $endTime';
+    } catch (e) {
+      return "";
+    }
   }
 }

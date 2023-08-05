@@ -1,3 +1,5 @@
+import 'package:fevent/src/config/constants/images.dart';
+import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,10 +40,11 @@ class SuccessEventTicketPage extends StatelessWidget {
                   const SizedBox(
                     height: 50,
                   ),
-                  Image.network(
-                    "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
-                    height: 168.h,
-                    fit: BoxFit.cover,
+                  Image.asset(
+                    XImage.ticket,
+                    width: 240.w,
+                    height: 128.h,
+                    fit: BoxFit.contain,
                   ),
                   const SizedBox(
                     height: 20,
@@ -75,7 +78,7 @@ class SuccessEventTicketPage extends StatelessWidget {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             maximumSize: const Size(150, 55)),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => XCoordinator.replaceDashboard(),
                         child: const Text(
                           "Quay lại",
                         )),

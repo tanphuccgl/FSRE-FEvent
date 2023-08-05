@@ -8,6 +8,7 @@ enum MyUserOption {
   feedback,
   event,
   donate,
+  job,
   logout;
 
   String get labelOf {
@@ -20,6 +21,8 @@ enum MyUserOption {
         return 'Lịch sử tham gia sự kiện';
       case MyUserOption.donate:
         return 'Lịch sử quyên góp';
+      case MyUserOption.job:
+        return 'Lịch sử công việc';
       case MyUserOption.logout:
         return 'Đăng xuất';
     }
@@ -49,6 +52,8 @@ enum MyUserOption {
       case MyUserOption.event:
         return Icons.event;
       case MyUserOption.donate:
+        return Icons.monetization_on;
+      case MyUserOption.job:
         return Icons.monetization_on;
       case MyUserOption.logout:
         return Icons.logout;

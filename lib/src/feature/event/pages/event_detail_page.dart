@@ -1,5 +1,5 @@
 import 'package:fevent/src/feature/event/logic/detail_event_bloc.dart';
-import 'package:fevent/src/network/model/event/event_model.dart';
+
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class EventDetailPage extends StatelessWidget {
-  final EventModel event;
-  const EventDetailPage({super.key, required this.event});
+  final String eventId;
+  const EventDetailPage({super.key, required this.eventId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DetailEventBloc(event),
+      create: (context) => DetailEventBloc(eventId),
       child: BlocBuilder<DetailEventBloc, DetailEventState>(
         builder: (context, state) {
           return Scaffold(
@@ -43,7 +43,7 @@ class EventDetailPage extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    event.title.toString(),
+                    state.eventModel?.title ?? "",
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.black,
@@ -74,7 +74,8 @@ class EventDetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          convertUTCToFormattedDate(event.startDate.toString()),
+                          convertUTCToFormattedDate(
+                              state.eventModel?.startDate ?? ""),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 15,
@@ -85,8 +86,9 @@ class EventDetailPage extends StatelessWidget {
                         ),
                         Text(
                           convertToFormattedDateTimeRange(
-                              event.startDate.toString(),
-                              event.endDate.toString()),
+                            state.eventModel?.startDate ?? "",
+                            state.eventModel?.endDate ?? "",
+                          ),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 13,
@@ -115,7 +117,8 @@ class EventDetailPage extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      (event.staff?.department?.name ?? "").toString(),
+                      (state.eventModel?.staff?.department?.name ?? "")
+                          .toString(),
                       style: const TextStyle(
                           color: Colors.black,
                           fontSize: 15,
@@ -146,7 +149,7 @@ class EventDetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          event.location ?? "",
+                          state.eventModel?.location ?? "",
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 15,
@@ -158,7 +161,7 @@ class EventDetailPage extends StatelessWidget {
                         SizedBox(
                           width: 150,
                           child: Text(
-                            event.location.toString(),
+                            state.eventModel?.location ?? "",
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 13,
@@ -202,7 +205,7 @@ class EventDetailPage extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              event.title ?? "",
+                              state.eventModel?.title ?? "",
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
@@ -224,7 +227,7 @@ class EventDetailPage extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              event.topic ?? "",
+                              state.eventModel?.topic ?? "",
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
@@ -246,7 +249,7 @@ class EventDetailPage extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              event.remainingAmount.toString(),
+                              (state.eventModel?.remainingAmount).toString(),
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
@@ -269,8 +272,8 @@ class EventDetailPage extends StatelessWidget {
                             ),
                             Text(
                               convertToFormattedDateTimeRange(
-                                  event.startDate.toString(),
-                                  event.endDate.toString()),
+                                  state.eventModel?.startDate ?? "",
+                                  state.eventModel?.endDate ?? ""),
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
@@ -292,7 +295,7 @@ class EventDetailPage extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              event.partner?.name ?? "",
+                              state.eventModel?.partners?.first.name ?? "",
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
@@ -324,7 +327,7 @@ class EventDetailPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    event.description ?? "",
+                    state.eventModel?.description ?? "",
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 15,
@@ -334,14 +337,15 @@ class EventDetailPage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                if (event.status == "PUBLIC" &&
-                    (event.remainingAmount ?? 0) > 0)
+                if (state.eventModel?.status == "PUBLIC" &&
+                    (state.eventModel?.remainingAmount ?? 0) > 0)
                   if (state.data?.participantId == null)
                     Center(
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               maximumSize: const Size(150, 55)),
-                          onPressed: () => XCoordinator.showEventHolder(event),
+                          onPressed: () =>
+                              XCoordinator.showEventHolder(eventId),
                           child: const Text(
                             "Đăng ký",
                           )),

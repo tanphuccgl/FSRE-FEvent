@@ -1,20 +1,37 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:equatable/equatable.dart';
 import 'package:fevent/src/feature/float_bottom_navigation/cubit/bottom_navigation_bloc.dart';
-import 'package:fevent/src/network/model/event/event_model.dart';
+import 'package:fevent/src/network/domain.dart';
+import 'package:fevent/src/network/model/event_detail.dart';
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/services/user_prefs.dart';
+import 'package:fevent/src/widgets/toast_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../../utils/helper/radius.dart';
 
 part "donate_event_state.dart";
 
 class DonateEventBloc extends Cubit<DonateEventState> {
-  final EventModel event;
-  DonateEventBloc(this.event) : super(const DonateEventState());
+  final String eventId;
+  DonateEventBloc(this.eventId) : super(const DonateEventState()) {
+    getEvent();
+    onChangedNumber("0");
+  }
 
-  //Domain get _domain => GetIt.I<Domain>();
+  Domain get _domain => GetIt.I<Domain>();
+
+  void getEvent() async {
+    final token = UserPrefs().getTokenUser;
+    if (token == null) return;
+    final result = await _domain.eventRepository.getEvent(eventId, token);
+    if (result.isSuccess) {
+      emit(state.copyWith(eventModel: result.data));
+    }
+  }
 
   void onChangedNumber(String value) {
     emit(state.copyWith(number: double.tryParse(value)));
@@ -27,15 +44,28 @@ class DonateEventBloc extends Cubit<DonateEventState> {
   void onDonateButton(BuildContext context) async {
     final token = UserPrefs().getTokenUser;
     if (token == null) return;
-    error(context);
-    // final result = await _domain.eventRepository
-    //     .postRegisterEvent(event.eventId ?? "", token);
-    // if (result.isSuccess) {
-    //   // ignore: use_build_context_synchronously
-    //   success(context);
-    // } else {
-    //   XToast.error("Lỗi");
-    // }
+
+    if (state.note.isEmpty || state.number == 0.0) {
+      return;
+    }
+
+    final result = await _domain.eventRepository.postDonateEvent(
+      amount: state.number,
+      eventId: eventId,
+      token: token,
+      note: state.note,
+    );
+    if (result.isSuccess) {
+      success(context);
+      onChangedNumber("0");
+    } else {
+      if (result.error == "payment") {
+        error(context);
+        onChangedNumber("0");
+      }
+
+      XToast.error("Lỗi");
+    }
   }
 
   void success(BuildContext context) {
@@ -111,7 +141,7 @@ class DonateEventBloc extends Cubit<DonateEventState> {
                     onPressed: () {
                       XCoordinator.replaceDashboard();
 
-                      context.read<BottomNavigationBloc>().onItemTapped(1);
+                      context.read<BottomNavigationBloc>().onItemTapped(2);
                     },
                     child: const Text(
                       "NẠP TIỀN",

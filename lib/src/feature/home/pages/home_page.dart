@@ -83,100 +83,98 @@ class HomePage extends StatelessWidget {
               ),
             ),
             body: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.1,
-                            blurRadius: 3,
-                            offset: const Offset(
-                                0, 3), // changes position of shadow
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 0.1,
+                          blurRadius: 3,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ]),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                XImage.icon1,
+                                width: 50,
+                                height: 50,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    state.countEvent,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  const Text(
+                                    "Đang diễn ra",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                              const Spacer(),
+                              Image.asset(
+                                XImage.icon2,
+                                width: 50,
+                                height: 50,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    state.count.toString(),
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  const Text(
+                                    "Sự kiện đã\nđăng ký",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ]),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  XImage.icon1,
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      state.countEvent,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    const Text(
-                                      "Đang diễn ra",
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                  ],
-                                ),
-                                const Spacer(),
-                                Image.asset(
-                                  XImage.icon2,
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      state.count.toString(),
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    const Text(
-                                      "Sự kiện đã\nđăng ký",
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                        ),
+                        const Divider(),
+                        GestureDetector(
+                          onTap: () => XCoordinator.showAllEvent(state.list),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5),
+                            child: Text("Đến trang chủ",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    color: XColors.primary)),
                           ),
-                          const Divider(),
-                          GestureDetector(
-                            onTap: () => XCoordinator.showAllEvent(state.list),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5),
-                              child: Text("Đến trang chủ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w900,
-                                      color: XColors.primary)),
-                            ),
-                          ),
-                        ]),
-                  ),
+                        ),
+                      ]),
                 ),
                 const SizedBox(
                   height: 15,
@@ -240,17 +238,12 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: SizedBox(
-                    height: 230.h,
-                    child: ListView.builder(
-                      itemBuilder: (context, index) =>
-                          _itemOther(state.listOther[index]),
-                      shrinkWrap: true,
-                      itemCount: state.listOther.length,
-                    ),
-                  ),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) =>
+                      _itemOther(state.listOther[index]),
+                  shrinkWrap: true,
+                  itemCount: state.listOther.length,
                 )
               ],
             ),

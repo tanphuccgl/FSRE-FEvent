@@ -6,22 +6,22 @@ class RegisterEventOneState extends Equatable {
   final String code;
   final String phone;
   final String email;
-  final String note;
+  final EventDetailModel? eventModel;
 
   const RegisterEventOneState({
     this.name = "",
     this.code = "",
     this.phone = "",
     this.email = "",
-    this.note = "",
+    this.eventModel,
   });
   @override
   List<Object?> get props => [
         name,
         code,
         phone,
+        eventModel,
         email,
-        note,
       ];
 
   RegisterEventOneState copyWith({
@@ -29,14 +29,14 @@ class RegisterEventOneState extends Equatable {
     String? code,
     String? phone,
     String? email,
-    String? note,
+    EventDetailModel? eventModel,
   }) {
     return RegisterEventOneState(
       name: name ?? this.name,
       code: code ?? this.code,
       phone: phone ?? this.phone,
       email: email ?? this.email,
-      note: note ?? this.note,
+      eventModel: eventModel ?? this.eventModel,
     );
   }
 }
