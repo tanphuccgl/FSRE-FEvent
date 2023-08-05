@@ -29,9 +29,37 @@ class RegisterEventTwoBloc extends Cubit<RegisterEventTwoState> {
     }
   }
 
+  void onChangedName(String value) {
+    emit(state.copyWith(name: value));
+  }
+
+  void onChangedCode(String value) {
+    emit(state.copyWith(code: value));
+  }
+
+  void onChangedPhone(String value) {
+    emit(state.copyWith(phone: value));
+  }
+
+  void onChangedEmail(String value) {
+    emit(state.copyWith(email: value));
+  }
+
+  void onChangedNote(String value) {
+    emit(state.copyWith(note: value));
+  }
+
   void onRegisterButton(BuildContext context) async {
     final token = UserPrefs().getTokenUser;
     if (token == null) return;
+
+    if (state.code.isEmpty ||
+        state.email.isEmpty ||
+        state.name.isEmpty ||
+        state.note.isEmpty ||
+        state.phone.isEmpty) {
+      return;
+    }
 
     final result =
         await _domain.eventRepository.postRegisterEvent(eventId, token);

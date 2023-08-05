@@ -170,6 +170,32 @@ class RegisterEventOnePage extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
+                const Text("Số điện thoại :",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  height: 5,
+                ),
+                XInput(
+                  value: state.phone,
+                  hintText: "Số điện thoại",
+                  onChanged: (value) => context
+                      .read<RegisterEventOneBloc>()
+                      .onChangedPhone(value),
+                  filled: true,
+                  keyboardType: TextInputType.number,
+                  fillColor: XColors.bgGrey.withOpacity(0.5),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: XColors.bgGrey, width: 1),
+                    borderRadius: BorderHelper.r10,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
                 const Text("Email :",
                     style: TextStyle(
                         color: Colors.black,
@@ -184,30 +210,6 @@ class RegisterEventOnePage extends StatelessWidget {
                       .read<RegisterEventOneBloc>()
                       .onChangedEmail(value),
                   hintText: "Email",
-                  filled: true,
-                  fillColor: XColors.bgGrey.withOpacity(0.5),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: XColors.bgGrey, width: 1),
-                    borderRadius: BorderHelper.r10,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text("Mong muốn của bạn :",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold)),
-                const SizedBox(
-                  height: 5,
-                ),
-                XInput(
-                  value: state.note,
-                  hintText: "Mong muốn của bạn",
-                  onChanged: (value) =>
-                      context.read<RegisterEventOneBloc>().onChangedNote(value),
                   filled: true,
                   fillColor: XColors.bgGrey.withOpacity(0.5),
                   enabledBorder: OutlineInputBorder(

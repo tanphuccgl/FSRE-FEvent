@@ -34,13 +34,16 @@ class RegisterEventOneBloc extends Cubit<RegisterEventOneState> {
     emit(state.copyWith(email: value));
   }
 
-  void onChangedNote(String value) {
-    emit(state.copyWith(note: value));
-  }
-
   void onRegisterButton(BuildContext context) async {
     final token = UserPrefs().getTokenUser;
     if (token == null) return;
+
+    if (state.code.isEmpty ||
+        state.email.isEmpty ||
+        state.name.isEmpty ||
+        state.phone.isEmpty) {
+      return;
+    }
 
     final result = await _domain.eventRepository
         .postRegisterEvent(event.eventId ?? "", token);

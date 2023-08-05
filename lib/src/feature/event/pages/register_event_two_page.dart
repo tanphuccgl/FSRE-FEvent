@@ -121,8 +121,10 @@ class RegisterEventTwoPage extends StatelessWidget {
                   height: 5,
                 ),
                 XInput(
-                  value: "",
                   hintText: "Họ và tên",
+                  value: state.name,
+                  onChanged: (value) =>
+                      context.read<RegisterEventTwoBloc>().onChangedName(value),
                   filled: true,
                   fillColor: XColors.bgGrey.withOpacity(0.5),
                   enabledBorder: OutlineInputBorder(
@@ -143,8 +145,35 @@ class RegisterEventTwoPage extends StatelessWidget {
                   height: 5,
                 ),
                 XInput(
-                  value: "",
+                  value: state.code,
+                  onChanged: (value) =>
+                      context.read<RegisterEventTwoBloc>().onChangedCode(value),
                   hintText: "MSSV",
+                  filled: true,
+                  fillColor: XColors.bgGrey.withOpacity(0.5),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: XColors.bgGrey, width: 1),
+                    borderRadius: BorderHelper.r10,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                const Text("Số điện thoại :",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  height: 5,
+                ),
+                XInput(
+                  value: state.phone,
+                  onChanged: (value) => context
+                      .read<RegisterEventTwoBloc>()
+                      .onChangedPhone(value),
+                  hintText: "Số điện thoại",
                   filled: true,
                   fillColor: XColors.bgGrey.withOpacity(0.5),
                   enabledBorder: OutlineInputBorder(
@@ -165,7 +194,10 @@ class RegisterEventTwoPage extends StatelessWidget {
                   height: 5,
                 ),
                 XInput(
-                  value: "",
+                  value: state.email,
+                  onChanged: (value) => context
+                      .read<RegisterEventTwoBloc>()
+                      .onChangedEmail(value),
                   hintText: "Email",
                   filled: true,
                   fillColor: XColors.bgGrey.withOpacity(0.5),
@@ -178,7 +210,7 @@ class RegisterEventTwoPage extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                const Text("Skill",
+                const Text("Nội dung :",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 13,
@@ -187,30 +219,10 @@ class RegisterEventTwoPage extends StatelessWidget {
                   height: 5,
                 ),
                 XInput(
-                  value: "",
-                  hintText: "Vui lòng chọn kỹ năng thích hợp",
-                  filled: true,
-                  fillColor: XColors.bgGrey.withOpacity(0.5),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: XColors.bgGrey, width: 1),
-                    borderRadius: BorderHelper.r10,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text("Chọn công việc",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold)),
-                const SizedBox(
-                  height: 5,
-                ),
-                XInput(
-                  value: "",
-                  hintText: "Vui lòng chọn công việc",
+                  value: state.note,
+                  onChanged: (value) =>
+                      context.read<RegisterEventTwoBloc>().onChangedNote(value),
+                  hintText: "Nội dung",
                   filled: true,
                   fillColor: XColors.bgGrey.withOpacity(0.5),
                   enabledBorder: OutlineInputBorder(
