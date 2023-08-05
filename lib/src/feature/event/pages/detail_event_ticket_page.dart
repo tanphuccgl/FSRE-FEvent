@@ -1,6 +1,5 @@
 import 'package:fevent/src/config/constants/images.dart';
 import 'package:fevent/src/feature/event/logic/detail_event_bloc.dart';
-import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -263,7 +262,8 @@ class DetailEventTicketPage extends StatelessWidget {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             maximumSize: const Size(150, 55)),
-                        onPressed: () => XCoordinator.showEventTicketSuccess(),
+                        onPressed: () =>
+                            context.read<DetailEventBloc>().postTicketEvent(),
                         child: const Text(
                           "Mua vé",
                         )),

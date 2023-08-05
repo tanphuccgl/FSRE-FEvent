@@ -1,5 +1,6 @@
 import 'package:fevent/src/network/model/check_participants.dart';
 import 'package:fevent/src/network/model/common/result.dart';
+import 'package:fevent/src/network/model/donations.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/event_detail.dart';
 import 'package:fevent/src/network/model/post_participants.dart';
@@ -27,10 +28,13 @@ abstract class EventRepository {
   Future<XResult<CheckParticipantsModel>> checkRegisterEvent(
       String eventId, String token);
 
-  Future<XResult<PostParticipantsModel>> postDonateEvent({
+  Future<XResult<DonationsModel>> postDonateEvent({
     required double amount,
     required String token,
     required String note,
     required String eventId,
   });
+
+  Future<XResult<CheckParticipantsModel>> postTicketEvent(
+      String eventId, String token);
 }

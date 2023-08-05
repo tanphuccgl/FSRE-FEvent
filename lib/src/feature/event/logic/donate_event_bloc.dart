@@ -19,6 +19,7 @@ class DonateEventBloc extends Cubit<DonateEventState> {
   final String eventId;
   DonateEventBloc(this.eventId) : super(const DonateEventState()) {
     getEvent();
+    onChangedNumber("0");
   }
 
   Domain get _domain => GetIt.I<Domain>();
@@ -44,7 +45,7 @@ class DonateEventBloc extends Cubit<DonateEventState> {
     final token = UserPrefs().getTokenUser;
     if (token == null) return;
 
-    if (state.note.isEmpty || state.number != 0.0) {
+    if (state.note.isEmpty || state.number == 0.0) {
       return;
     }
 
@@ -56,8 +57,13 @@ class DonateEventBloc extends Cubit<DonateEventState> {
     );
     if (result.isSuccess) {
       success(context);
+      onChangedNumber("0");
     } else {
-      error(context);
+      if (result.error == "payment") {
+        error(context);
+        onChangedNumber("0");
+      }
+
       XToast.error("Lỗi");
     }
   }

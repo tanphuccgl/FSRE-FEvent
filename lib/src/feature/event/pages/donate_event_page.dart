@@ -123,7 +123,9 @@ class DonateEventPage extends StatelessWidget {
                   height: 15,
                 ),
                 XInput(
-                  value: state.number == 0.0 ? "" : state.number.toString(),
+                  value: state.number == 0.0
+                      ? ""
+                      : state.number.toInt().toString(),
                   filled: true,
                   hintText: "Vui lòng nhập số tiền",
                   onChanged: (value) =>

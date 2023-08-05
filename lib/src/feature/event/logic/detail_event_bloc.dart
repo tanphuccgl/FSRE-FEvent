@@ -3,6 +3,7 @@ import 'package:fevent/src/network/domain.dart';
 import 'package:fevent/src/network/model/check_participants.dart';
 
 import 'package:fevent/src/network/model/event_detail.dart';
+import 'package:fevent/src/router/coordinator.dart';
 
 import 'package:fevent/src/services/user_prefs.dart';
 import 'package:fevent/src/utils/helper/radius.dart';
@@ -111,5 +112,18 @@ class DetailEventBloc extends Cubit<DetailEventState> {
         );
       },
     );
+  }
+
+  void postTicketEvent() async {
+    //TODO
+    final token = UserPrefs().getTokenUser;
+    if (token == null) return;
+    final result =
+        await _domain.eventRepository.postTicketEvent(eventId, token);
+    if (result.isSuccess) {
+      XCoordinator.showEventTicketSuccess();
+    } else {
+      XToast.error("Lỗi");
+    }
   }
 }

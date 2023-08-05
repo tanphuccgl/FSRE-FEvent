@@ -3,6 +3,7 @@ import 'package:fevent/src/config/constants/endpoints.dart';
 import 'package:fevent/src/network/data_sources/base_data_source.dart';
 import 'package:fevent/src/network/model/check_participants.dart';
 import 'package:fevent/src/network/model/common/result.dart';
+import 'package:fevent/src/network/model/donations.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/event/list_event_model.dart';
 import 'package:fevent/src/network/model/event_detail.dart';
@@ -138,7 +139,7 @@ class EventRepositoryImpl extends EventRepository {
   }
 
   @override
-  Future<XResult<PostParticipantsModel>> postDonateEvent({
+  Future<XResult<DonationsModel>> postDonateEvent({
     required double amount,
     required String token,
     required String note,
@@ -158,13 +159,43 @@ class EventRepositoryImpl extends EventRepository {
         },
       );
 
-      final result = PostParticipantsModel.fromJson(response.data);
+      final result = DonationsModel.fromJson(response.data);
+
+      return response.statusCode == 200 || response.statusCode == 201
+          ? result.message == "Quyên góp thành công"
+              ? XResult.success(result)
+              : XResult.error("payment")
+          : XResult.error(result.message);
+    } catch (e, a) {
+      LoggerHelper.error('> postDonateEvent CATCH Error< $e $a');
+
+      return XResult.exception(e);
+    }
+  }
+
+  //TODO
+  @override
+  Future<XResult<CheckParticipantsModel>> postTicketEvent(
+      String eventId, String token) async {
+    try {
+      final response = await BaseDataSource().post(
+        Endpoints.postRegisterEvent,
+        options: Options(headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        }),
+        data: {
+          "eventId": eventId,
+        },
+      );
+
+      final result = CheckParticipantsModel.fromJson(response.data);
 
       return response.statusCode == 200 || response.statusCode == 201
           ? XResult.success(result)
           : XResult.error("Error");
     } catch (e, a) {
-      LoggerHelper.error('> postDonateEvent CATCH Error< $e $a');
+      LoggerHelper.error('> postTicketEvent CATCH Error< $e $a');
 
       return XResult.exception(e);
     }
