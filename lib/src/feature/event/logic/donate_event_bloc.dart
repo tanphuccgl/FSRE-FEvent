@@ -1,10 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:equatable/equatable.dart';
 import 'package:fevent/src/feature/float_bottom_navigation/cubit/bottom_navigation_bloc.dart';
+import 'package:fevent/src/network/domain.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/services/user_prefs.dart';
+import 'package:fevent/src/widgets/toast_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../../utils/helper/radius.dart';
 
@@ -14,7 +19,7 @@ class DonateEventBloc extends Cubit<DonateEventState> {
   final EventModel event;
   DonateEventBloc(this.event) : super(const DonateEventState());
 
-  //Domain get _domain => GetIt.I<Domain>();
+  Domain get _domain => GetIt.I<Domain>();
 
   void onChangedNumber(String value) {
     emit(state.copyWith(number: double.tryParse(value)));
@@ -27,15 +32,23 @@ class DonateEventBloc extends Cubit<DonateEventState> {
   void onDonateButton(BuildContext context) async {
     final token = UserPrefs().getTokenUser;
     if (token == null) return;
-    error(context);
-    // final result = await _domain.eventRepository
-    //     .postRegisterEvent(event.eventId ?? "", token);
-    // if (result.isSuccess) {
-    //   // ignore: use_build_context_synchronously
-    //   success(context);
-    // } else {
-    //   XToast.error("Lỗi");
-    // }
+
+    if (state.note.isEmpty || state.number != 0.0) {
+      return;
+    }
+
+    final result = await _domain.eventRepository.postDonateEvent(
+      amount: state.number,
+      eventId: event.eventId ?? "",
+      token: token,
+      note: state.note,
+    );
+    if (result.isSuccess) {
+      success(context);
+    } else {
+      error(context);
+      XToast.error("Lỗi");
+    }
   }
 
   void success(BuildContext context) {

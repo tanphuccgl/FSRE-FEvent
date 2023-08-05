@@ -25,4 +25,11 @@ abstract class EventRepository {
 
   Future<XResult<CheckParticipantsModel>> checkRegisterEvent(
       String eventId, String token);
+
+  Future<XResult<PostParticipantsModel>> postDonateEvent({
+    required double amount,
+    required String token,
+    required String note,
+    required String eventId,
+  });
 }

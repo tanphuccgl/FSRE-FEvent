@@ -134,4 +134,37 @@ class EventRepositoryImpl extends EventRepository {
       return XResult.exception(e);
     }
   }
+
+  @override
+  Future<XResult<PostParticipantsModel>> postDonateEvent({
+    required double amount,
+    required String token,
+    required String note,
+    required String eventId,
+  }) async {
+    try {
+      final response = await BaseDataSource().post(
+        Endpoints.postdonations,
+        options: Options(headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        }),
+        data: {
+          "amount": amount,
+          "note": note,
+          "eventId": eventId,
+        },
+      );
+
+      final result = PostParticipantsModel.fromJson(response.data);
+
+      return response.statusCode == 200 || response.statusCode == 201
+          ? XResult.success(result)
+          : XResult.error("Error");
+    } catch (e, a) {
+      LoggerHelper.error('> postDonateEvent CATCH Error< $e $a');
+
+      return XResult.exception(e);
+    }
+  }
 }

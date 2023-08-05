@@ -325,11 +325,11 @@ class DetailEventDonatePage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                if (event.status == "PUBLIC" &&
-                    (event.remainingAmount ?? 0) > 0)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    if (event.status == "PUBLIC" &&
+                        (event.remainingAmount ?? 0) > 0)
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               maximumSize: const Size(150, 55)),
@@ -337,6 +337,7 @@ class DetailEventDonatePage extends StatelessWidget {
                           child: const Text(
                             "Đăng ký",
                           )),
+                    if (event.status == "PUBLIC" || event.status == "UPCOMING")
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.lightGreen,
@@ -345,8 +346,8 @@ class DetailEventDonatePage extends StatelessWidget {
                           child: const Text(
                             "Quyên góp",
                           )),
-                    ],
-                  ),
+                  ],
+                ),
                 const SizedBox(
                   height: 45,
                 ),

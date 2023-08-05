@@ -292,7 +292,7 @@ class EventDetailPage extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              event.partner?.name ?? "",
+                              event.partners?.first.name ?? "",
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,

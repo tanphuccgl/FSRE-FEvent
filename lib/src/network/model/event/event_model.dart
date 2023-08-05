@@ -1,64 +1,78 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class EventModel {
   String? eventId;
   String? title;
   String? topic;
-  String? type;
   String? description;
+  bool? isOnline;
   String? status;
   String? createdAt;
   String? updatedAt;
   String? location;
   int? totalDonation;
   int? rating;
+  int? cost;
   String? startDate;
   String? endDate;
   String? image;
   int? expectedAmount;
   int? remainingAmount;
-  Partner? partner;
+  List<Partners>? partners;
   Staff? staff;
+  List<Categories>? categories;
 
   EventModel(
       {this.eventId,
       this.title,
       this.topic,
-      this.type,
       this.description,
+      this.isOnline,
       this.status,
       this.createdAt,
       this.updatedAt,
       this.location,
       this.totalDonation,
       this.rating,
+      this.cost,
       this.startDate,
       this.endDate,
       this.image,
       this.expectedAmount,
       this.remainingAmount,
-      this.partner,
-      this.staff});
+      this.partners,
+      this.staff,
+      this.categories});
 
   EventModel.fromJson(Map<String, dynamic> json) {
     eventId = json['eventId'];
     title = json['title'];
     topic = json['topic'];
-    type = json['type'];
     description = json['description'];
+    isOnline = json['isOnline'];
     status = json['status'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     location = json['location'];
     totalDonation = json['totalDonation'];
     rating = json['rating'];
+    cost = json['cost'];
     startDate = json['startDate'];
     endDate = json['endDate'];
     image = json['image'];
     expectedAmount = json['expectedAmount'];
     remainingAmount = json['remainingAmount'];
-    partner =
-        json['partner'] != null ? Partner.fromJson(json['partner']) : null;
+    if (json['partners'] != null) {
+      partners = <Partners>[];
+      json['partners'].forEach((v) {
+        partners!.add(Partners.fromJson(v));
+      });
+    }
     staff = json['staff'] != null ? Staff.fromJson(json['staff']) : null;
+    if (json['categories'] != null) {
+      categories = <Categories>[];
+      json['categories'].forEach((v) {
+        categories!.add(Categories.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -66,35 +80,34 @@ class EventModel {
     data['eventId'] = eventId;
     data['title'] = title;
     data['topic'] = topic;
-    data['type'] = type;
     data['description'] = description;
+    data['isOnline'] = isOnline;
     data['status'] = status;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     data['location'] = location;
     data['totalDonation'] = totalDonation;
     data['rating'] = rating;
+    data['cost'] = cost;
     data['startDate'] = startDate;
     data['endDate'] = endDate;
     data['image'] = image;
     data['expectedAmount'] = expectedAmount;
     data['remainingAmount'] = remainingAmount;
-    if (partner != null) {
-      data['partner'] = partner!.toJson();
+    if (partners != null) {
+      data['partners'] = partners!.map((v) => v.toJson()).toList();
     }
     if (staff != null) {
       data['staff'] = staff!.toJson();
     }
+    if (categories != null) {
+      data['categories'] = categories!.map((v) => v.toJson()).toList();
+    }
     return data;
-  }
-
-  @override
-  String toString() {
-    return 'EventModel(eventId: $eventId, title: $title, topic: $topic, type: $type, description: $description, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, location: $location, totalDonation: $totalDonation, rating: $rating, startDate: $startDate, endDate: $endDate, image: $image, expectedAmount: $expectedAmount, remainingAmount: $remainingAmount, partner: $partner, staff: $staff)';
   }
 }
 
-class Partner {
+class Partners {
   String? partnerId;
   String? name;
   String? description;
@@ -102,7 +115,7 @@ class Partner {
   String? updatedAt;
   String? status;
 
-  Partner(
+  Partners(
       {this.partnerId,
       this.name,
       this.description,
@@ -110,7 +123,7 @@ class Partner {
       this.updatedAt,
       this.status});
 
-  Partner.fromJson(Map<String, dynamic> json) {
+  Partners.fromJson(Map<String, dynamic> json) {
     partnerId = json['partnerId'];
     name = json['name'];
     description = json['description'];
@@ -214,6 +227,43 @@ class Department {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['departmentId'] = departmentId;
     data['name'] = name;
+    data['status'] = status;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    return data;
+  }
+}
+
+class Categories {
+  String? categoryId;
+  String? categoryName;
+  String? description;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
+
+  Categories(
+      {this.categoryId,
+      this.categoryName,
+      this.description,
+      this.status,
+      this.createdAt,
+      this.updatedAt});
+
+  Categories.fromJson(Map<String, dynamic> json) {
+    categoryId = json['categoryId'];
+    categoryName = json['categoryName'];
+    description = json['description'];
+    status = json['status'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['categoryId'] = categoryId;
+    data['categoryName'] = categoryName;
+    data['description'] = description;
     data['status'] = status;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;

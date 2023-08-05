@@ -1,4 +1,5 @@
 import 'package:fevent/src/config/constants/images.dart';
+import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -77,7 +78,7 @@ class SuccessEventTicketPage extends StatelessWidget {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             maximumSize: const Size(150, 55)),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => XCoordinator.replaceDashboard(),
                         child: const Text(
                           "Quay lại",
                         )),

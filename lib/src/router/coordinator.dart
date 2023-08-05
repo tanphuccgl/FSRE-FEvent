@@ -61,9 +61,19 @@ class XCoordinator {
       push(AllEventPage(list: list));
 
   static Future<void> showEventDetail(EventModel event) async {
-    if (event.type == "DONATION") {
+    if (((event.categories ?? [])
+                .singleWhere((e) => e.categoryName == "DONATION",
+                    orElse: () => Categories(categoryId: ""))
+                .categoryId ??
+            "")
+        .isNotEmpty) {
       push(DetailEventDonatePage(event: event));
-    } else if (event.type == "TICKET") {
+    } else if (((event.categories ?? [])
+                .singleWhere((e) => e.categoryName == "TICKET",
+                    orElse: () => Categories(categoryId: ""))
+                .categoryId ??
+            "")
+        .isNotEmpty) {
       push(DetailEventTicketPage(event: event));
     } else {
       push(EventDetailPage(event: event));

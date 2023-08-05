@@ -283,7 +283,7 @@ class HolderRegisterEventPage extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        event.partner?.name ?? "",
+                        event.partners?.first.name ?? "",
                         style: const TextStyle(
                             color: Colors.black,
                             fontSize: 15,
@@ -308,13 +308,19 @@ class HolderRegisterEventPage extends StatelessWidget {
                   child: const Text(
                     "Người tham gia",
                   )),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      maximumSize: const Size(150, 55)),
-                  onPressed: () => XCoordinator.showListJob(),
-                  child: const Text(
-                    "Việc làm thêm",
-                  )),
+              if (((event.categories ?? [])
+                          .singleWhere((e) => e.categoryName == "JOB",
+                              orElse: () => Categories(categoryId: ""))
+                          .categoryId ??
+                      "")
+                  .isNotEmpty)
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        maximumSize: const Size(150, 55)),
+                    onPressed: () => XCoordinator.showListJob(),
+                    child: const Text(
+                      "Việc làm thêm",
+                    )),
             ],
           ),
           const SizedBox(
