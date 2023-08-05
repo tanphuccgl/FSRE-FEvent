@@ -53,4 +53,6 @@ class Endpoints {
       "$baseUrl/job-requests/me/status?status=ACCEPT";
   static const String getJobRequestMePending =
       "$baseUrl/job-requests/me/status?status=PENDING";
+
+  static const String myDonation = "$baseUrl/donations/me";
 }

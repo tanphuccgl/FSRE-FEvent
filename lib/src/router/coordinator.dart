@@ -12,6 +12,7 @@ import 'package:fevent/src/feature/event/pages/register_event_one_page.dart';
 import 'package:fevent/src/feature/event/pages/register_event_two_page.dart';
 import 'package:fevent/src/feature/event/pages/success_event_ticket_page.dart';
 import 'package:fevent/src/feature/job_request/pages/job_request_page.dart';
+import 'package:fevent/src/feature/my_donation/pages/my_donation_page.dart';
 import 'package:fevent/src/feature/my_event/pages/my_event_page.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/job.dart';
@@ -120,4 +121,6 @@ class XCoordinator {
   static Future showNotification() => pushNamed(XRouterName.notification);
 
   static Future showJobRequestPage() => push(const JobRequestPage());
+
+  static Future showMyDonationPage() => push(const MyDonationPage());
 }
