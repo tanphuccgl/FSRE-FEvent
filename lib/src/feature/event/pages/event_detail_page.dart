@@ -295,7 +295,10 @@ class EventDetailPage extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              state.eventModel?.partners?.first.name ?? "",
+                              (state.eventModel?.partners ?? []).isEmpty
+                                  ? ""
+                                  : state.eventModel?.partners!.first.name ??
+                                      "",
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
