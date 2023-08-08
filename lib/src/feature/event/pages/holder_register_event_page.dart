@@ -348,21 +348,29 @@ class HolderRegisterEventPage extends StatelessWidget {
   }
 
   String convertUTCToFormattedDate(String utcTimestamp) {
-    DateTime utcDateTime = DateTime.parse(utcTimestamp);
-    DateTime localDateTime = utcDateTime.toLocal();
-    String formattedDate = DateFormat('d MMMM, yyyy').format(localDateTime);
-    return formattedDate;
+    try {
+      DateTime utcDateTime = DateTime.parse(utcTimestamp);
+      DateTime localDateTime = utcDateTime.toLocal();
+      String formattedDate = DateFormat('d MMMM, yyyy').format(localDateTime);
+      return formattedDate;
+    } catch (e) {
+      return "";
+    }
   }
 
   String convertToFormattedDateTimeRange(
       String startTimestamp, String endTimestamp) {
-    DateTime startDateTime = DateTime.parse(startTimestamp).toLocal();
-    DateTime endDateTime = DateTime.parse(endTimestamp).toLocal();
+    try {
+      DateTime startDateTime = DateTime.parse(startTimestamp).toLocal();
+      DateTime endDateTime = DateTime.parse(endTimestamp).toLocal();
 
-    String dayOfWeek = DateFormat('EEEE').format(startDateTime);
-    String startTime = DateFormat('h:00 a').format(startDateTime);
-    String endTime = DateFormat('h:00 a').format(endDateTime);
+      String dayOfWeek = DateFormat('EEEE').format(startDateTime);
+      String startTime = DateFormat('h:00 a').format(startDateTime);
+      String endTime = DateFormat('h:00 a').format(endDateTime);
 
-    return '$dayOfWeek, $startTime - $endTime';
+      return '$dayOfWeek, $startTime - $endTime';
+    } catch (e) {
+      return "";
+    }
   }
 }

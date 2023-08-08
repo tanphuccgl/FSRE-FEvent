@@ -15,6 +15,7 @@ import 'package:fevent/src/feature/feedback/pages/feedback_page.dart';
 import 'package:fevent/src/feature/job_request/pages/job_request_page.dart';
 import 'package:fevent/src/feature/my_donation/pages/my_donation_page.dart';
 import 'package:fevent/src/feature/my_event/pages/my_event_page.dart';
+import 'package:fevent/src/feature/search/pages/search_page.dart';
 import 'package:fevent/src/network/model/event/event_model.dart';
 import 'package:fevent/src/network/model/job.dart';
 import 'package:fevent/src/router/router_name.dart';
@@ -127,4 +128,6 @@ class XCoordinator {
   static Future showFeedbackPage(String eventId) => push(FeedbackPage(
         eventId: eventId,
       ));
+
+  static Future showSearchPage() => push(const SearchPage());
 }
