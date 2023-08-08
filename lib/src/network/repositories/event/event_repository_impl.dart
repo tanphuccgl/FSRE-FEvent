@@ -240,4 +240,54 @@ class EventRepositoryImpl extends EventRepository {
       return XResult.exception(e);
     }
   }
+
+  @override
+  Future<XResult<List<EventModel>>> getListEventSearch(
+      {required String title,
+      required String topic,
+      required String type,
+      required String status,
+      required String startDate,
+      required String endDate}) async {
+    try {
+      var a = "";
+      var b = "";
+      if (startDate.isNotEmpty) {
+        startDate = startDate.replaceAll("/", "%2F");
+        a = "&startDate=$startDate";
+      }
+      if (endDate.isNotEmpty) {
+        endDate = endDate.replaceAll("/", "%2F");
+        b = "&endDate=$endDate";
+      }
+
+      var a1 = "";
+      var a2 = "";
+      var a3 = "";
+      if (topic.isNotEmpty) {
+        a1 = "&topic=$topic";
+      }
+      if (type.isNotEmpty) {
+        a2 = "&categoryName=$type";
+      }
+      if (status.isNotEmpty) {
+        a3 = "&status=$status";
+      }
+      final response = await BaseDataSource().get(
+        "${Endpoints.event}?page=0&pageSize=99&orderBy=startDate&order=ASC&isShowInactive=false$a1$a2$a3$a$b",
+      );
+
+      final result = ListEventModel.fromJson(
+        response.data,
+      );
+      final list = (result.data ?? []).toList();
+      return response.statusCode == 200 || response.statusCode == 201
+          ? XResult.success(list)
+          : XResult.error("Error");
+    } catch (e) {
+      LoggerHelper.error('> GET LIST Event CATCH Error< $e');
+
+      return XResult.exception(e);
+    }
+  }
 }

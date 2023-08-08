@@ -48,4 +48,12 @@ abstract class EventRepository {
     required String token,
     required String eventId,
   });
+  Future<XResult<List<EventModel>>> getListEventSearch({
+    required String title,
+    required String topic,
+    required String type,
+    required String status,
+    required String startDate,
+    required String endDate,
+  });
 }

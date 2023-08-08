@@ -18,6 +18,7 @@ import 'package:fevent/src/feature/my_event/pages/my_event_page.dart';
 import 'package:fevent/src/feature/profile/pages/profile_page.dart';
 import 'package:fevent/src/feature/profile/pages/update_profile_page.dart';
 import 'package:fevent/src/feature/scan/pages/scan_page.dart';
+import 'package:fevent/src/feature/search/pages/search_page.dart';
 import 'package:fevent/src/feature/wallet/pages/wallet_page.dart';
 import 'package:fevent/src/network/model/job.dart';
 import 'package:fevent/src/router/router_name.dart';
@@ -102,6 +103,9 @@ class XAppRoute {
             builder: (_) => const FeedbackPage(
                   eventId: "",
                 ));
+
+      case XRouterName.search:
+        return MaterialPageRoute(builder: (_) => const SearchPage());
 
       default:
         return MaterialPageRoute(
