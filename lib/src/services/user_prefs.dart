@@ -27,10 +27,10 @@ class UserPrefs {
     _prefs.setString("USER", value);
   }
 
-  String? get getTokenUser =>
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU4YjQ2YWYyLTI2ODUtNDRhMS1iYWM1LWE3YjY4YzQ4NDJmNCIsImlhdCI6MTY5MTIyNDkyNH0.7PyfEp-RuA4eu5Np2E3LH-kTNMMLjM6ekl5LQbdqGZY";
+  // String? get getTokenUser =>
+  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU4YjQ2YWYyLTI2ODUtNDRhMS1iYWM1LWE3YjY4YzQ4NDJmNCIsImlhdCI6MTY5MTIyNDkyNH0.7PyfEp-RuA4eu5Np2E3LH-kTNMMLjM6ekl5LQbdqGZY";
 
   //String? get getUserID => getUser()?.id;
 
-//  String? get getTokenUser => getUser()?.token;
+  String? get getTokenUser => getUser()?.token;
 }
