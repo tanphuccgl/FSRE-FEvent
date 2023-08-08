@@ -182,16 +182,20 @@ class WalletPage extends StatelessWidget {
   }
 
   String formatDate(String dateTimeString) {
-    if (dateTimeString.isEmpty) return "";
-    DateTime dateTime = DateTime.parse(dateTimeString);
+    try {
+      if (dateTimeString.isEmpty) return "";
+      DateTime dateTime = DateTime.parse(dateTimeString);
 
-    // Format time
-    String formattedTime = DateFormat('HH:mm').format(dateTime.toLocal());
+      // Format time
+      String formattedTime = DateFormat('HH:mm').format(dateTime.toLocal());
 
-    // Format date
-    String formattedDate =
-        DateFormat('dd/MM/yyyy').format(DateTime(2023, 3, 21));
+      // Format date
+      String formattedDate =
+          DateFormat('dd/MM/yyyy').format(DateTime(2023, 3, 21));
 
-    return '$formattedTime - $formattedDate';
+      return '$formattedTime - $formattedDate';
+    } catch (e) {
+      return "";
+    }
   }
 }
