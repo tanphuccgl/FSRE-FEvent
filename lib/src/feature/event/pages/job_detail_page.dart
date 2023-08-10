@@ -37,9 +37,11 @@ class JobDetailPage extends StatelessWidget {
             height: 15,
           ),
           Image.network(
-            "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+            data.event?.image ??
+                "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
             height: 128.h,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) => const SizedBox(),
           ),
           const SizedBox(
             height: 15,

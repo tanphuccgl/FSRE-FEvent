@@ -302,9 +302,12 @@ class DetailEventDonatePage extends StatelessWidget {
                   height: 20,
                 ),
                 Image.network(
-                  "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                  state.eventModel?.image ??
+                      "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
                   height: 168.h,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const SizedBox(),
                 ),
                 const SizedBox(
                   height: 15,
