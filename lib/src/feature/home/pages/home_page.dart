@@ -282,7 +282,7 @@ class HomePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              formatDateTime(event.createdAt.toString()),
+                              formatDateTime(event.startDate.toString()),
                               style: const TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16,
@@ -435,7 +435,7 @@ class HomePage extends StatelessWidget {
                                 children: [
                                   Text(
                                     convertUTCToLocalTime(
-                                        event.createdAt.toString()),
+                                        event.startDate.toString()),
                                     style: const TextStyle(color: Colors.black),
                                   ),
                                   Container(
@@ -489,7 +489,8 @@ class HomePage extends StatelessWidget {
     try {
       DateTime utcDateTime = DateTime.parse(utcTimestamp);
       DateTime localDateTime = utcDateTime.toLocal();
-      String formattedTime = DateFormat('hh:mm a').format(localDateTime);
+      String formattedTime =
+          DateFormat('hh:mm a', "vi_VN").format(localDateTime);
       return formattedTime;
     } catch (e) {
       return "";
@@ -515,7 +516,15 @@ class HomePage extends StatelessWidget {
   }
 
   String _getWeekday(DateTime dateTime) {
-    List<String> weekdays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    List<String> weekdays = [
+      'THỨ 2',
+      'THỨ 3',
+      'THỨ 4',
+      'THỨ 5',
+      'THỨ 6',
+      'THỨ 7',
+      'CN'
+    ];
     return weekdays[dateTime.weekday];
   }
 
@@ -525,24 +534,24 @@ class HomePage extends StatelessWidget {
 
   String _getMonth(DateTime dateTime) {
     List<String> months = [
-      'JAN',
-      'FEB',
-      'MAR',
-      'APR',
-      'MAY',
-      'JUN',
-      'JUL',
-      'AUG',
-      'SEP',
-      'OCT',
-      'NOV',
-      'DEC'
+      'T1',
+      'T2',
+      'T3',
+      'T4',
+      'T5',
+      'T6',
+      'T7',
+      'T8',
+      'T9',
+      'T10',
+      'T11',
+      'T12'
     ];
     return months[dateTime.month - 1];
   }
 
   String _getTime(DateTime dateTime) {
-    String period = dateTime.hour >= 12 ? 'PM' : 'AM';
+    String period = dateTime.hour >= 12 ? 'CH' : 'SA';
     int hour = dateTime.hour % 12;
     if (hour == 0) {
       hour = 12;

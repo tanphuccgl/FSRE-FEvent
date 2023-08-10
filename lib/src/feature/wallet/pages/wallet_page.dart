@@ -187,11 +187,12 @@ class WalletPage extends StatelessWidget {
       DateTime dateTime = DateTime.parse(dateTimeString);
 
       // Format time
-      String formattedTime = DateFormat('HH:mm').format(dateTime.toLocal());
+      String formattedTime =
+          DateFormat('HH:mm', "vi_VN").format(dateTime.toLocal());
 
       // Format date
       String formattedDate =
-          DateFormat('dd/MM/yyyy').format(DateTime(2023, 3, 21));
+          DateFormat('dd/MM/yyyy', "vi_VN").format(DateTime(2023, 3, 21));
 
       return '$formattedTime - $formattedDate';
     } catch (e) {

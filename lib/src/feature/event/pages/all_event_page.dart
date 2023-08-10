@@ -101,7 +101,7 @@ class AllEventPage extends StatelessWidget {
                       children: [
                         Text(
                           convertUTCToFormattedDateTime(
-                              event.createdAt.toString()),
+                              event.startDate.toString()),
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.black),
                         ),
@@ -172,7 +172,7 @@ class AllEventPage extends StatelessWidget {
       DateTime utcDateTime = DateTime.parse(utcTimestamp);
       DateTime localDateTime = utcDateTime.toLocal();
       String formattedDateTime =
-          DateFormat('d MMM, yyyy, h:mm a').format(localDateTime);
+          DateFormat('d MMM, yyyy, h:mm a', "vi_VN").format(localDateTime);
       return formattedDateTime;
     } catch (e) {
       return "";

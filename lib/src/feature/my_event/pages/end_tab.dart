@@ -137,8 +137,8 @@ class EndTab extends StatelessWidget {
 
   String formatTime(String originalTime) {
     try {
-      final inputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-      final outputFormat = DateFormat("d MMM, yyyy, h:mm a");
+      final inputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", "vi_VN");
+      final outputFormat = DateFormat("d MMM, yyyy, h:mm a", "vi_VN");
       final dateTime = inputFormat.parse(originalTime);
       return outputFormat.format(dateTime);
     } catch (e) {

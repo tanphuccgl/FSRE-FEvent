@@ -208,9 +208,10 @@ class JobRequestPage extends StatelessWidget {
 
   String convertDateTimeToFormattedString(String input) {
     try {
-      final DateFormat inputFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSZ");
-      final DateFormat outputDateFormat = DateFormat.EEEE();
-      final DateFormat outputTimeFormat = DateFormat.Hm();
+      final DateFormat inputFormat =
+          DateFormat("yyyy-MM-ddTHH:mm:ss.SSSZ", "vi_VN");
+      final DateFormat outputDateFormat = DateFormat.EEEE("vi_VN");
+      final DateFormat outputTimeFormat = DateFormat.Hm("vi_VN");
 
       DateTime dateTime = inputFormat.parse(input);
       String formattedDate = outputDateFormat.format(dateTime);

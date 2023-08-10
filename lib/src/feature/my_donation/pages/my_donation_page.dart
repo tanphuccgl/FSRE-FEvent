@@ -139,9 +139,10 @@ class MyDonationPage extends StatelessWidget {
 
   String convertDateTimeToFormattedString(String input) {
     try {
-      final DateFormat inputFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSZ");
-      final DateFormat outputDateFormat = DateFormat("dd/MM/yyyy");
-      final DateFormat outputTimeFormat = DateFormat.Hm();
+      final DateFormat inputFormat =
+          DateFormat("yyyy-MM-ddTHH:mm:ss.SSSZ", "vi_VN");
+      final DateFormat outputDateFormat = DateFormat("dd/MM/yyyy", "vi_VN");
+      final DateFormat outputTimeFormat = DateFormat.Hm("vi_VN");
 
       DateTime dateTime = inputFormat.parse(input);
       String formattedTime = outputTimeFormat.format(dateTime);

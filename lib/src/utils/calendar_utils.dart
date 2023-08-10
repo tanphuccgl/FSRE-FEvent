@@ -16,7 +16,7 @@ class CalendarUtils {
   }
 
   String formatDaysInWeek(List<DateTime> days) {
-    DateFormat dateFormat = DateFormat('d/M/yyyy');
+    DateFormat dateFormat = DateFormat('d/M/yyyy', "vi_VN");
     String startDay = days.first.day.toString();
     String endDay = dateFormat.format(days.last);
 
@@ -24,6 +24,6 @@ class CalendarUtils {
   }
 
   String formatDate(DateTime date) {
-    return DateFormat('E\nd').format(date);
+    return DateFormat('E\nd', "vi_VN").format(date);
   }
 }

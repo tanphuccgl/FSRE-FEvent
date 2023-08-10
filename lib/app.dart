@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         builder: (context, child) {
           return MaterialApp(
+            locale: const Locale("vi", "VN"),
             navigatorKey: XCoordinator.navigatorKey,
             initialRoute: XRouterName.signIn,
             onGenerateRoute: XAppRoute.onGenerateRoute,
