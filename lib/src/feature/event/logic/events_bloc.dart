@@ -27,7 +27,7 @@ class EventsBloc extends Cubit<EventsState> {
       startDate: "",
     );
     if (value.isSuccess) {
-      emit(state.copyWith(list: value.data));
+      _emitIfOpen(state.copyWith(list: value.data));
     } else {
       XToast.error("Không thể load dữ liệu từ server");
     }
@@ -38,9 +38,15 @@ class EventsBloc extends Cubit<EventsState> {
     if (token == null) return;
     final value = await _domain.myEventRepository.getParticipantsMe(token);
     if (value.isSuccess) {
-      emit(state.copyWith(count: value.data?.data?.length ?? 0));
+      _emitIfOpen(state.copyWith(count: value.data?.data?.length ?? 0));
     } else {
       XToast.error("Không thể load dữ liệu từ server");
+    }
+  }
+
+  void _emitIfOpen(EventsState newState) {
+    if (!isClosed) {
+      emit(newState);
     }
   }
 }
