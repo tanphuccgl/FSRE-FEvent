@@ -102,7 +102,7 @@ class MyDonationPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  event.note.toString(),
+                  (event.participant?.event?.title ?? "").toString(),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
