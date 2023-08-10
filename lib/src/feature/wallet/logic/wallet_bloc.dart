@@ -73,7 +73,8 @@ class WalletBloc extends Cubit<WalletState> {
     final result = await _domain.walletRepository
         .deposit(token, state.number, "https://www.facebook.com/");
     if (result.isSuccess) {
-      await launchUrl(Uri.parse(result.data!.paymentUrl ?? ""));
+      await launchUrl(Uri.parse(result.data!.paymentUrl ?? ""),
+          mode: LaunchMode.externalApplication);
       //  emit(state.copyWith(walletModel: result.data));
       getWalletMe();
       Navigator.pop(context);
