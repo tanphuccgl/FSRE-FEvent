@@ -18,9 +18,9 @@ class FavouriteBloc extends Cubit<FavouriteState> {
     final result = await _domain.favouriteRepository.getFavouriteEvent(eventId);
     if (result.isSuccess) {
       if ((result.data!.listInterest ?? []).isNotEmpty) {
-        emit(state.copyWith(isEnable: true));
+        _emitIfOpen(state.copyWith(isEnable: true));
       } else {
-        emit(state.copyWith(isEnable: false));
+        _emitIfOpen(state.copyWith(isEnable: false));
       }
     }
   }
@@ -48,6 +48,12 @@ class FavouriteBloc extends Cubit<FavouriteState> {
     );
     if (result.isSuccess) {
       init();
+    }
+  }
+
+  void _emitIfOpen(FavouriteState newState) {
+    if (!isClosed) {
+      emit(newState);
     }
   }
 }

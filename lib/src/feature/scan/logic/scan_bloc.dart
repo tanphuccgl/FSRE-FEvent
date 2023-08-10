@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:fevent/src/feature/float_bottom_navigation/cubit/bottom_navigation_bloc.dart';
 import 'package:fevent/src/router/coordinator.dart';
@@ -38,8 +40,23 @@ class ScanBloc extends Cubit<ScanState> {
 
   void scannedStream() {
     if (controller == null) return;
+
     controller!.scannedDataStream.listen((scanData) {
-      _emitIfOpen(state.copyWith(barcode: scanData));
+      if (scanData.code != null) {
+        Map<String, dynamic> jsonData = json.decode(scanData.code!);
+
+        String eventId = jsonData['eventId'] ?? "";
+        String api = jsonData['api'] ?? "";
+        if (eventId.isNotEmpty && api.isNotEmpty) {
+          if (api == "checkOut") {
+            XCoordinator.showFeedbackPage(eventId);
+          }
+          if (api == "checkIn") {
+            controller!.pauseCamera();
+            success(XCoordinator.context);
+          }
+        }
+      }
     });
   }
 
@@ -67,7 +84,7 @@ class ScanBloc extends Cubit<ScanState> {
                   onPressed: () {
                     XCoordinator.replaceDashboard();
 
-                    context.read<BottomNavigationBloc>().onItemTapped(1);
+                    context.read<BottomNavigationBloc>().onItemTapped(0);
                   },
                   child: const Text(
                     "Quay Lại trang chủ",
@@ -97,11 +114,5 @@ class ScanBloc extends Cubit<ScanState> {
     controller?.dispose();
 
     return super.close();
-  }
-
-  void _emitIfOpen(ScanState newState) {
-    if (!isClosed) {
-      emit(newState);
-    }
   }
 }

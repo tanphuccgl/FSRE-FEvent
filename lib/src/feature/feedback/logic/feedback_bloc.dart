@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fevent/src/feature/float_bottom_navigation/cubit/bottom_navigation_bloc.dart';
 import 'package:fevent/src/network/domain.dart';
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/services/user_prefs.dart';
@@ -87,7 +88,11 @@ class FeedbackBloc extends Cubit<FeedbackState> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderHelper.r10),
                       maximumSize: const Size(250, 40)),
-                  onPressed: () => XCoordinator.replaceDashboard(),
+                  onPressed: () {
+                    XCoordinator.replaceDashboard();
+
+                    context.read<BottomNavigationBloc>().onItemTapped(0);
+                  },
                   child: const Text(
                     "Quay lại trang chủ",
                   )),

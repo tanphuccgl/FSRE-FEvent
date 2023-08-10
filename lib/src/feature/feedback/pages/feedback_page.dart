@@ -1,4 +1,5 @@
 import 'package:fevent/src/feature/feedback/logic/feedback_bloc.dart';
+import 'package:fevent/src/feature/float_bottom_navigation/cubit/bottom_navigation_bloc.dart';
 import 'package:fevent/src/router/coordinator.dart';
 import 'package:fevent/src/theme/colors.dart';
 import 'package:fevent/src/widgets/input.dart';
@@ -21,7 +22,11 @@ class FeedbackPage extends StatelessWidget {
               backgroundColor: XColors.primary,
               centerTitle: false,
               leading: GestureDetector(
-                onTap: () => XCoordinator.replaceDashboard(),
+                onTap: () {
+                  XCoordinator.replaceDashboard();
+
+                  context.read<BottomNavigationBloc>().onItemTapped(0);
+                },
                 child: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
