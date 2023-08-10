@@ -204,12 +204,16 @@ class EventDetailPage extends StatelessWidget {
                             const SizedBox(
                               width: 10,
                             ),
-                            Text(
-                              state.eventModel?.title ?? "",
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
+                            SizedBox(
+                              width: 250,
+                              child: Text(
+                                state.eventModel?.title ?? "",
+                                maxLines: 3,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ],
                         ),
@@ -284,28 +288,35 @@ class EventDetailPage extends StatelessWidget {
                         const SizedBox(
                           height: 5,
                         ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.supervised_user_circle_outlined,
-                              color: XColors.primary,
-                              size: 30,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              (state.eventModel?.partners ?? []).isEmpty
-                                  ? ""
-                                  : state.eventModel?.partners!.first.name ??
-                                      "",
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
+                        if ((state.eventModel?.partners ?? []).isNotEmpty)
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Icon(
+                                Icons.supervised_user_circle_outlined,
+                                color: XColors.primary,
+                                size: 30,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: state.eventModel!.partners!.map((e) {
+                                  return SizedBox(
+                                    width: 250,
+                                    child: Text(e.name ?? "",
+                                        maxLines: 3,
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold)),
+                                  );
+                                }).toList(),
+                              )
+                            ],
+                          ),
                       ],
                     ),
                   ),
