@@ -7,10 +7,10 @@ import 'package:fevent/src/utils/helper/logger.dart';
 
 class JobRepositoryImpl extends JobRepository {
   @override
-  Future<XResult<JobsModel>> getListJob() async {
+  Future<XResult<JobsModel>> getListJob(String eventId) async {
     try {
       final response = await BaseDataSource().get(
-        "${Endpoints.jobs}?page=0&pageSize=12&orderBy=createdAt&order=ASC&isShowInactive=false",
+        "${Endpoints.jobs}?page=0&pageSize=12&orderBy=createdAt&order=ASC&isShowInactive=false&eventId=$eventId",
       );
 
       final result = JobsModel.fromJson(

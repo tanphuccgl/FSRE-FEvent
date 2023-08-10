@@ -8,12 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class ListJobPage extends StatelessWidget {
-  const ListJobPage({super.key});
+  final String eventId;
+  const ListJobPage({super.key, required this.eventId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => JobBloc(),
+      create: (context) => JobBloc(eventId),
       child: BlocBuilder<JobBloc, JobState>(
         builder: (context, state) {
           return Scaffold(

@@ -86,7 +86,10 @@ class XAppRoute {
         return MaterialPageRoute(builder: (_) => const WalletPage());
 
       case XRouterName.listJob:
-        return MaterialPageRoute(builder: (_) => const ListJobPage());
+        return MaterialPageRoute(
+            builder: (_) => const ListJobPage(
+                  eventId: "",
+                ));
       case XRouterName.jobDetail:
         return MaterialPageRoute(
             builder: (_) => JobDetailPage(

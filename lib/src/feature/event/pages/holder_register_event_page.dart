@@ -336,7 +336,8 @@ class HolderRegisterEventPage extends StatelessWidget {
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               maximumSize: const Size(150, 55)),
-                          onPressed: () => XCoordinator.showListJob(),
+                          onPressed: () => XCoordinator.showListJob(
+                              state.eventModel?.eventId ?? ""),
                           child: const Text(
                             "Việc làm thêm",
                           )),
