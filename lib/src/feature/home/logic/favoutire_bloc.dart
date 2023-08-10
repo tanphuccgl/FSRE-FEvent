@@ -19,6 +19,8 @@ class FavouriteBloc extends Cubit<FavouriteState> {
     if (result.isSuccess) {
       if ((result.data!.listInterest ?? []).isNotEmpty) {
         emit(state.copyWith(isEnable: true));
+      } else {
+        emit(state.copyWith(isEnable: false));
       }
     }
   }
@@ -28,6 +30,19 @@ class FavouriteBloc extends Cubit<FavouriteState> {
     if (token == null) return;
 
     final result = await _domain.favouriteRepository.postFavouriteEvent(
+      eventId,
+      token,
+    );
+    if (result.isSuccess) {
+      init();
+    }
+  }
+
+  void removeFavouriteEvent() async {
+    final token = UserPrefs().getTokenUser;
+    if (token == null) return;
+
+    final result = await _domain.favouriteRepository.removeFavouriteEvent(
       eventId,
       token,
     );

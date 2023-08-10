@@ -135,9 +135,14 @@ class AllEventPage extends StatelessWidget {
                               ),
                               const Spacer(),
                               state.isEnable
-                                  ? const Icon(
-                                      Icons.favorite,
-                                      color: Colors.red,
+                                  ? GestureDetector(
+                                      onTap: () => context
+                                          .read<FavouriteBloc>()
+                                          .removeFavouriteEvent(),
+                                      child: const Icon(
+                                        Icons.favorite,
+                                        color: Colors.red,
+                                      ),
                                     )
                                   : GestureDetector(
                                       onTap: () => context

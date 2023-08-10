@@ -20,6 +20,7 @@ class Endpoints {
 
   static const String getFavouriteEvent = "$baseUrl/interests/event";
   static const String postFavouriteEvent = "$baseUrl/interests";
+  static const String removeFavouriteEvent = "$baseUrl/interests";
 
   static const String wallet = "$baseUrl/wallet/me";
   static const String transaction = "$baseUrl/wallet/me/transaction";
