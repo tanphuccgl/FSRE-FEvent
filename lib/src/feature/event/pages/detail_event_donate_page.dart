@@ -312,26 +312,40 @@ class DetailEventDonatePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    if (state.eventModel?.status == "PUBLIC" &&
+                    if ((state.eventModel?.status == "PUBLIC" ||
+                            state.eventModel?.status == "UPCOMING") &&
                         (state.eventModel?.remainingAmount ?? 0) > 0)
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              maximumSize: const Size(150, 55)),
-                          onPressed: () => XCoordinator.showEventOne(eventId),
-                          child: const Text(
-                            "Đăng ký",
-                          )),
+                      if (state.data?.participantId == null)
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                maximumSize: const Size(150, 55)),
+                            onPressed: () => XCoordinator.showEventOne(eventId),
+                            child: const Text(
+                              "Đăng ký",
+                            ))
+                      else
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red,
+                                maximumSize: const Size(150, 55)),
+                            onPressed: () => context
+                                .read<DetailEventBloc>()
+                                .onRemoveRegisterEventButton(context),
+                            child: const Text(
+                              "Hủy Đăng ký",
+                            )),
                     if (state.eventModel?.status == "PUBLIC" ||
                         state.eventModel?.status == "UPCOMING")
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.lightGreen,
-                              maximumSize: const Size(150, 55)),
-                          onPressed: () =>
-                              XCoordinator.showEventDonate(eventId),
-                          child: const Text(
-                            "Quyên góp",
-                          )),
+                      if ((state.eventModel?.donations ?? []).isNotEmpty)
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.lightGreen,
+                                maximumSize: const Size(150, 55)),
+                            onPressed: () =>
+                                XCoordinator.showEventDonate(eventId),
+                            child: const Text(
+                              "Quyên góp",
+                            )),
                   ],
                 ),
                 const SizedBox(

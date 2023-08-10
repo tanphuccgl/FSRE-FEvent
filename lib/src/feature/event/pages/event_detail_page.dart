@@ -351,7 +351,8 @@ class EventDetailPage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                if (state.eventModel?.status == "PUBLIC" &&
+                if ((state.eventModel?.status == "PUBLIC" ||
+                        state.eventModel?.status == "UPCOMING") &&
                     (state.eventModel?.remainingAmount ?? 0) > 0)
                   if (state.data?.participantId == null)
                     Center(
