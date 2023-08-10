@@ -302,9 +302,12 @@ class DetailEventDonatePage extends StatelessWidget {
                   height: 20,
                 ),
                 Image.network(
-                  "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                  state.eventModel?.image ??
+                      "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
                   height: 168.h,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const SizedBox(),
                 ),
                 const SizedBox(
                   height: 15,
@@ -312,26 +315,40 @@ class DetailEventDonatePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    if (state.eventModel?.status == "PUBLIC" &&
+                    if ((state.eventModel?.status == "PUBLIC" ||
+                            state.eventModel?.status == "UPCOMING") &&
                         (state.eventModel?.remainingAmount ?? 0) > 0)
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              maximumSize: const Size(150, 55)),
-                          onPressed: () => XCoordinator.showEventOne(eventId),
-                          child: const Text(
-                            "Đăng ký",
-                          )),
+                      if (state.data?.participantId == null)
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                maximumSize: const Size(150, 55)),
+                            onPressed: () => XCoordinator.showEventOne(eventId),
+                            child: const Text(
+                              "Đăng ký",
+                            ))
+                      else
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red,
+                                maximumSize: const Size(150, 55)),
+                            onPressed: () => context
+                                .read<DetailEventBloc>()
+                                .onRemoveRegisterEventButton(context),
+                            child: const Text(
+                              "Hủy Đăng ký",
+                            )),
                     if (state.eventModel?.status == "PUBLIC" ||
                         state.eventModel?.status == "UPCOMING")
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.lightGreen,
-                              maximumSize: const Size(150, 55)),
-                          onPressed: () =>
-                              XCoordinator.showEventDonate(eventId),
-                          child: const Text(
-                            "Quyên góp",
-                          )),
+                      if ((state.eventModel?.donations ?? []).isNotEmpty)
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.lightGreen,
+                                maximumSize: const Size(150, 55)),
+                            onPressed: () =>
+                                XCoordinator.showEventDonate(eventId),
+                            child: const Text(
+                              "Quyên góp",
+                            )),
                   ],
                 ),
                 const SizedBox(
@@ -361,7 +378,8 @@ class DetailEventDonatePage extends StatelessWidget {
     try {
       DateTime utcDateTime = DateTime.parse(utcTimestamp);
       DateTime localDateTime = utcDateTime.toLocal();
-      String formattedDate = DateFormat('d MMMM, yyyy').format(localDateTime);
+      String formattedDate =
+          DateFormat('d MMMM, yyyy', "vi_VN").format(localDateTime);
       return formattedDate;
     } catch (e) {
       return "";
@@ -374,9 +392,9 @@ class DetailEventDonatePage extends StatelessWidget {
       DateTime startDateTime = DateTime.parse(startTimestamp).toLocal();
       DateTime endDateTime = DateTime.parse(endTimestamp).toLocal();
 
-      String dayOfWeek = DateFormat('EEEE').format(startDateTime);
-      String startTime = DateFormat('h:00 a').format(startDateTime);
-      String endTime = DateFormat('h:00 a').format(endDateTime);
+      String dayOfWeek = DateFormat('EEEE', "vi_VN").format(startDateTime);
+      String startTime = DateFormat('h:00 a', "vi_VN").format(startDateTime);
+      String endTime = DateFormat('h:00 a', "vi_VN").format(endDateTime);
 
       return '$dayOfWeek, $startTime - $endTime';
     } catch (e) {

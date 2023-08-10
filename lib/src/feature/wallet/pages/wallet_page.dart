@@ -167,7 +167,7 @@ class WalletPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(state.textShow(data.type ?? "")),
-                  Text(formatDate(data.updatedAt ?? "")),
+                  Text(formatDate(data.createdAt ?? "")),
                 ],
               ),
               const Spacer(),
@@ -187,11 +187,11 @@ class WalletPage extends StatelessWidget {
       DateTime dateTime = DateTime.parse(dateTimeString);
 
       // Format time
-      String formattedTime = DateFormat('HH:mm').format(dateTime.toLocal());
+      String formattedTime =
+          DateFormat('HH:mm', "vi_VN").format(dateTime.toLocal());
 
       // Format date
-      String formattedDate =
-          DateFormat('dd/MM/yyyy').format(DateTime(2023, 3, 21));
+      String formattedDate = DateFormat('dd/MM/yyyy', "vi_VN").format(dateTime);
 
       return '$formattedTime - $formattedDate';
     } catch (e) {

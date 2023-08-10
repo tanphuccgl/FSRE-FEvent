@@ -297,7 +297,7 @@ class SearchBloc extends Cubit<SearchState> {
   String formatDateTime(DateTime dateTime) {
     try {
       String formattedDate =
-          '${dateTime.day.toString().padLeft(2, '0')}/${dateTime.month.toString().padLeft(2, '0')}/${dateTime.year}';
+          '${dateTime.month.toString().padLeft(2, '0')}/${dateTime.day.toString().padLeft(2, '0')}/${dateTime.year}';
       return formattedDate;
     } catch (e) {
       return "";

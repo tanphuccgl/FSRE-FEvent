@@ -100,7 +100,8 @@ class XCoordinator {
   static Future showEventTicketSuccess() =>
       push(const SuccessEventTicketPage());
 
-  static Future showListJob() => push(const ListJobPage());
+  static Future showListJob(String eventId) =>
+      push(ListJobPage(eventId: eventId));
 
   static Future showJobDetail(JobData event) => push(JobDetailPage(
         data: event,

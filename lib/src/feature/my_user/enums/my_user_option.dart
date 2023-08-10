@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum MyUserOption {
-  notification,
   feedback,
   event,
   donate,
@@ -13,8 +12,6 @@ enum MyUserOption {
 
   String get labelOf {
     switch (this) {
-      case MyUserOption.notification:
-        return 'Thông báo';
       case MyUserOption.feedback:
         return 'Nhận xét';
       case MyUserOption.event:
@@ -54,8 +51,6 @@ enum MyUserOption {
 
   IconData get iconOf {
     switch (this) {
-      case MyUserOption.notification:
-        return Icons.notifications;
       case MyUserOption.feedback:
         return Icons.feedback;
       case MyUserOption.event:

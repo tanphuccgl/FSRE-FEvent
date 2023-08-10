@@ -80,6 +80,7 @@ class Participant {
   String? checkoutAt;
   String? status;
   String? createdAt;
+  Event? event;
   Student? student;
 
   Participant(
@@ -88,6 +89,7 @@ class Participant {
       this.checkoutAt,
       this.status,
       this.createdAt,
+      this.event,
       this.student});
 
   Participant.fromJson(Map<String, dynamic> json) {
@@ -96,6 +98,7 @@ class Participant {
     checkoutAt = json['checkoutAt'];
     status = json['status'];
     createdAt = json['createdAt'];
+    event = json['event'] != null ? Event.fromJson(json['event']) : null;
     student =
         json['student'] != null ? Student.fromJson(json['student']) : null;
   }
@@ -107,9 +110,93 @@ class Participant {
     data['checkoutAt'] = checkoutAt;
     data['status'] = status;
     data['createdAt'] = createdAt;
+    if (event != null) {
+      data['event'] = event!.toJson();
+    }
     if (student != null) {
       data['student'] = student!.toJson();
     }
+    return data;
+  }
+}
+
+class Event {
+  String? eventId;
+  String? title;
+  String? topic;
+  String? description;
+  bool? isOnline;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
+  String? location;
+  int? totalDonation;
+  int? rating;
+  int? cost;
+  String? startDate;
+  String? endDate;
+  String? image;
+  int? expectedAmount;
+  int? remainingAmount;
+
+  Event(
+      {this.eventId,
+      this.title,
+      this.topic,
+      this.description,
+      this.isOnline,
+      this.status,
+      this.createdAt,
+      this.updatedAt,
+      this.location,
+      this.totalDonation,
+      this.rating,
+      this.cost,
+      this.startDate,
+      this.endDate,
+      this.image,
+      this.expectedAmount,
+      this.remainingAmount});
+
+  Event.fromJson(Map<String, dynamic> json) {
+    eventId = json['eventId'];
+    title = json['title'];
+    topic = json['topic'];
+    description = json['description'];
+    isOnline = json['isOnline'];
+    status = json['status'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+    location = json['location'];
+    totalDonation = json['totalDonation'];
+    rating = json['rating'];
+    cost = json['cost'];
+    startDate = json['startDate'];
+    endDate = json['endDate'];
+    image = json['image'];
+    expectedAmount = json['expectedAmount'];
+    remainingAmount = json['remainingAmount'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['eventId'] = eventId;
+    data['title'] = title;
+    data['topic'] = topic;
+    data['description'] = description;
+    data['isOnline'] = isOnline;
+    data['status'] = status;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['location'] = location;
+    data['totalDonation'] = totalDonation;
+    data['rating'] = rating;
+    data['cost'] = cost;
+    data['startDate'] = startDate;
+    data['endDate'] = endDate;
+    data['image'] = image;
+    data['expectedAmount'] = expectedAmount;
+    data['remainingAmount'] = remainingAmount;
     return data;
   }
 }

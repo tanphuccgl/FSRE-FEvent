@@ -177,9 +177,12 @@ class HolderRegisterEventPage extends StatelessWidget {
                   height: 15,
                 ),
                 Image.network(
-                  "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                  state.eventModel?.image ??
+                      "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
                   height: 168.h,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const SizedBox(),
                 ),
                 const SizedBox(
                   height: 15,
@@ -333,7 +336,8 @@ class HolderRegisterEventPage extends StatelessWidget {
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               maximumSize: const Size(150, 55)),
-                          onPressed: () => XCoordinator.showListJob(),
+                          onPressed: () => XCoordinator.showListJob(
+                              state.eventModel?.eventId ?? ""),
                           child: const Text(
                             "Việc làm thêm",
                           )),
@@ -354,7 +358,8 @@ class HolderRegisterEventPage extends StatelessWidget {
     try {
       DateTime utcDateTime = DateTime.parse(utcTimestamp);
       DateTime localDateTime = utcDateTime.toLocal();
-      String formattedDate = DateFormat('d MMMM, yyyy').format(localDateTime);
+      String formattedDate =
+          DateFormat('d MMMM, yyyy', "vi_VN").format(localDateTime);
       return formattedDate;
     } catch (e) {
       return "";
@@ -367,9 +372,9 @@ class HolderRegisterEventPage extends StatelessWidget {
       DateTime startDateTime = DateTime.parse(startTimestamp).toLocal();
       DateTime endDateTime = DateTime.parse(endTimestamp).toLocal();
 
-      String dayOfWeek = DateFormat('EEEE').format(startDateTime);
-      String startTime = DateFormat('h:00 a').format(startDateTime);
-      String endTime = DateFormat('h:00 a').format(endDateTime);
+      String dayOfWeek = DateFormat('EEEE', "vi_VN").format(startDateTime);
+      String startTime = DateFormat('h:00 a', "vi_VN").format(startDateTime);
+      String endTime = DateFormat('h:00 a', "vi_VN").format(endDateTime);
 
       return '$dayOfWeek, $startTime - $endTime';
     } catch (e) {

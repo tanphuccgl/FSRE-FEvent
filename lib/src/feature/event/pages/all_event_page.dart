@@ -49,7 +49,9 @@ class AllEventPage extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
-                    const Icon(Icons.search),
+                    GestureDetector(
+                        onTap: () => XCoordinator.showSearchPage(),
+                        child: const Icon(Icons.search)),
                     const SizedBox(
                       width: 10,
                     ),
@@ -86,10 +88,13 @@ class AllEventPage extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.network(
-                        "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                        event.image ??
+                            "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
                         height: 148.h,
                         width: 118.w,
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const SizedBox(),
                       ),
                     ),
                     const SizedBox(
@@ -101,7 +106,7 @@ class AllEventPage extends StatelessWidget {
                       children: [
                         Text(
                           convertUTCToFormattedDateTime(
-                              event.createdAt.toString()),
+                              event.startDate.toString()),
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.black),
                         ),
@@ -172,7 +177,7 @@ class AllEventPage extends StatelessWidget {
       DateTime utcDateTime = DateTime.parse(utcTimestamp);
       DateTime localDateTime = utcDateTime.toLocal();
       String formattedDateTime =
-          DateFormat('d MMM, yyyy, h:mm a').format(localDateTime);
+          DateFormat('d MMM, yyyy, h:mm a', "vi_VN").format(localDateTime);
       return formattedDateTime;
     } catch (e) {
       return "";

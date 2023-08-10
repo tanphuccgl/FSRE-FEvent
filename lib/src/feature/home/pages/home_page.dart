@@ -20,234 +20,241 @@ class HomePage extends StatelessWidget {
       child: BlocBuilder<EventsBloc, EventsState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              toolbarHeight: 168.h,
-              backgroundColor: XColors.primary,
-              flexibleSpace: SafeArea(
-                child: Column(children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                    child: Row(
-                      children: [
-                        Image.asset(XImage.location),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            body: Column(
+              children: [
+                SafeArea(
+                  child: Container(
+                    color: XColors.primary,
+                    child: Column(children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                        child: Row(
                           children: [
-                            Text(
-                              "Địa điểm",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                            Image.asset(XImage.location),
+                            const SizedBox(
+                              width: 15,
                             ),
-                            SizedBox(
-                              height: 5,
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Địa điểm",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "Quận 9, TP Hồ Chí Minh",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
                             ),
-                            Text(
-                              "Quận 9, TP Hồ Chí Minh",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            const Spacer(),
                           ],
                         ),
-                        const Spacer(),
-                        Image.asset(XImage.notification),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => XCoordinator.showSearchPage(),
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-                      padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25),
                       ),
-                      child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Tìm kiếm sự kiện",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey),
-                            ),
-                            Icon(
-                              Icons.search,
-                              color: Colors.grey,
-                            )
-                          ]),
-                    ),
-                  ),
-                ]),
-              ),
-            ),
-            body: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 0.1,
-                          blurRadius: 3,
-                          offset:
-                              const Offset(0, 3), // changes position of shadow
+                      GestureDetector(
+                        onTap: () => XCoordinator.showSearchPage(),
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Tìm kiếm sự kiện",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey),
+                                ),
+                                Icon(
+                                  Icons.search,
+                                  color: Colors.grey,
+                                )
+                              ]),
                         ),
-                      ]),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      ),
+                    ]),
+                  ),
+                ),
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 0.1,
+                                blurRadius: 3,
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
+                              ),
+                            ]),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      XImage.icon1,
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          state.countEvent,
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        const Text(
+                                          "Đang diễn ra",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    Image.asset(
+                                      XImage.icon2,
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          state.count.toString(),
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        const Text(
+                                          "Sự kiện đã\nđăng ký",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Divider(),
+                              GestureDetector(
+                                onTap: () =>
+                                    XCoordinator.showAllEvent(state.list),
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 5),
+                                  child: Text("Đến trang chủ",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w900,
+                                          color: XColors.primary)),
+                                ),
+                              ),
+                            ]),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      if (state.listUpcoming.isNotEmpty)
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Image.asset(
-                                XImage.icon1,
-                                width: 50,
-                                height: 50,
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    state.countEvent,
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  const Text(
-                                    "Đang diễn ra",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Image.asset(
-                                XImage.icon2,
-                                width: 50,
-                                height: 50,
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    state.count.toString(),
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  const Text(
-                                    "Sự kiện đã\nđăng ký",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
+                              const Text("Sự kiện sắp tới",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.black)),
+                              GestureDetector(
+                                  onTap: () => XCoordinator.showAllEvent(
+                                      state.listUpcoming),
+                                  child: const Text("Xem tất cả",
+                                      style: TextStyle(color: Colors.grey))),
                             ],
                           ),
                         ),
-                        const Divider(),
-                        GestureDetector(
-                          onTap: () => XCoordinator.showAllEvent(state.list),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 5),
-                            child: Text("Đến trang chủ",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    color: XColors.primary)),
+                      if (state.listUpcoming.isNotEmpty)
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      if (state.listUpcoming.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: SizedBox(
+                            height: 230.h,
+                            child: ListView.builder(
+                              itemBuilder: (context, index) =>
+                                  _item(state.listUpcoming[index]),
+                              shrinkWrap: true,
+                              itemCount: state.listUpcoming.length,
+                              scrollDirection: Axis.horizontal,
+                            ),
                           ),
                         ),
-                      ]),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                if (state.listUpcoming.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text("Sự kiện sắp tới",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                color: Colors.black)),
-                        GestureDetector(
-                            onTap: () =>
-                                XCoordinator.showAllEvent(state.listUpcoming),
-                            child: const Text("Xem tất cả",
-                                style: TextStyle(color: Colors.grey))),
-                      ],
-                    ),
-                  ),
-                if (state.listUpcoming.isNotEmpty)
-                  const SizedBox(
-                    height: 20,
-                  ),
-                if (state.listUpcoming.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: SizedBox(
-                      height: 230.h,
-                      child: ListView.builder(
-                        itemBuilder: (context, index) =>
-                            _item(state.listUpcoming[index]),
-                        shrinkWrap: true,
-                        itemCount: state.listUpcoming.length,
-                        scrollDirection: Axis.horizontal,
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                  ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("Tìm hiểu thêm",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              color: Colors.black)),
-                      GestureDetector(
-                          onTap: () =>
-                              XCoordinator.showAllEvent(state.listOther),
-                          child: const Text("Xem tất cả",
-                              style: TextStyle(color: Colors.grey))),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Tìm hiểu thêm",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.black)),
+                            GestureDetector(
+                                onTap: () =>
+                                    XCoordinator.showAllEvent(state.listOther),
+                                child: const Text("Xem tất cả",
+                                    style: TextStyle(color: Colors.grey))),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) =>
+                            _itemOther(state.listOther[index]),
+                        shrinkWrap: true,
+                        itemCount: state.listOther.length,
+                      )
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) =>
-                      _itemOther(state.listOther[index]),
-                  shrinkWrap: true,
-                  itemCount: state.listOther.length,
-                )
               ],
             ),
           );
@@ -282,7 +289,7 @@ class HomePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              formatDateTime(event.createdAt.toString()),
+                              formatDateTime(event.startDate.toString()),
                               style: const TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16,
@@ -308,10 +315,13 @@ class HomePage extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
-                            "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                            event.image ??
+                                "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
                             height: 110.h,
                             width: 132.w,
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                const SizedBox(),
                           ),
                         ),
                       ],
@@ -392,11 +402,14 @@ class HomePage extends StatelessWidget {
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(25)),
                     child: Image.network(
-                      "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                      event.image ??
+                          "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
                       //  event.image.toString(),
                       height: 139.h,
                       width: 300.w,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) =>
+                          const SizedBox(),
                     ),
                   ),
                   Padding(
@@ -435,7 +448,7 @@ class HomePage extends StatelessWidget {
                                 children: [
                                   Text(
                                     convertUTCToLocalTime(
-                                        event.createdAt.toString()),
+                                        event.startDate.toString()),
                                     style: const TextStyle(color: Colors.black),
                                   ),
                                   Container(
@@ -489,7 +502,8 @@ class HomePage extends StatelessWidget {
     try {
       DateTime utcDateTime = DateTime.parse(utcTimestamp);
       DateTime localDateTime = utcDateTime.toLocal();
-      String formattedTime = DateFormat('hh:mm a').format(localDateTime);
+      String formattedTime =
+          DateFormat('hh:mm a', "vi_VN").format(localDateTime);
       return formattedTime;
     } catch (e) {
       return "";
@@ -515,7 +529,15 @@ class HomePage extends StatelessWidget {
   }
 
   String _getWeekday(DateTime dateTime) {
-    List<String> weekdays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    List<String> weekdays = [
+      'THỨ 2',
+      'THỨ 3',
+      'THỨ 4',
+      'THỨ 5',
+      'THỨ 6',
+      'THỨ 7',
+      'CN'
+    ];
     return weekdays[dateTime.weekday];
   }
 
@@ -525,24 +547,24 @@ class HomePage extends StatelessWidget {
 
   String _getMonth(DateTime dateTime) {
     List<String> months = [
-      'JAN',
-      'FEB',
-      'MAR',
-      'APR',
-      'MAY',
-      'JUN',
-      'JUL',
-      'AUG',
-      'SEP',
-      'OCT',
-      'NOV',
-      'DEC'
+      'T1',
+      'T2',
+      'T3',
+      'T4',
+      'T5',
+      'T6',
+      'T7',
+      'T8',
+      'T9',
+      'T10',
+      'T11',
+      'T12'
     ];
     return months[dateTime.month - 1];
   }
 
   String _getTime(DateTime dateTime) {
-    String period = dateTime.hour >= 12 ? 'PM' : 'AM';
+    String period = dateTime.hour >= 12 ? 'CH' : 'SA';
     int hour = dateTime.hour % 12;
     if (hour == 0) {
       hour = 12;

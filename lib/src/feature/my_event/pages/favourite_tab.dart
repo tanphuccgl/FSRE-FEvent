@@ -39,10 +39,12 @@ class FavouriteTab extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                data.event?.image ??
+                    "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
                 height: 170.h,
                 width: 118.w,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => const SizedBox(),
               ),
             ),
             const SizedBox(
@@ -107,8 +109,8 @@ class FavouriteTab extends StatelessWidget {
 
   String formatTime(String originalTime) {
     try {
-      final inputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-      final outputFormat = DateFormat("d MMM, yyyy, h:mm a");
+      final inputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", "vi_VN");
+      final outputFormat = DateFormat("d MMM, yyyy, h:mm a", "vi_VN");
       final dateTime = inputFormat.parse(originalTime);
       return outputFormat.format(dateTime);
     } catch (e) {

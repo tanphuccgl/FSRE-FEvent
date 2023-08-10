@@ -176,9 +176,12 @@ class EventDetailPage extends StatelessWidget {
                   height: 15,
                 ),
                 Image.network(
-                  "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
+                  state.eventModel?.image ??
+                      "https://agendabrussels.imgix.net/004a2b71108438b08b4c2d39af2e4173770c6408.jpg",
                   height: 168.h,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const SizedBox(),
                 ),
                 const SizedBox(
                   height: 15,
@@ -204,12 +207,16 @@ class EventDetailPage extends StatelessWidget {
                             const SizedBox(
                               width: 10,
                             ),
-                            Text(
-                              state.eventModel?.title ?? "",
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
+                            SizedBox(
+                              width: 250,
+                              child: Text(
+                                state.eventModel?.title ?? "",
+                                maxLines: 3,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ],
                         ),
@@ -284,28 +291,35 @@ class EventDetailPage extends StatelessWidget {
                         const SizedBox(
                           height: 5,
                         ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.supervised_user_circle_outlined,
-                              color: XColors.primary,
-                              size: 30,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              (state.eventModel?.partners ?? []).isEmpty
-                                  ? ""
-                                  : state.eventModel?.partners!.first.name ??
-                                      "",
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
+                        if ((state.eventModel?.partners ?? []).isNotEmpty)
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Icon(
+                                Icons.supervised_user_circle_outlined,
+                                color: XColors.primary,
+                                size: 30,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: state.eventModel!.partners!.map((e) {
+                                  return SizedBox(
+                                    width: 250,
+                                    child: Text(e.name ?? "",
+                                        maxLines: 3,
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold)),
+                                  );
+                                }).toList(),
+                              )
+                            ],
+                          ),
                       ],
                     ),
                   ),
@@ -340,7 +354,8 @@ class EventDetailPage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                if (state.eventModel?.status == "PUBLIC" &&
+                if ((state.eventModel?.status == "PUBLIC" ||
+                        state.eventModel?.status == "UPCOMING") &&
                     (state.eventModel?.remainingAmount ?? 0) > 0)
                   if (state.data?.participantId == null)
                     Center(
@@ -381,7 +396,8 @@ class EventDetailPage extends StatelessWidget {
     try {
       DateTime utcDateTime = DateTime.parse(utcTimestamp);
       DateTime localDateTime = utcDateTime.toLocal();
-      String formattedDate = DateFormat('d MMMM, yyyy').format(localDateTime);
+      String formattedDate =
+          DateFormat('d MMMM, yyyy', "vi_VN").format(localDateTime);
       return formattedDate;
     } catch (e) {
       return "";
@@ -394,9 +410,9 @@ class EventDetailPage extends StatelessWidget {
       DateTime startDateTime = DateTime.parse(startTimestamp).toLocal();
       DateTime endDateTime = DateTime.parse(endTimestamp).toLocal();
 
-      String dayOfWeek = DateFormat('EEEE').format(startDateTime);
-      String startTime = DateFormat('h:00 a').format(startDateTime);
-      String endTime = DateFormat('h:00 a').format(endDateTime);
+      String dayOfWeek = DateFormat('EEEE', "vi_VN").format(startDateTime);
+      String startTime = DateFormat('h:00 a', "vi_VN").format(startDateTime);
+      String endTime = DateFormat('h:00 a', "vi_VN").format(endDateTime);
 
       return '$dayOfWeek, $startTime - $endTime';
     } catch (e) {
