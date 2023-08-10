@@ -53,7 +53,6 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                         const Spacer(),
-                        Image.asset(XImage.notification),
                       ],
                     ),
                   ),
