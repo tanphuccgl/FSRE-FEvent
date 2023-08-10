@@ -37,7 +37,7 @@ class WalletRepositoryImpl extends WalletRepository {
   Future<XResult<TransactionModel>> getListTransaction(String token) async {
     try {
       final response = await BaseDataSource().get(
-        "${Endpoints.transaction}?page=0&pageSize=12&orderBy=createdAt&order=ASC&isShowInactive=false",
+        "${Endpoints.transaction}?page=0&pageSize=99&orderBy=createdAt&order=ASC&isShowInactive=false",
         options: Options(headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer $token",

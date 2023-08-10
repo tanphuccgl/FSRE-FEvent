@@ -10,7 +10,7 @@ class JobRepositoryImpl extends JobRepository {
   Future<XResult<JobsModel>> getListJob(String eventId) async {
     try {
       final response = await BaseDataSource().get(
-        "${Endpoints.jobs}?page=0&pageSize=12&orderBy=createdAt&order=ASC&isShowInactive=false&eventId=$eventId",
+        "${Endpoints.jobs}?page=0&pageSize=99&orderBy=createdAt&order=ASC&isShowInactive=false&eventId=$eventId",
       );
 
       final result = JobsModel.fromJson(
