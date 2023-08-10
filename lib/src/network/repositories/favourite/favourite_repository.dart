@@ -6,4 +6,6 @@ abstract class FavouriteRepository {
   Future<XResult<FavouriteModel>> getFavouriteEvent(String eventId);
   Future<XResult<PostFavouriteModel>> postFavouriteEvent(
       String eventId, String token);
+
+  Future<XResult<bool>> removeFavouriteEvent(String eventId, String token);
 }

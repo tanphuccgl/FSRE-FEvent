@@ -52,4 +52,26 @@ class FavouriteRepositoryImpl extends FavouriteRepository {
       return XResult.exception(e);
     }
   }
+
+  @override
+  Future<XResult<bool>> removeFavouriteEvent(
+      String eventId, String token) async {
+    try {
+      final response = await BaseDataSource().delete(
+        "${Endpoints.removeFavouriteEvent}/$eventId",
+        options: Options(headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        }),
+      );
+
+      return response.statusCode == 200 || response.statusCode == 201
+          ? XResult.success(true)
+          : XResult.error("Error");
+    } catch (e, a) {
+      LoggerHelper.error('> removeFavouriteEvent CATCH Error< $e $a');
+
+      return XResult.exception(e);
+    }
+  }
 }
