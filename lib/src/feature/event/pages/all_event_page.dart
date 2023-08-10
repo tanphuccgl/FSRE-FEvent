@@ -49,7 +49,9 @@ class AllEventPage extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
-                    const Icon(Icons.search),
+                    GestureDetector(
+                        onTap: () => XCoordinator.showSearchPage(),
+                        child: const Icon(Icons.search)),
                     const SizedBox(
                       width: 10,
                     ),
